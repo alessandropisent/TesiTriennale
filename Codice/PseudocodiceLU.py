@@ -86,7 +86,8 @@ def linearSolver(A,b):
     (L,U) = LU(A)
     y = lowSolver(L,b)
     x = upSolver(U,y)
-    debug(L,U,y,x)
+    #debug(L,U,y,x)
     return x
 
-linearSolver(A,b)
+x = linearSolver(A,b)
+print(x)
