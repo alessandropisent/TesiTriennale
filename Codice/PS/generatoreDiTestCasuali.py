@@ -1,11 +1,11 @@
 from random import randint
 
 
-N = 3 # righe, b deve avere la stessa dimensione
-M = 3 # colonne
+N = 100 # righe, b deve avere la stessa dimensione
+M = 100 # colonne
 
 a = 0
-b = 10
+b = 100
 
 with open("Codice/FileInput.txt","w") as f:
     f.write(str(N)+" "+str(M)+"\n")

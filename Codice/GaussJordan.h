@@ -16,3 +16,11 @@ void initMatrix(int , int , Matrix *);
 void freeMatrix(Matrix * );
 
 void printFMatrix(Matrix *);
+
+void rowNorm(int , Matrix *);
+
+void zerosRow(int , int, Matrix *);
+
+void zerosCol(int , Matrix * );
+
+void solveTheMatrix(Matrix *);

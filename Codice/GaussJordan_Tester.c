@@ -3,7 +3,7 @@
 
     Descrizione file :
     In questo file di tester ci sono tutte le funzioni per la gestione dei file
-    e il main per il test del risolutore
+    e il main per per il risolutore lineare
 
     Appunti:
     Prende in lettura un file con la matrice e i coefficienti noti
@@ -13,32 +13,40 @@
 #include <stdio.h>
 #include "GaussJordan.h"
 
+/*  Funzione che stampa su un file la Matrice M (con i termini noti a sinitra)
+    IP nameFileOut, stringa contente il nome del file in Output
+    IP Matice M, matrice da stampare 
+    OF File $nameFileOut con la matrice
+    OR Esito: ()
+         0: elaborazione riuscita;
+        -1: apertura fallita di $nameFileOut).
+*/
 int printMatrix(const char nameFileOut[], Matrix *M){
 
-    int i,j;
-    FILE *outF;
+    int i,j;        /*varibili per scandire righe e colonne*/
+    FILE *outF;     /*Variabile per il file di Output*/
 
     outF = fopen(nameFileOut, "w");
+
     /*Errore apertura file output*/
     if (outF == NULL)
-        return -2;
+        return -1;
     
+    /*Scansione delle righe*/
     for(i=0;i<M->n;i++){
-
-        for(j = 0; j<(M->m)+1;j++){
-       
+        /*scansione degli elementi colonna*/
+        for(j = 0; j<(M->m)+1;j++)
             fprintf(outF,"%5.2f ",(M->A)[i+M->s][j]);
 
-        }/*for*/
-        fprintf(outF,"\n");
-
+        fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
 
     /*chiusura del file*/
     fclose(outF);
     /*nessun problema*/
     return 0;
-}
+
+}/*printMatrix*/
 
 
 /*  Funzione per la lettura dei comandi nei file
@@ -108,16 +116,19 @@ int main(int argc, char const *argv[]){
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*if*/
 
-    if(readFileMatrix(argv[1],&M) == -1){
+    /*Lettura della matrice in input*/
+    if(readFileMatrix(argv[1],&M) == -1)
         printf("ERRORE FILE INGRESSO");
-    }/*if*/
     
-    if(printMatrix(argv[2],&M) == -1){
+    
+    /*risoluzione della matrice*/
+    solveTheMatrix(&M);
+
+    /*Stampa su file della matrice risolta*/
+    if(printMatrix(argv[2],&M) == -1)
         printf("ERRORE FILE USCITA");
-    }/*if*/
-
-    /*printFMatrix(&M);*/
-
+    
+    /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
     
     return 0;
