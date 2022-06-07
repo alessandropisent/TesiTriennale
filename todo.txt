@@ -1,0 +1,4 @@
+Funzione di Lettura del file
+Ricerca su programmazione lineare
+controllare che io possa allocare con malloc solo una volta
+Ricerca efficenza su LU e GaussJordan

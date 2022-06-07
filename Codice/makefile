@@ -1,9 +1,9 @@
-QueueDBA_Tester.exe: QueueDBA.o QueueDBA_Tester.o
-	gcc -o QueueDBA_Tester.exe QueueDBA.o QueueDBA_Tester.o
+GaussJordan_Tester.exe: GaussJordan.o GaussJordan_Tester.o
+	gcc -o GaussJordan_Tester.exe GaussJordan.o GaussJordan_Tester.o
 
-QueueDBA.o: QueueDBA.c
-	gcc -ansi -pedantic -Wall -Werror -c QueueDBA.c
+GaussJordan.o: GaussJordan.c
+	gcc -ansi -pedantic -Wall -Werror -c GaussJordan.c
 
-QueueDBA_Tester.o: QueueDBA_Tester.c
-	gcc -ansi -pedantic -Wall -Werror -c QueueDBA_Tester.c
+GaussJordan_Tester.o: GaussJordan_Tester.c
+	gcc -ansi -pedantic -Wall -Werror -c GaussJordan_Tester.c
 
