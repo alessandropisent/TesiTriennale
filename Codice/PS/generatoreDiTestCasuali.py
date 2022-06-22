@@ -18,6 +18,7 @@ for i in range(N):
 for i in range(N):
     c[i] = randint(a,b)
 
+# Scrittura per il file di Test per il programma PRincipale
 with open("Codice/FileInput.txt","w") as f:
     f.write(str(N)+" "+str(M)+"\n")
     for i in range(N):
@@ -27,7 +28,7 @@ with open("Codice/FileInput.txt","w") as f:
         f.write("\n")
     for i in range(N):
         f.write(str(c[i])+"\n")
-
+#Scrittura del file per il programma LU 
 with open("Codice/LU/FileInput.txt","w") as f:
     f.write(str(N)+" "+str(M)+"\n")
     for i in range(N):
@@ -38,14 +39,24 @@ with open("Codice/LU/FileInput.txt","w") as f:
     for i in range(N):
         f.write(str(c[i])+"\n")
 
+# Scrittura per il matlab
 with open("Codice/PS/FileMatlab.txt","w") as f:
     f.write("A = [ ")
     for i in range(N):
         for j in range(M):
             f.write(str(m[i][j])+" ")
-        f.write("; ")
+        if(i!=N-1):
+            f.write("; ")
+        else:
+            f.write("]")
     
-    f.write("\nb=[")
+    f.write("\nb = [ ")
     for i in range(N):
-        f.write(str(c[i])+" ")
+        f.write(str(c[i]))
+        if(i!=(N-1)):
+            f.write("; ")
+        else:
+            f.write(" ")
     f.write("]")
+
+    f.write("\nx = linsolve(A,b)")

@@ -88,23 +88,18 @@ void printFMatrix( Matrix *M){
     OR:  0 potevo normalizzare 
         -1 se non potevo diag
 */
-int diagNorm(int d, Matrix *M){
+void diagNorm(int d, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
     int i;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->A)[d+(M->s)][d+1];
-    
-    if(isZero(t))
-        return -1;
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->m+1);i++)
         (M->A)[d+(M->s)][i]=((M->A)[d+1][i])/t;
     
     /*c'e' sempre il +M->s per offset che nella prima riga non c'e nulla*/
-
-    return 0;
 
 }/*diagNorm*/
 
@@ -120,6 +115,7 @@ void zerosRow(int r, int c, Matrix *M){
     
     int i;
     double el;
+    int z;
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->A)[r+(M->s)][c+1];
@@ -130,7 +126,13 @@ void zerosRow(int r, int c, Matrix *M){
         el = (M->A)[r+(M->s)][i] - t * (M->A)[c+(M->s)][i];
         (M->A)[r+(M->s)][i] = el;
 
+        if(isZero(el))
+            z++;
+
     }/*for*/
+
+    if(z>=c)
+        addR(r,M);
     
 
 }/*zerosRow*/
@@ -144,12 +146,9 @@ void zerosRow(int r, int c, Matrix *M){
 void zerosCol(int c, Matrix * M){
     
     int i,row;
-
     
-    /*normalizzo l'elemento sulla diagonale M[c][c]*/
-    if(diagNorm(c,M) == -1)
-        return; /*se l'lemento sulla diagonale e' zero non continuo con la funzione*/
-
+    /*normalizzo la diagonale*/
+    diagNorm(c,M);
 
     /*Per ogni elemento*/
     for(i=0;i<((M->n)-1);i++){
@@ -168,12 +167,35 @@ void zerosCol(int c, Matrix * M){
 void solveTheMatrix(Matrix *M){
 
     int i;  /*per il for*/
+    bool start = true;   /*variabile per stato*/
+    int skip = 0;           /*quante colonne ho schippato dal inizio*/
     int m = min(M->n,M->m);
     
     /*Normalizzo l'elemento sulla diagonale e 
         azzero tutti gli altri elementi*/
-    for(i=0;i<m;i++)
-        zerosCol(i,M);
+    for(i=0;i<m;i++){
+        /*se l'elemento sulla diagonale M[i][i]!=0 allora posso continuare*/
+        if(!isZero((M->A)[i+(M->s)][i+1])){
+            zerosCol(i,M);
+            start = false;
+        }/*if*/
+        
+        /*se ho appena iniziato potrei avere qualche elemento
+        sulla diagonale principale == 0 */
+        else if(start)
+            skip++;
+        
+    }/*for*/
+
+    /*riparto dall'inizio con le righe che non ho fatto*/
+    if (skip<m){
+        for(i=0;i<skip;i++){
+            /*controllo comunque che non sia ancora a zero*/
+            if(!isZero((M->A)[i+(M->s)][i+1]))
+                zerosCol(i,M);
+        }/*for*/
+    }/*if*/
+
     
         
     
@@ -194,7 +216,7 @@ bool isZero(double a){
     IP r, riga da aggiungere
     IOP M, matrice con tutto
 */
-void deleteR(int r, Matrix* M){
+void addR(int r, Matrix* M){
 
     M->dipRow[M->nRD] = r;
     M->nRD +=1;    

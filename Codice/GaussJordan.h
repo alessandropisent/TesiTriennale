@@ -20,7 +20,7 @@ void freeMatrix(Matrix * );
 
 void printFMatrix(Matrix *);
 
-int diagNorm(int , Matrix *);
+void diagNorm(int , Matrix *);
 
 void zerosRow(int , int, Matrix *);
 
@@ -30,7 +30,7 @@ void solveTheMatrix(Matrix *);
 
 bool isZero(double a);
 
-void deleteR(int , Matrix *);
+void R(int , Matrix *);
 
 bool isLinDip(int , Matrix *);
 
