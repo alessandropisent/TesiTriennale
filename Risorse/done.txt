@@ -1,0 +1,3 @@
+x 2022-06-07 Funzione di Lettura del file +Programma
+x 2022-06-07 controllare che io possa allocare con malloc solo una volta +Programma
+x 2022-06-08 Ricerca efficenza su LU e GaussJordan +Ricerca

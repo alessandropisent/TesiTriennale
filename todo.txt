@@ -1,4 +1,0 @@
-x 2022-06-07 Funzione di Lettura del file
-Ricerca su programmazione lineare
-x 2022-06-07 controllare che io possa allocare con malloc solo una volta
-Ricerca efficenza su LU e GaussJordan

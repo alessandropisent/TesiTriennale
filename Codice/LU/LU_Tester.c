@@ -11,7 +11,7 @@
     
 */
 #include <stdio.h>
-#include "GaussJordan.h"
+#include "LU.h"
 
 /*  Funzione che stampa su un file la Matrice M (con i termini noti a sinitra)
     IP nameFileOut, stringa contente il nome del file in Output
@@ -120,7 +120,6 @@ int main(int argc, char const *argv[]){
     if(readFileMatrix(argv[1],&M) == -1)
         printf("ERRORE FILE INGRESSO");
     
-    printFMatrix(&M);
     
     /*risoluzione della matrice*/
     solveTheMatrix(&M);

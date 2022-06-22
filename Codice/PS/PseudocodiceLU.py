@@ -4,6 +4,9 @@ import numpy as np
 A = np.array([[1 , 4, 7] , [2,5,8], [3,6,10]])
 b = [1,1,1]
 
+M = np.array([[7,9,8], [6,4,3], [6,5,10]])
+x = [0,4,6]
+
 #se state > 0 Lower, <0 Upper
 def triang(n,state):
     L = np.zeros((n,n),dtype=int)
@@ -89,5 +92,5 @@ def linearSolver(A,b):
     #debug(L,U,y,x)
     return x
 
-x = linearSolver(A,b)
+x = linearSolver(M,x)
 print(x)
