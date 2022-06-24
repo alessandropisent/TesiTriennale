@@ -130,7 +130,7 @@ void printFMatrixRel(Matrix *M){
 
 }/*printFMatrixRel*/
 
-/*  Funzione per normalizzare l'elemento sulla diagonale di una riga, 
+/*  Funzione per normalizzare l'elemento sulla "diagonale" di una riga, 
     dividendola per se stessa
 
     IP r, riga della matrice ideale su cui operare
@@ -177,9 +177,18 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->A)[r+(M->s)][c+1];
+    
+    /*per non propagare l'errore di t*/
     if(isZero(t))
         t = 0;
+
+    /*Scrivo la relazione tra le righe*/
     (M->B)[r][c] = t/((M->B)[r][c]);
+
+    /*controllo se e' una delle righe linearmente dipendente*/
+    if(rowLinDip(r,M))
+        /*in caso non modifico riga $r e esco*/
+        return;
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->m+1);i++){
@@ -187,15 +196,16 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
         el = (M->A)[r+(M->s)][i] - t * (M->A)[rowC+(M->s)][i];
         (M->A)[r+(M->s)][i] = el;
 
+        /*conto gli zeri che trovo*/
         if(isZero(el))
             z++;
 
     }/*for*/
 
+    /*se ho una riga di zeri allora e' una riga lin dip*/
     if(z>=(M->m))
         addR(r,M);
     
-
 }/*zerosRow*/
 
 
@@ -224,6 +234,19 @@ void zerosCol(int r, int c, Matrix * M){
 
 }/*zerosCol*/
 
+bool rowLinDip(int row, Matrix * M){
+
+    int i;
+
+    for(i =0; i<(M->nRD);i++){
+        if(row==((M->dipRow)[i]))
+            return true;
+    }/*for*/
+
+    return false;
+
+}/*rowLinDip*/
+
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
 */
@@ -239,6 +262,7 @@ void solveTheMatrix(Matrix *M){
         /*se ho trovato delle righe linearmente dipendendi 
             risolvo per le altre righe*/
         solveLinDip(M);
+
     
 }/*solveTheMatrix*/
 
@@ -259,44 +283,10 @@ bool isZero(double a){
 */
 void addR(int r, Matrix* M){
     
-    int i,e;
-    bool found = false;
-
-    for(i=0; i<M->nRD;i++){
-        e = (M->dipRow)[i];
-        if(e==r){
-            found = true;
-            break;
-        }/*if*/
-
-    }/*for*/
-
-    if(!found){
-        M->dipRow[M->nRD] = r;
-        M->nRD +=1;
-    }/**/
-
+    M->dipRow[M->nRD] = r;
+    M->nRD +=1;
 
 }/*addR*/
-
-/*  Funzione che risponde alla domanda : Questa riga $r e' linearmente
-    dipente dalle altre righe
-
-    IP r, riga da controllare
-    IP M, Matrice con le righe
-*/
-bool isLinDip(int r, Matrix * M ){
-
-    int i;
-
-    for(i=0; i<(M->nRD);i++)
-        if(r == (M->dipRow[i]))
-            return true;
-
-    return false;
-
-
-}/*isLinDip*/
 
 /*  Funzione che ritorna il minimo tra due interi
     IP a, intero a
@@ -363,11 +353,16 @@ void solveLinDip(Matrix * M){
 
     for(i=0;i<(M->nRD);i++){
         
+        /*calcolo per gli indici di riga e colonna*/
         r = s+i;
-        c = (M->dipRow)[i];
+        c = (M->dipRow)[i];     /*la colonna da ricalcolare sara' uguale alla colonna lin dip*/
+
+        /*limito fino a quando posso andare con gli indici*/
+        if(c>=(M->m) || r>=(M->n))
+            break;
         
         /* se l elemento sulla M[r][c]!=0 allora posso continuare*/
-        if((c<(M->m)) && (!isZero((M->A)[r+(M->s)][c+1]))){
+        if(!isZero((M->A)[r+(M->s)][c+1])){
             zerosCol(r,c,M);
             start = false;
         }/*if*/
@@ -384,6 +379,9 @@ void solveLinDip(Matrix * M){
         for(i=0;i<skip;i++){
             r = s+i;
             c = (M->dipRow)[i];
+            if(c>=(M->m) || r>=(M->n))
+                break;
+            
             /*controllo comunque che non sia ancora a zero*/
             if((c<(M->m)) && !isZero((M->A)[r+(M->s)][c+1]))
                 zerosCol(r,c,M);

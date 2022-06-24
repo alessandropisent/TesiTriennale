@@ -31,6 +31,8 @@ void zerosRow(int , int, int, Matrix *);
 
 void zerosCol(int ,int,  Matrix * );
 
+bool rowLinDip(int, Matrix *);
+
 void solveTheMatrix(Matrix *);
 
 void solveDiag(Matrix * );

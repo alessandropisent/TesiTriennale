@@ -44,17 +44,23 @@ int printMatrix(const char nameFileOut[], Matrix *M){
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
 
-    fprintf(outF,"\nla relazione tra le righe (inizio a contare da 0):\n\n");
+    /*stampo la relazione tra le righe se c'e'*/
+    if(M->nRD > 0){
+        fprintf(outF,"\nla relazione tra le righe linearmente indipendenti (inizio a contare da 0):\n\n");
 
-    for(i=0;i<(M->nRD);i++){
-        row=M->dipRow[i];
-        fprintf(outF,"Riga %d:",row);
-        for(j=0;j<(M->m);j++){
-            
-            fprintf(outF,"%5.2f ",(M->B)[row][j]);
+        for(i=0;i<(M->nRD);i++){
+
+            row=M->dipRow[i];
+            fprintf(outF,"Riga %d:",row);
+
+            for(j=0;j<(M->m);j++)
+                fprintf(outF,"%5.2f ",(M->B)[row][j]);
+
+            fprintf(outF,"\n");     /*fine della riga*/
         }/*for*/
-        fprintf(outF,"\n");     /*fine della riga*/
-    }
+
+    }/*if*/
+    
 
     /*chiusura del file*/
     fclose(outF);

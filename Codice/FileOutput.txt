@@ -1,9 +1,11 @@
 La matrice risolta A:
 
- 0.33  1.00  0.67  0.00 
+ 0.20  1.00  0.00  0.20 
 -10.00  0.00  0.00  0.00 
- 0.52 -0.00  1.33  1.00 
+-3.00  0.00  0.00  0.00 
+ 0.38 -0.00  1.00  0.68 
 
-la relazione tra le righe (inizio a contare da 0):
+la relazione tra le righe linearmente indipendenti (inizio a contare da 0):
 
-Riga 1: 1.50  0.00 -0.00 
+Riga 1: 1.50 -0.00  0.00 
+Riga 2: 0.50 -0.00  0.00 
