@@ -5,20 +5,25 @@
 #define ERROR 0.001
 
 typedef struct {
-    double** A;     /*array con allocazione dinamica memoria*/
+    double** A;     /*Matrice con allocazione dinamica memoria*/
     int n;          /*# Righe*/
     int m;          /*# Colonne*/
     int b;          /*in che colonna si trova il termine noto*/
     int s;          /*# di righe che lascio libere*/
     int * dipRow;   /*array con gli indici delle righe dipendenti */    
     int nRD;        /*# di elenti in $dipRow*/
+    double** B;     /*matrice con relazioni tra righe*/
 } Matrix;
 
 void initMatrix(int , int , Matrix *);
 
 void freeMatrix(Matrix * );
 
+void zeroB(Matrix *);
+
 void printFMatrix(Matrix *);
+
+void printFMatrixRel(Matrix *);
 
 void diagNorm(int , int, Matrix *);
 

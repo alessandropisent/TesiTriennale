@@ -23,7 +23,7 @@
 */
 int printMatrix(const char nameFileOut[], Matrix *M){
 
-    int i,j;        /*varibili per scandire righe e colonne*/
+    int i,j,row;        /*varibili per scandire righe e colonne*/
     FILE *outF;     /*Variabile per il file di Output*/
 
     outF = fopen(nameFileOut, "w");
@@ -31,6 +31,9 @@ int printMatrix(const char nameFileOut[], Matrix *M){
     /*Errore apertura file output*/
     if (outF == NULL)
         return -1;
+    
+    /*scritta per la matrice risolta*/
+    fprintf(outF,"La matrice risolta A:\n\n");
     
     /*Scansione delle righe*/
     for(i=0;i<M->n;i++){
@@ -40,6 +43,18 @@ int printMatrix(const char nameFileOut[], Matrix *M){
 
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
+
+    fprintf(outF,"\nla relazione tra le righe (inizio a contare da 0):\n\n");
+
+    for(i=0;i<(M->nRD);i++){
+        row=M->dipRow[i];
+        fprintf(outF,"Riga %d:",row);
+        for(j=0;j<(M->m);j++){
+            
+            fprintf(outF,"%5.2f ",(M->B)[row][j]);
+        }/*for*/
+        fprintf(outF,"\n");     /*fine della riga*/
+    }
 
     /*chiusura del file*/
     fclose(outF);

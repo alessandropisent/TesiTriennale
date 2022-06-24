@@ -37,6 +37,18 @@ void initMatrix(int n, int m, Matrix *M){
     M->dipRow = (int*) malloc(sizeof(int) * initNDipRow);
     assert(M->dipRow != NULL);
     
+    /*creazione della matrice per le relazioni tra le righe*/
+    M->B = (double**) malloc( sizeof(double*) *(M->n) );
+    assert(M->B != NULL);
+
+    /*Creazione di un array per ogni riga*/
+    for(i = 0; i<(s+n) ; i++){
+        (M->B)[i] = (double*) malloc(sizeof(double) *(M->m));
+        assert((M->B)[i] != NULL);
+    }/*for*/
+
+    /*funzione che mette zeri nella matrice B di relazioni*/
+    zeroB(M);
 
 }/*initMatrix*/
 
@@ -48,16 +60,30 @@ void freeMatrix(Matrix *M){
     int i;
 
     /*libera le colonne*/
-    for(i = 1; i < M->m; i++)
+    for(i = 1; i < M->m; i++){
         free((M->A)[i]);
+        free((M->B)[i]);
+    }/*for*/
+        
     
     /*libera le righe*/
     free(M->A);
+    free(M->B);
 
     /*libera la matrice con righe dipendenti*/
     free(M->dipRow);
     
 }/*freeMatrix*/
+
+void zeroB(Matrix* M){
+    int i,j;
+
+    for(i = 0; i< M->n; i++){
+        for(j=0;j< M->m; j++)
+            (M->B)[i][j]=0;
+        
+    }/*for*/
+}/*zeroB*/
 
 /*  Funzione che stampa una matrice a schermo
     IP M, matrice da stampare
@@ -66,7 +92,8 @@ void freeMatrix(Matrix *M){
 void printFMatrix( Matrix *M){
 
     int i,j;
-
+    /*forntespizio*/
+    printf("\nSTAMPO A\n");
     /*scandisco tutte le righe*/
     for(i=0;i<M->n;i++){
 
@@ -80,6 +107,29 @@ void printFMatrix( Matrix *M){
 
 }/*printFMatrix*/
 
+/*  Funzione che stampa una matrice Relazioni a schermo
+    IP M, matrice da stampare
+    OV matrice stampata
+*/
+void printFMatrixRel(Matrix *M){
+
+    int i,j;
+
+    /*frontespizio*/
+    printf("\nSTAMPO B\n");
+    /*scandisco tutte le righe*/
+    for(i=0;i<M->n;i++){
+
+        /*scandisco tutte le colonne*/
+        for(j = 0; j<(M->m);j++)
+            printf("%5.2f ",(M->B)[i][j]);
+
+        printf("\n");   /*fine riga*/
+
+    }/*for*/
+
+}/*printFMatrixRel*/
+
 /*  Funzione per normalizzare l'elemento sulla diagonale di una riga, 
     dividendola per se stessa
 
@@ -90,10 +140,17 @@ void printFMatrix( Matrix *M){
 */
 void diagNorm(int r, int c, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
-    int i;
+    int i,indexRow;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->A)[r+(M->s)][c+1];
+
+    /*metto t in tutta la colonna di B*/
+    for(i=0;i<M->n-1;i++){
+        indexRow = (i+r+1)%(M->n);
+        (M->B)[indexRow][c] = t;
+    }/*for*/
+    
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->m+1);i++)
@@ -122,6 +179,7 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     double t = (M->A)[r+(M->s)][c+1];
     if(isZero(t))
         t = 0;
+    (M->B)[r][c] = t/((M->B)[r][c]);
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->m+1);i++){
@@ -181,8 +239,6 @@ void solveTheMatrix(Matrix *M){
         /*se ho trovato delle righe linearmente dipendendi 
             risolvo per le altre righe*/
         solveLinDip(M);
-        
-        
     
 }/*solveTheMatrix*/
 
