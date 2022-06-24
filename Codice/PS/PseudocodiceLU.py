@@ -1,11 +1,15 @@
 import numpy as np
 
 #Esempio per calcoli
-A = np.array([[1 , 4, 7] , [2,5,8], [3,6,10]])
-b = [1,1,1]
+Ap = np.array([[1 , 4, 7] , [2,5,8], [3,6,10]])
+bp = [1,1,1]
 
 M = np.array([[7,9,8], [6,4,3], [6,5,10]])
 x = [0,4,6]
+
+## Da calcolare
+A = np.array([[ 4, 8, 7, 3, 9], [8, 7, 2, 6, 10], [5, 10, 9, 7, 2], [10, 0, 4, 0, 10], [0, 4, 2, 10, 0]])
+b = [ 3, 3, 8, 4, 10 ]
 
 #se state > 0 Lower, <0 Upper
 def triang(n,state):
@@ -72,9 +76,9 @@ def lowSolver(L,b):
 def upSolver(U,y):
     n=len(U)
     x = np.zeros(n)
-    for i in range(n-1,-1,-1):
+    for i in range(n-1,0,-1): 
         sum = 0
-        for j in range(i,n):
+        for j in range(n-1,i):
             sum += U[i][j]*x[j]
         x[i] = (y[i] - sum)/U[i][i]
     return x
@@ -92,5 +96,5 @@ def linearSolver(A,b):
     #debug(L,U,y,x)
     return x
 
-x = linearSolver(M,x)
+x = linearSolver(A,b)
 print(x)

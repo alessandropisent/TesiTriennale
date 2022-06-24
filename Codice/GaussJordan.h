@@ -1,4 +1,4 @@
-#include <stdbool.h> 
+#include <stdbool.h> /*bool ovunque*/
 
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
@@ -20,17 +20,21 @@ void freeMatrix(Matrix * );
 
 void printFMatrix(Matrix *);
 
-void diagNorm(int , Matrix *);
+void diagNorm(int , int, Matrix *);
 
-void zerosRow(int , int, Matrix *);
+void zerosRow(int , int, int, Matrix *);
 
-void zerosCol(int , Matrix * );
+void zerosCol(int ,int,  Matrix * );
 
 void solveTheMatrix(Matrix *);
 
+void solveDiag(Matrix * );
+
+void solveLinDip(Matrix *);
+
 bool isZero(double a);
 
-void R(int , Matrix *);
+void addR(int , Matrix *);
 
 bool isLinDip(int , Matrix *);
 

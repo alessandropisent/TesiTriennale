@@ -120,8 +120,6 @@ int main(int argc, char const *argv[]){
     if(readFileMatrix(argv[1],&M) == -1)
         printf("ERRORE FILE INGRESSO");
     
-    printFMatrix(&M);
-    
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 

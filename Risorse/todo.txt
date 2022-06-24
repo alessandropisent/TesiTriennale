@@ -1,3 +1,3 @@
 Ricerca su programmazione lineare +Ricerca
 x 2022-06-22 2022-06-22 Risolvere se primo elemento e' zero +Programma
-2022-06-22 Risolvere se colonne e righe di numero divero +Programma
+x 2022-06-24 2022-06-22 Risolvere se colonne e righe di numero divero +Programma

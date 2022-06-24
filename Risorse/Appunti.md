@@ -13,11 +13,15 @@ Quindi è meglio solo per risolvere più equazioni con diversi b
 ma sono sempre algorimi $O(n^3)$
 
 # EdgeCases per Gauss Jordan
-- [ ] Più righe che colonne
-- [ ] Più colonne che righe
+- [x] Più righe che colonne
+- [x] Più colonne che righe
 - [x] Linee Linearmente dipendenti
 
 ## Domande per professore
 1. Da quando a quando va in vacanza
 2. Se sa entro quando devo consegnare
 3. E quando scriviamo il titolo
+
+# Risoluzione
+Se # Di righe > # Colonne, posso risolvere
+Se # Di Colonne > # Di righe infinite soluzioni

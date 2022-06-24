@@ -2,8 +2,8 @@ from random import randint
 import numpy as np
 
 
-N = 5 # righe, b deve avere la stessa dimensione
-M = 5 # colonne
+N = 25 # righe, b deve avere la stessa dimensione
+M = 21 # colonne
 
 a = 0
 b = 10
@@ -60,3 +60,27 @@ with open("Codice/PS/FileMatlab.txt","w") as f:
     f.write("]")
 
     f.write("\nx = linsolve(A,b)")
+
+# Scrittura per il file di decomposizione LU
+with open("Codice/PS/FileLU.txt","w") as f:
+    f.write("A = np.array([[ ")
+    for i in range(N):
+        for j in range(M):
+            f.write(str(m[i][j]))
+            if(j!=M-1):
+                f.write(", ")
+            else:
+                f.write("]")
+        if(i!=N-1):
+            f.write(", [")
+        else:
+            f.write("])")
+    
+    f.write("\nb = [ ")
+    for i in range(N):
+        f.write(str(c[i]))
+        if(i!=(N-1)):
+            f.write(", ")
+        else:
+            f.write(" ")
+    f.write("]")
