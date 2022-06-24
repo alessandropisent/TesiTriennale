@@ -1,3 +1,21 @@
+/*  Autore   : Alessandro Pisent
+    Matricola: 1162916
+
+    Descrizione file :
+    In questo file ci sono codificate tutte le funzioni per la risoluzione di 
+    un sistema lineare tramite il metodo di Gauss Jordan. 
+
+    Inoltre cerca di calcolare il rapporto di proporzionalita' tra le 
+    righe, e lo memorizza in una matrice B, all'interno del tipo strutturato 
+    Matrix.
+
+
+
+    Appunti:
+    Prende in lettura un file con la matrice e i coefficienti noti
+    
+    
+*/
 #include <stdlib.h>         /*malloc*/
 #include <assert.h>         /*assert*/
 #include <stdio.h>          /*printf*/
@@ -234,13 +252,23 @@ void zerosCol(int r, int c, Matrix * M){
 
 }/*zerosCol*/
 
+/*  Funzione che stabilisce se la riga $r e' linearmente dipendente
+    alle altre righe della matrice
+    IP row, riga da controllorare
+    IP M, matrice
+    OR se la $row, e' linearmente dipendente alle altre righe
+*/
 bool rowLinDip(int row, Matrix * M){
 
-    int i;
+    int i;  /*pèer il for*/
 
+    /*controllo tutto l'array con le righe lin dip*/
     for(i =0; i<(M->nRD);i++){
+
+        /*match trovato*/
         if(row==((M->dipRow)[i]))
             return true;
+
     }/*for*/
 
     return false;
@@ -251,8 +279,6 @@ bool rowLinDip(int row, Matrix * M){
     IOP M, matrice da risolvere
 */
 void solveTheMatrix(Matrix *M){
-
-    /*int rig = M->n - M->m;*/
 
     /*risolvo gli elementi sulla diagonale*/
     solveDiag(M);
@@ -351,6 +377,7 @@ void solveLinDip(Matrix * M){
     int r,c;            /*variabili di indice riga e colonna, per semplificare 
                         lettura*/
 
+    /*for che scandisce tutti gli elementi nel array delle righe dipendenti*/
     for(i=0;i<(M->nRD);i++){
         
         /*calcolo per gli indici di riga e colonna*/
@@ -377,8 +404,12 @@ void solveLinDip(Matrix * M){
     /*riparto dall'inizio con le righe che non ho fatto*/
     if (skip<(s-M->m)){
         for(i=0;i<skip;i++){
+
+            /*calcolo degli indici*/
             r = s+i;
-            c = (M->dipRow)[i];
+            c = (M->dipRow)[i]; /*la colonna da ricalcolare sara' uguale alla colonna lin dip*/
+            
+            /*limito fino a quando posso andare con gli indici*/
             if(c>=(M->m) || r>=(M->n))
                 break;
             
