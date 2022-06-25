@@ -5,14 +5,24 @@
     In questo file ci sono codificate tutte le funzioni per la risoluzione di 
     un sistema lineare tramite il metodo di Gauss Jordan. 
 
-    Inoltre cerca di calcolare il rapporto di proporzionalita' tra le 
-    righe, e lo memorizza in una matrice B, all'interno del tipo strutturato 
-    Matrix.
-
-
-
     Appunti:
-    Prende in lettura un file con la matrice e i coefficienti noti
+    Cerca di calcolare il rapporto di proporzionalita' tra le  righe, e lo 
+    memorizza in una matrice B, all'interno del tipo strutturato Matrix.
+
+    L'albero delle chiamate: 
+    1:solveTheMatrix O(n^3)
+        1: solveDiag         Risolvo, o almeno provo a risolvere la matrice 
+                                come se fosse una min(m,n) x min(m,n)
+            min(n,m): ZeroCol O(nm)      Azzera la colonna selezionata
+                1:diagNorm O(n)      Normalizza l'elemento sulla diagonale
+                n-1: zeroRow O(m)    Azzera l'elemento della riga, e modifica gli altri  
+
+        Solo se ho #righe > #Colonne devo continuare l'algorimo
+        1: solveLinDip
+            n-m: ZeroCol O(nm)            Azzera la colonna selezionata
+                1:diagNorm O(n)      Normalizza l'elemento sulla diagonale
+                n-1: zeroRow O(m)    Azzera l'elemento della riga, e modifica gli altri  
+
     
     
 */
@@ -93,9 +103,15 @@ void freeMatrix(Matrix *M){
     
 }/*freeMatrix*/
 
+/*  Funzione che mette tutti zero nella matrice B
+    IOP M, tipo strutturato matrice con al interno B
+*/
 void zeroB(Matrix* M){
-    int i,j;
+    /*Sono costretto a fare questo perche' in c non e' garantito che valore ci sia
+    nella memoria allocata*/
+    int i,j;    /*per i for*/
 
+    /*due for uno dentro l'altro per scandire la matrice B*/
     for(i = 0; i< M->n; i++){
         for(j=0;j< M->m; j++)
             (M->B)[i][j]=0;
@@ -181,6 +197,8 @@ void diagNorm(int r, int c, Matrix *M){
 
 /*  Funzione che azzera l'elemento M[$r][$c] e modifica di conseguenza la
     riga $r. (prende come elemento di pivot M[$rowC][$c])
+    Qui c'e' il controllo se la riga e' linearmente dipendente, nel caso,
+    non prova ad modificarla tutta
 
     IP r, riga da modificare
     IP c, colonna dove ci troviamo (Da azzerare)
@@ -235,7 +253,7 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
 */
 void zerosCol(int r, int c, Matrix * M){
     
-    int i,row;
+    int i,row;  /*variabili per il ciclo, e per la riga*/
     
     
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
@@ -271,6 +289,7 @@ bool rowLinDip(int row, Matrix * M){
 
     }/*for*/
 
+    /*match non trovato*/
     return false;
 
 }/*rowLinDip*/
@@ -334,7 +353,7 @@ void solveDiag(Matrix * M){
     int i;  /*per il for*/
     bool start = true;   /*variabile per stato*/
     int skip = 0;           /*quante colonne ho schippato dal inizio*/
-    int m = min(M->n,M->m);
+    int m = min(M->n,M->m); /*il massimo di matrice "quadrata" che risolvo*/
     
     /*Normalizzo l'elemento sulla diagonale e 
         azzero tutti gli altri elementi*/
@@ -414,7 +433,7 @@ void solveLinDip(Matrix * M){
                 break;
             
             /*controllo comunque che non sia ancora a zero*/
-            if((c<(M->m)) && !isZero((M->A)[r+(M->s)][c+1]))
+            if(!isZero((M->A)[r+(M->s)][c+1]))
                 zerosCol(r,c,M);
         }/*for*/
     }/*if*/
