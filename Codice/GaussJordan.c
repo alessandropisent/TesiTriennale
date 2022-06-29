@@ -71,7 +71,7 @@ void initMatrix(int n, int m, Matrix *M){
 
     /*Creazione di un array per ogni riga*/
     for(i = 0; i<(s+n) ; i++){
-        (M->B)[i] = (double*) calloc(sizeof(double) *(M->m),sizeof(double));
+        (M->B)[i] = (double*) calloc( (M->m) ,sizeof(double));
         assert((M->B)[i] != NULL);
     }/*for*/
 
