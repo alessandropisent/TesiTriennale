@@ -2,8 +2,8 @@ from random import randint
 import numpy as np
 
 
-N = 3 # righe, b deve avere la stessa dimensione
-M = 3 # colonne
+N = 4 # righe, b deve avere la stessa dimensione
+M = 4 # colonne
 
 a = 0
 b = 10

@@ -9,7 +9,7 @@
     Cerca di calcolare il rapporto di proporzionalita' tra le  righe, e lo 
     memorizza in una matrice B, all'interno del tipo strutturato Matrix.
 
-    L'albero delle chiamate: 
+    L'albero delle chiamate: (Analisi approssimata)
     1:solveTheMatrix O(n^3)
         1: solveDiag         Risolvo, o almeno provo a risolvere la matrice 
                                 come se fosse una min(m,n) x min(m,n)
@@ -26,7 +26,7 @@
     
     
 */
-#include <stdlib.h>         /*malloc*/
+#include <stdlib.h>         /*malloc, free*/
 #include <assert.h>         /*assert*/
 #include <stdio.h>          /*printf*/
 #include <math.h>           /*fabs*/
@@ -71,12 +71,13 @@ void initMatrix(int n, int m, Matrix *M){
 
     /*Creazione di un array per ogni riga*/
     for(i = 0; i<(s+n) ; i++){
-        (M->B)[i] = (double*) malloc(sizeof(double) *(M->m));
+        (M->B)[i] = (double*) calloc(sizeof(double) *(M->m),sizeof(double));
         assert((M->B)[i] != NULL);
     }/*for*/
 
     /*funzione che mette zeri nella matrice B di relazioni*/
-    zeroB(M);
+    /*zeroB(M);*/
+    /*non serve se utilizziamo calloc al posto di malloc*/
 
 }/*initMatrix*/
 
@@ -87,7 +88,7 @@ void freeMatrix(Matrix *M){
 
     int i;
 
-    /*libera le colonne*/
+    /*libera le righe*/
     for(i = 1; i < M->m; i++){
         free((M->A)[i]);
         free((M->B)[i]);
