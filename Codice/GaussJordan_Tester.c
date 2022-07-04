@@ -129,7 +129,8 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 */
 int main(int argc, char const *argv[]){
 
-    Matrix M;
+    Matrix M,T;
+    bool printIt = true;
     
     /*Se l'utente si e' dimenticato di scrivere i file di IO*/
     if(argc < 3){
@@ -138,18 +139,32 @@ int main(int argc, char const *argv[]){
     }/*if*/
 
     /*Lettura della matrice in input*/
-    if(readFileMatrix(argv[1],&M) == -1)
+    if(readFileMatrix(argv[1],&M) == -1){
         printf("ERRORE FILE INGRESSO");
-    
+        return -1;
+    }
+    /*Lettura della matrice Test*/
+    readFileMatrix(argv[1],&T);
+        
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 
+    if(test(&M,&T,printIt))
+        printf("\n TEST PASSATO :)\n");
+    else
+        printf("\nTEST NON PASSATO !!!!!!!\n");
+
+
     /*Stampa su file della matrice risolta*/
-    if(printMatrix(argv[2],&M) == -1)
+    if(printMatrix(argv[2],&M) == -1){
         printf("ERRORE FILE USCITA");
+        return -1;
+    }
+        
     
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
+    freeMatrix(&T);
     
     return 0;
 }/*main*/

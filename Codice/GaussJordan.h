@@ -3,6 +3,7 @@
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
 #define ERROR 0.001
+#define MAX_STRING 100
 
 typedef struct {
     double** A;     /*Matrice con allocazione dinamica memoria*/
@@ -43,6 +44,6 @@ bool isZero(double a);
 
 void addR(int , Matrix *);
 
-bool isLinDip(int , Matrix *);
-
 int min(int, int);
+
+bool test(Matrix* , Matrix* , bool);

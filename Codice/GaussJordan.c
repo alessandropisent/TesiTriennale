@@ -32,6 +32,8 @@
 #include <math.h>           /*fabs*/
 #include "GaussJordan.h"    /*definizione delle funzioni nel file*/
 
+#define TESTMODE true
+
 /*inizializzazzione della matrice e allocazione della memoria
     IP n, numero di righe
     IP m, numero di colonne
@@ -128,7 +130,7 @@ void printFMatrix( Matrix *M){
 
     int i,j;
     /*forntespizio*/
-    printf("\nSTAMPO A\n");
+    printf("\nSTAMPO A: b|A\n");
     /*scandisco tutte le righe*/
     for(i=0;i<M->n;i++){
 
@@ -180,12 +182,15 @@ void diagNorm(int r, int c, Matrix *M){
     /*prendo il valore sulla diagonale*/
     double t = (M->A)[r+(M->s)][c+1];
 
-    /*metto t in tutta la colonna di B*/
+    /*metto t in tutta la colonna di B se posso*/
     for(i=0;i<M->n-1;i++){
         indexRow = (i+r+1)%(M->n);
-        (M->B)[indexRow][c] = t;
+        if(!rowLinDip(indexRow,M))
+            (M->B)[indexRow][c] = t;
+        
     }/*for*/
     
+    /*printFMatrixRel(M);*/
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->m+1);i++)
@@ -214,18 +219,12 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->A)[r+(M->s)][c+1];
-    
-    /*per non propagare l'errore di t*/
-    if(isZero(t))
-        t = 0;
 
     /*Scrivo la relazione tra le righe*/
     (M->B)[r][c] = t/((M->B)[r][c]);
-
-    /*controllo se e' una delle righe linearmente dipendente*/
-    if(rowLinDip(r,M))
-        /*in caso non modifico riga $r e esco*/
-        return;
+    if(TESTMODE)
+        printFMatrixRel(M);   
+    
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->m+1);i++){
@@ -236,12 +235,19 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
         /*conto gli zeri che trovo*/
         if(isZero(el))
             z++;
+        
+        if(TESTMODE){
+            printf("MODIFICATO A[%d][%d]",r,i);
+            printFMatrix(M);
+        }/*if*/
+
 
     }/*for*/
 
     /*se ho una riga di zeri allora e' una riga lin dip*/
     if(z>=(M->m))
         addR(r,M);
+
     
 }/*zerosRow*/
 
@@ -256,7 +262,6 @@ void zerosCol(int r, int c, Matrix * M){
     
     int i,row;  /*variabili per il ciclo, e per la riga*/
     
-    
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     diagNorm(r,c,M);
 
@@ -264,10 +269,10 @@ void zerosCol(int r, int c, Matrix * M){
     for(i=0;i<((M->n)-1);i++){
 
         row =  (i+1+r)%(M->n);
-        zerosRow(row, c, r, M);
+        if(!rowLinDip(row,M))
+            zerosRow(row, c, r, M);
 
     }/*for*/
-    
 
 }/*zerosCol*/
 
@@ -442,3 +447,69 @@ void solveLinDip(Matrix * M){
 
 }/*solveLinDip*/
 
+/*  Funzione per testare che effettivamente la relazione trovata 
+    Sia giusta
+    IP S, matrice risolta
+    IP T, matrice non risolta "Originale"
+    IP printTest, se vogliamo stampare a schermo le operazioni compiute dal test
+    OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
+         FALSE se il test non e' andato a buon fine (Ho sbagliato)   
+*/
+bool test(Matrix* S, Matrix* T, bool printTest){
+    int  d, j, i, iR;
+    double el,sum,molt, elMoltiplicato;
+
+    if(printTest){
+        printf("\nORIGINAL");
+        printFMatrix(T);
+        printf("\nSOLVED");
+        printFMatrix(S);
+        printFMatrixRel(S);
+        printf("Dobbiamo controllare R = ");
+        for(i=0;i<(S->nRD);i++)
+            printf("%d, ",S->dipRow[i]);
+        printf("\n");
+    }/*if*/
+
+    /*per ogni riga dipendente*/
+    for(d=0;d<S->nRD;d++){
+
+        /*indice della riga che stiamo controllando*/
+        iR = (S->dipRow)[d];
+
+        if (printTest)
+            printf("\nLet's do Row %d\n",iR);
+        
+        /*per ogni elemento della riga somma tutti gli elmenti 
+            delle colonne*/
+        for(i=0;i<(S->m);i++){
+            /*somma degli elementi*/
+            sum = 0;
+
+            /*per ogni */
+            for(j=0;j<(S->n);j++){
+
+                /*dichiarazioni di variabili per poi stampare*/
+                molt = ((S->B)[iR][j]);
+                elMoltiplicato = ((T->A)[j+1][i+1]);
+
+                sum += molt*elMoltiplicato;
+                
+                if(printTest)
+                    printf("sum = %5.2f , added B[%d][%d]=%5.2f * A[%d][%d]=%5.2f\n", 
+                        sum, iR, j, molt, j,i,elMoltiplicato);
+            }/*for*/
+
+            /*elemento della colonna dipendente*/
+            el = (T->A)[iR+1][i+1];
+            if(printTest)
+                printf("\nTest: A[%d][%d]=%5.2f, sum = %5.2f\n",iR,i,el,sum);
+
+            if(!isZero(el-sum))
+                return false;
+        }/*for*/
+    }/*for*/
+
+    return true;
+
+}/*test*/
