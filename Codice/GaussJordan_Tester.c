@@ -21,7 +21,7 @@
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileOut).
 */
-int printMatrix(const char nameFileOut[], Matrix *M){
+int printMatrix(const char nameFileOut[], const Matrix *M){
 
     int i,j,row;        /*varibili per scandire righe e colonne*/
     FILE *outF;     /*Variabile per il file di Output*/
@@ -36,25 +36,51 @@ int printMatrix(const char nameFileOut[], Matrix *M){
     fprintf(outF,"La matrice risolta A:\n\n");
     
     /*Scansione delle righe*/
-    for(i=0;i<M->n;i++){
+    for(i=0;i<M->nEq;i++){
+        fprintf(outF,"%2d: ",i+1);
         /*scansione degli elementi colonna*/
-        for(j = 0; j<(M->m)+1;j++)
-            fprintf(outF,"%5.2f ",(M->A)[i+M->s][j]);
+        for(j = 0; j<(M->nIn)+1;j++)
+            fprintf(outF,"%5.2f ",(M->MCoef)[i+1][j]);
 
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
 
-    /*stampo la relazione tra le righe se c'e'*/
-    if(M->nRD > 0){
-        fprintf(outF,"\nla relazione tra le righe linearmente indipendenti (inizio a contare da 0):\n\n");
+    if(M->nEq-M->nIn-M->nEDip == 0){
+        
+        if(!isZeroCoefAllEqnLinDip(M))
+            fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
 
-        for(i=0;i<(M->nRD);i++){
+        else{
+            fprintf(outF,"SISTEMA CON RISULTATO UNICO\n");        
+            /*scrittura piu' carina carina del risultato*/
+            for(i=0;i<M->nEq;i++){
+                for(j=0;j<M->nIn;j++){
+                    if(!isZero((M->MCoef)[i+1][j+1],M->error)){
+                        fprintf(outF,"x%2d = %5.2f\n",j+1,(M->MCoef)[i+1][0]);
+                        break;
+                    }/*if*/
+                        
+                }/*for*/
+            
+            }/*for*/
+        }/*else*/
+            
+    }/*if*/
+    
+    /*stampo gli spazi*/
+    
 
-            row=M->dipRow[i];
+    /*stampo la relazioni lineari tra le righe se ci sono*/
+    if(M->nEDip > 0){
+        fprintf(outF,"\nla relazione tra le righe linearmente indipendenti (inizio a contare da 1):\n\n");
+
+        for(i=0;i<(M->nEDip);i++){
+
+            row=M->aEDip[i];
             fprintf(outF,"Riga %d:",row);
 
-            for(j=0;j<(M->m);j++)
-                fprintf(outF,"%5.2f ",(M->B)[row][j]);
+            for(j=0;j<(M->nIn);j++)
+                fprintf(outF,"%5.2f ",(M->MRAlg)[row][j]);
 
             fprintf(outF,"\n");     /*fine della riga*/
         }/*for*/
@@ -98,22 +124,27 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 
     /*scansione della matrice*/
     for(i=0;i<n;i++){
-        for(j = 0; j<m;j++){
+
+        for(j = 0; j< m+1 ;j++){
+
             /*lettura del dato*/
             fscanf(inF,"%lf",&r);
+
             /*memorizzazzione*/
-            (M->A)[i+(M->s)][j+1] = r;
-            /*NOTA: M->s sono le righe che ho lasciato libero, e j+1 perche' memorizzo
-                nella colonna 0 i valori noti*/
+            (M->MCoef)[i+1][(j+1)%(m+1)] = r;
+
         }/*for*/
 
     }/*for*/
 
-    /*scansione dei termini noti*/
-    for(i = 0; i<n;i++){
-        fscanf(inF,"%lf",&r);
-        (M->A)[i+(M->s)][M->b] = r;
-    }/*for*/
+    /*salvo l'errore dentro alla matrice*/
+    fscanf(inF,"%lf",&r);
+    M->error = r;
+
+    /*stampa di cioò che ho letto*/
+    printf("LA MATRICE LETTA: \n");
+    printFMatrix(M);
+    printf("ERRORE LETTO : %f\n", M->error);
 
     /*chiusura del file*/
     fclose(inF);
@@ -129,9 +160,10 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 */
 int main(int argc, char const *argv[]){
 
-    Matrix M,T;
-    bool printIt = true;
-    
+    Matrix M, T;
+
+
+
     /*Se l'utente si e' dimenticato di scrivere i file di IO*/
     if(argc < 3){
         printf("Inserire il nome dei file di Input e Output");
@@ -143,17 +175,21 @@ int main(int argc, char const *argv[]){
         printf("ERRORE FILE INGRESSO");
         return -1;
     }
-    /*Lettura della matrice Test*/
-    readFileMatrix(argv[1],&T);
-        
+
+    
+        /*Lettura della matrice Test*/
+        readFileMatrix(argv[1],&T);
+
+
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 
-    if(test(&M,&T,printIt))
+    /*
+    if(test(&M,&T))
         printf("\n TEST PASSATO :)\n");
     else
         printf("\nTEST NON PASSATO !!!!!!!\n");
-
+    */
 
     /*Stampa su file della matrice risolta*/
     if(printMatrix(argv[2],&M) == -1){

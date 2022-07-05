@@ -1,3 +1,5 @@
-Ricerca su programmazione lineare +Ricerca
-x 2022-06-22 2022-06-22 Risolvere se primo elemento e' zero +Programma
-x 2022-06-24 2022-06-22 Risolvere se colonne e righe di numero divero +Programma
+Errori d'insermento dati
+Controllo su sitema indeterminato
+Come srcivere lo span in modo carino
+Scrivere lo span in modo carino
+Modo sistematico per trovare la relazione tra colonne

@@ -2,29 +2,25 @@
 
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
-#define ERROR 0.001
 #define MAX_STRING 100
 
 typedef struct {
-    double** A;     /*Matrice con allocazione dinamica memoria*/
-    int n;          /*# Righe*/
-    int m;          /*# Colonne*/
-    int b;          /*in che colonna si trova il termine noto*/
-    int s;          /*# di righe che lascio libere*/
-    int * dipRow;   /*array con gli indici delle righe dipendenti */    
-    int nRD;        /*# di elenti in $dipRow*/
-    double** B;     /*matrice con relazioni tra righe*/
+    double** MCoef;     /*Matrice con allocazione dinamica memoria*/
+    int nEq; /*n*/           /*# di equazioni, # Righe*/
+    int nIn; /*m*/           /*# di Incognit, # Colonne*/
+    int* aEDip;           /*array con gli indici delle equazioni dipendenti */    
+    int nEDip;            /*# di elenti in $dipRow*/
+    double** MRAlg;     /*matrice con relazioni algebriche tra righe*/
+    double error;       /*precisione di errore*/
 } Matrix;
 
 void initMatrix(int , int , Matrix *);
 
 void freeMatrix(Matrix * );
 
-void zeroB(Matrix *);
+void printFMatrix(const Matrix *);
 
-void printFMatrix(Matrix *);
-
-void printFMatrixRel(Matrix *);
+void printFMatrixRAlg(const Matrix *);
 
 void diagNorm(int , int, Matrix *);
 
@@ -32,7 +28,9 @@ void zerosRow(int , int, int, Matrix *);
 
 void zerosCol(int ,int,  Matrix * );
 
-bool rowLinDip(int, Matrix *);
+bool isEqLinDip(int, const Matrix *);
+
+bool isZeroCoefAllEqnLinDip(const Matrix *);
 
 void solveTheMatrix(Matrix *);
 
@@ -40,10 +38,10 @@ void solveDiag(Matrix * );
 
 void solveLinDip(Matrix *);
 
-bool isZero(double a);
+bool isZero(double , double);
 
 void addR(int , Matrix *);
 
 int min(int, int);
 
-bool test(Matrix* , Matrix* , bool);
+bool test(Matrix* , Matrix* );

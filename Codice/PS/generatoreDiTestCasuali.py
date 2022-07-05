@@ -4,14 +4,16 @@ import numpy as np
 #------ 
 # Variabili di input
 
-N = 6 # righe, b deve avere la stessa dimensione
-M = 4 # colonne
+N = 10 # righe, # di equazioni
+M = 5 # colonne, # di incognite
 
 a = 0
 b = 10
 
-D = 2 # # of righe dipendenti
+D = 5 # # of righe dipendenti
 In = N-D
+
+precisone = "0.0001"
 
 #------------------------------------------------------
 # START OF PROGRAMMA
@@ -48,7 +50,7 @@ with open("Codice/Dipendenza.txt", "w") as fileD:
                 m[rC[i]][j] = f*m[rI[i%In]][j]
                 c[rC[i]] = f*c[rI[i%In]]
     else:
-        fileD("No dipendenza")
+        fileD.write("No dipendenza")
     
 
 
@@ -59,20 +61,17 @@ with open("Codice/FileInput.txt","w") as f:
     for i in range(N):
         for j in range(M):
             f.write(str(m[i][j])+" ")
-        
-        f.write("\n")
-    for i in range(N):
         f.write(str(c[i])+"\n")
+    f.write(precisone)
+        
 #Scrittura del file per il programma LU 
 with open("Codice/LU/FileInput.txt","w") as f:
     f.write(str(N)+" "+str(M)+"\n")
     for i in range(N):
         for j in range(M):
             f.write(str(m[i][j])+" ")
-        
-        f.write("\n")
-    for i in range(N):
         f.write(str(c[i])+"\n")
+    f.write(precisone)
 
 # Scrittura per il matlab
 with open("Codice/PS/FileMatlab.txt","w") as f:

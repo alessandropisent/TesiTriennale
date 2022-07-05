@@ -25,3 +25,8 @@ ma sono sempre algorimi $O(n^3)$
 # Risoluzione
 Se # Di righe > # Colonne, posso risolvere
 Se # Di Colonne > # Di righe infinite soluzioni
+
+# Vacanze professore
+- 15-28 Luglio
+- 29-23 Agosto
+
