@@ -1,5 +1,6 @@
 Errori d'insermento dati
-Controllo su sitema indeterminato
-Come srcivere lo span in modo carino
-Scrivere lo span in modo carino
+x Controllo su sitema indeterminato
+x Come srcivere lo span in modo carino
+x Scrivere lo span in modo carino
 Modo sistematico per trovare la relazione tra colonne
+decidere il modo per stampare in base a quante variabili ci sono

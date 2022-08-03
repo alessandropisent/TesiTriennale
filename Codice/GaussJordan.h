@@ -2,7 +2,7 @@
 
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
-#define MAX_STRING 100
+#define MAX_STRING 200
 
 typedef struct {
     double** MCoef;     /*Matrice con allocazione dinamica memoria*/
@@ -45,3 +45,5 @@ void addR(int , Matrix *);
 int min(int, int);
 
 bool test(Matrix* , Matrix* );
+
+void printEquations(const Matrix *);

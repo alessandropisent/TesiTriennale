@@ -4,13 +4,13 @@ import numpy as np
 #------ 
 # Variabili di input
 
-N = 10 # righe, # di equazioni
-M = 5 # colonne, # di incognite
+N = 5 # righe, # di equazioni
+M = 10 # colonne, # di incognite
 
 a = 0
 b = 10
 
-D = 5 # # of righe dipendenti
+D = 0 # # of righe dipendenti
 In = N-D
 
 precisone = "0.0001"
@@ -59,9 +59,10 @@ with open("Codice/Dipendenza.txt", "w") as fileD:
 with open("Codice/FileInput.txt","w") as f:
     f.write(str(N)+" "+str(M)+"\n")
     for i in range(N):
+        f.write(str(c[i])+" ")
         for j in range(M):
             f.write(str(m[i][j])+" ")
-        f.write(str(c[i])+"\n")
+        f.write("\n")
     f.write(precisone)
         
 #Scrittura del file per il programma LU 

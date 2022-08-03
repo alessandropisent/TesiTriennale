@@ -30,11 +30,8 @@
 #include <assert.h>         /*assert*/
 #include <stdio.h>          /*printf*/
 #include <math.h>           /*fabs*/
+#include <string.h>         /*strcat*/
 #include "GaussJordan.h"    /*definizione delle funzioni nel file*/
-
-#define TESTMODE true
-#define LITETESTMODE true
-#define PRINT true
 
 /*inizializzazzione della matrice e allocazione della memoria
     IP n, numero di righe
@@ -174,12 +171,6 @@ void diagNorm(int r, int c, Matrix *M){
             (M->MRAlg)[indexRow][c-1] = t;
         
     }/*for*/
-    
-    #ifdef TESTMODE
-        printf("\nNORMALIZZO L'elento MCoeff[%d][%d]=%5.2f\nSalvo t su matrice MRA[][%d]",
-            r,c,t,c-1);
-        printFMatrixRAlg(M);
-    #endif
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -312,18 +303,10 @@ void solveTheMatrix(Matrix *M){
         /*se l'elemento sulla diagonale M[i][i]!=0 allora posso continuare*/
         if(!isZero((M->MCoef)[r+1][c], M->error)){
             
-            #ifdef TESTMODE
-                printf("MCoeff[%d][%d]!=ZERO",r+1,c);
-            #endif
-            
             zerosCol(r+1,c,M);
             i++;
         
         }/*if*/
-        
-        #ifdef TESTMODE
-            printFMatrix(M);
-        #endif
 
         r=(r+1)%(M->nEq);
         j++;
@@ -373,7 +356,7 @@ int min(int a, int b){
     return b;
 }/*min*/
 
-#ifdef TESTMODE
+
 /*  Funzione per testare che effettivamente la relazione trovata 
     Sia giusta
     IP S, matrice risolta
@@ -386,7 +369,7 @@ bool test(Matrix* S, Matrix* T){
     int  d, j, i, iR;
     double el,sum,molt, elMoltiplicato;
 
-    #ifdef PRINT
+
         printf("\nORIGINAL");
         printFMatrix(T);
         printf("\nSOLVED");
@@ -396,7 +379,7 @@ bool test(Matrix* S, Matrix* T){
         for(i=0;i<(S->nEDip);i++)
             printf("%d, ",S->aEDip[i]);
         printf("\n");
-    #endif 
+
 
     /*per ogni riga dipendente*/
     for(d=0;d<S->nEDip;d++){
@@ -404,9 +387,6 @@ bool test(Matrix* S, Matrix* T){
         /*indice della riga che stiamo controllando*/
         iR = (S->aEDip)[d];
         
-        #ifdef TESTMODE
-            printf("\nLet's do Row %d\n",iR);
-        #endif
         /*per ogni elemento della riga somma tutti gli elmenti 
             delle colonne*/
         for(i=0;i<(S->nIn);i++){
@@ -422,18 +402,11 @@ bool test(Matrix* S, Matrix* T){
 
                 sum += molt*elMoltiplicato;
                 
-                #ifdef LITETESTMODE
-                    printf("sum = %5.2f , added B[%d][%d]=%5.2f * A[%d][%d]=%5.2f\n", 
-                        sum, iR, j, molt, j,i,elMoltiplicato);
-                #endif
             }/*for*/
 
             /*elemento della colonna dipendente*/
             el = (T->MCoef)[iR+1][i+1];
             
-            #ifdef LITETESTMODE
-                printf("\nTest: A[%d][%d]=%5.2f, sum = %5.2f\n",iR,i,el,sum);
-            #endif
 
             if(!isZero(el-sum,S->error))
                 return false;
@@ -443,5 +416,31 @@ bool test(Matrix* S, Matrix* T){
     return true;
 
 }/*test*/
-#endif
 
+
+/*  Fuznione che stampa a schermo il sistema di equazioni a schermo
+    IP Matrix M
+    OV il sistema di equazioni
+*/
+void printEquations(const Matrix *M){
+
+    int i,j;
+    
+    /*stampa del forntespizio*/
+    printf("\nIL SISTEMA DI EQUAZIONI e':\n");
+    for(i = 0; i < M->nEq; i++){
+
+        for(j=0;j<M->nIn-1;j++)
+            printf("%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
+
+        
+        /*stampa l'ultimo elemento*/
+        printf("%5.2f * x%d ",(M->MCoef)[i+1][j+1],j+1);
+
+        /*stampa termine noto*/
+        printf(" = %5.2f\n",(M->MCoef)[i+1][0]);
+
+
+    }/*for*/
+
+}/*printEquations*/
