@@ -1,6 +1,10 @@
 # TesiTriennale Alessandro Pisent
 
-Risoluzione con Gauss-Jordan
+# Risoluzione di sitemi lineari tramite Gauss-Jordan
+
+Dati come inputi i coefficienti di un sistema lineare sotto forma di matrice, il progrmma trova la soluzione, distringuendo se la soluzione sia unica, oppure se le relazioni delle variabili, ossia il sottospazio delle soluzioni : Ad esempio un sottospazio di dimensione 2 con quindi libere 2 variabili può essere scritto in questo modo:
+$$x = 2 y + 3 z + 5$$
+Il programma è inoltre in grado di trovare le relazioni lineari tra le equazioni, se c'erano; è anche in grado di stabilire se il sitema sia inpossibile
 
 L'inserimento dei file e' del tipo con il sistema di equazioni scritti nel modo:
 $$\begin{cases}
@@ -9,7 +13,7 @@ $$\begin{cases}
   a_{31} \cdot x_1 + a_{32} \cdot x_2 + a_{33} \cdot x_3 &= b_3 \\
 \end{cases}$$
 
-viene però immesso come input come :
+viene però immesso come input nel file come :
 ```
 n m
 b1 a11 a12 a13

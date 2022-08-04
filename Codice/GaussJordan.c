@@ -68,12 +68,32 @@ void initMatrix(int n, int m, Matrix *M){
     assert(M->MRAlg != NULL);
 
     /*Creazione di un array per ogni riga*/
-    for(i = 0; i<(n+1) ; i++){
-        (M->MRAlg)[i] = (double*) calloc( m ,sizeof(double));
+    for(i = 0; i< n; i++){
+        (M->MRAlg)[i] = (double*) malloc( n * sizeof(double));
         assert((M->MRAlg)[i] != NULL);
     }/*for*/
+    oneMatrixRAlg(M);
 
 }/*initMatrix*/
+
+void oneMatrixRAlg(Matrix *M){
+
+    int i,j;
+
+    for(i=0;i<M->nEq;i++){
+
+        for(j=0;j<M->nEq;j++){
+
+            if(i==j)
+                (M->MRAlg)[i][j]=1;
+            else
+                (M->MRAlg)[i][j]=0;
+
+        }/*for*/
+
+    }/*for*/
+
+}/*oneMatrixRAlg*/
 
 /*  Funzione che libera la memoria assegnata alla matrice
     IOP M, matrice da liberare

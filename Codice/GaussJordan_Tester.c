@@ -274,7 +274,7 @@ int main(int argc, char const *argv[]){
 
     /*Se l'utente si e' dimenticato di scrivere i file di IO*/
     else if(argc < 3){
-        printf("Inserire il nome dei file di Input e Output");
+        printf("Inserire il nome dei file di Input e Output\nPer aiuto:\"GaussJordan_Tester.exe -help\"");
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*else if*/
 
@@ -285,15 +285,17 @@ int main(int argc, char const *argv[]){
     }/*if*/
 
 
+
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 
-    /*
+    /*Lettura della matrice Test*/
+    /*readFileMatrix(argv[1],&T);
     if(test(&M,&T))
         printf("\n TEST PASSATO :)\n");
     else
-        printf("\nTEST NON PASSATO !!!!!!!\n");
-    */
+        printf("\nTEST NON PASSATO !!!!!!!\n");*/
+    
 
     /*Stampa su file della matrice risolta*/
     if(printMatrix(argv[2],&M) == -1){
