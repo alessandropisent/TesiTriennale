@@ -103,25 +103,42 @@ void fprintIndet(FILE *outF, const Matrix *M){
 void fprintRel(FILE *outF, const Matrix *M){
 
     int i,j,row,count=0;
-    fprintf(outF,"\nla relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
 
+    /*considerazione per il singolare e plurale*/
+    if(M->nEDip==1)
+        /*frontespizio*/
+        fprintf(outF,"\nIl sistema ha una equazione linearmente dipendente: ");
+    else
+        /*frontespizio*/
+        fprintf(outF,"\nIl sistema ha %d equazioni linearmente dipendenti: ",M->nEDip);
+    
+    /*stampa delle eqn lin dip*/
+    fprintf(outF,"(");
+    for(i=0;i<M->nEDip;i++)
+        fprintf(outF," Eq%d", (M->aEDip)[i]);
+    fprintf(outF," )");
+
+    fprintf(outF,"\n\nLe relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
+    
+    /*stampa delle relazioni*/
     for(i=0;i<(M->nEDip);i++){
 
+        /*indice di riga*/
         row=M->aEDip[i];
         fprintf(outF,"R%d=",row);
 
         for(j=0;j<M->nEq;j++){
 
             /*stampo solo le relazioni con le altre colonne e diverse da 0*/
-            if((j!=row) && !isZero((M->MRAlg)[row][j],M->error)){
+            if((j!=(row-1)) && !isZero((M->MRAlg)[row-1][j],M->error)){
                 
                 if(!count){
-                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row][j],j);
+                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row-1][j],j);
                     count++;
                 }/*if*/
 
                 else
-                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row][j],j);
+                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row-1][j],j);
                     
             }/*if*/
                 
@@ -171,7 +188,7 @@ void printHelp(int code){
         -1: apertura fallita di $nameFileOut).
 */
 int printMatrix(const char nameFileOut[], const Matrix *M){
-    int i=0;
+
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
     /*Errore apertura file output*/
@@ -199,24 +216,9 @@ int printMatrix(const char nameFileOut[], const Matrix *M){
 
 
     /*stampo la relazioni lineari tra le righe se ci sono*/
-    if(M->nEDip > 0){
-        /*considerazione per il singolare e plurale*/
-        if(M->nEDip==1)
-            /*frontespizio*/
-            fprintf(outF,"\nIl sistema ha una equazione linearmente dipendente: ");
-        else
-             /*frontespizio*/
-            fprintf(outF,"\nIl sistema ha %d equazioni linearmente dipendenti: ",M->nEDip);
-        fprintf(outF,"(");
-        for(i=0;i<M->nEDip;i++)
-            fprintf(outF," Eq%d", (M->aEDip)[i]);
-        fprintf(outF," )");
+    if(M->nEDip > 0)
         /*stampa sul file le relazioni tra le equazioni*/
-        /*fprintRel(outF, M);*/
-
-    }/*if*/
-        
-
+        fprintRel(outF, M);
 
     /*chiusura del file*/
     fclose(outF);

@@ -14,3 +14,7 @@ x 4 =  8.71
 x 5 = -13.54
 
 Il sistema ha una equazione linearmente dipendente: ( Eq6 )
+
+Le relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):
+
+R6=15.00 * R0 + 28.33 * R1 + 31.11 * R2 

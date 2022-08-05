@@ -73,7 +73,30 @@ void initMatrix(int n, int m, Matrix *M){
         assert((M->MRAlg)[i] != NULL);
     }/*for*/
 
+    oneMatrixRAlg(M);
+
 }/*initMatrix*/
+
+/*  Funzione che crea una matrice di 1 di dimensione $nEq x $nEq nella matrice MRAlg
+    IOP Matrix M, strutturato con dentro le equazioni
+*/
+void oneMatrixRAlg(Matrix *M){
+
+    int i,j;
+    for(i=0;i<M->nEq;i++){
+
+        for(j=0;j<M->nEq;j++){
+
+            if(i==j)
+                (M->MRAlg)[i][j]=1;
+            else
+                (M->MRAlg)[i][j]=0;
+
+        }/*for*/
+
+    }/*for*/
+
+}/*oneMatrixRAlg*/
 
 /*  Funzione che libera la memoria assegnata alla matrice
     IOP M, matrice da liberare
@@ -82,17 +105,16 @@ void freeMatrix(Matrix *M){
 
     int i;
 
-    /*libera le righe*/
+    /*libera le righe coefficienti*/
     for(i = 1; i < M->nIn; i++)
         free((M->MCoef)[i]);
-        
-
-
+    
+    /*libera righe relazioni*/
     for ( i = 0; i < M->nEq; i++)
         free((M->MRAlg)[i]);
     
 
-    /*libera le righe*/
+    /*libera le array di righe*/
     free(M->MCoef);
     free(M->MRAlg);
 
@@ -140,7 +162,7 @@ void printFMatrixRAlg(const Matrix *M){
     for(i=0;i<M->nEq;i++){
 
         /*scandisco tutte le colonne*/
-        for(j = 0; j<(M->nIn);j++)
+        for(j = 0; j<M->nEq;j++)
             printf("%5.2f ",(M->MRAlg)[i][j]);
 
         printf("\n");   /*fine riga*/
@@ -164,6 +186,8 @@ void diagNorm(int r, int c, Matrix *M){
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
+    /*Normalizzo l'elemento sulla sua stessa riga*/
+    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -190,6 +214,8 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
+    printf("Azzero il coefficiente: M[%d][%d]\n",r,c);
+    (M->MRAlg)[r-1][c-1] = -t/((M->MRAlg)[r-1][r-1]);
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
@@ -234,6 +260,7 @@ void zerosCol(int r, int c, Matrix * M){
             zerosRow(row, c, r, M);
 
     }/*for*/
+    printFMatrix(M);
 
 }/*zerosCol*/
 
@@ -296,7 +323,11 @@ void solveTheMatrix(Matrix *M){
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
             zerosCol(r+1,c,M);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-        
+            
+            /*TAG: DEBUG*/
+            printf("\nOperazione su Zero(%d,%d)",r+1,c);    /*TAG: DEBUG*/
+            printFMatrixRAlg(M);                            /*TAG: DEBUG*/
+
         }/*if*/
 
         /*indice di riga a partire da 0*/

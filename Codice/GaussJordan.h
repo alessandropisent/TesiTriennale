@@ -16,6 +16,8 @@ typedef struct {
 
 void initMatrix(int , int , Matrix *);
 
+void oneMatrixRAlg(Matrix *);
+
 void freeMatrix(Matrix * );
 
 void printFMatrix(const Matrix *);
