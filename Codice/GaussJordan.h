@@ -12,40 +12,40 @@ typedef struct {
     int nEDip;            /*# di elenti in $dipRow*/
     double** MRAlg;     /*matrice con relazioni algebriche tra righe*/
     double error;       /*precisione di errore*/
-} Matrix;
+} SisEqLin;
 
-void initMatrix(int , int , Matrix *);
+void initMatrix(int , int , SisEqLin *);
 
-void oneMatrixRAlg(Matrix *);
+void oneMatrixRAlg(SisEqLin *);
 
-void freeMatrix(Matrix * );
+void freeMatrix(SisEqLin * );
 
-void printFMatrix(const Matrix *);
+void printFMatrix(const SisEqLin *);
 
-void printFMatrixRAlg(const Matrix *);
+void printFMatrixRAlg(const SisEqLin *);
 
-void diagNorm(int , int, Matrix *);
+void diagNorm(int , int, SisEqLin *);
 
-void zerosRow(int , int, int, Matrix *);
+void zerosRow(int , int, int, SisEqLin *);
 
-void zerosCol(int ,int,  Matrix * );
+void zerosCol(int ,int,  SisEqLin * );
 
-bool isEqLinDip(int, const Matrix *);
+bool isEqLinDip(int, const SisEqLin *);
 
-bool isZeroCoefAllEqnLinDip(const Matrix *);
+bool isZeroCoefAllEqnLinDip(const SisEqLin *);
 
-void solveTheMatrix(Matrix *);
+void solveTheMatrix(SisEqLin *);
 
-void solveDiag(Matrix * );
+void solveDiag(SisEqLin * );
 
-void solveLinDip(Matrix *);
+void solveLinDip(SisEqLin *);
 
 bool isZero(double , double);
 
-void addR(int , Matrix *);
+void addR(int , SisEqLin *);
 
 int min(int, int);
 
-bool test(Matrix* , Matrix* );
+bool test(SisEqLin* , SisEqLin* );
 
-void printEquations(const Matrix *);
+void printEquations(const SisEqLin *);

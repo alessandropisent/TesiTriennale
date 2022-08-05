@@ -7,7 +7,7 @@
 
     Appunti:
     Cerca di calcolare il rapporto di proporzionalita' tra le  righe, e lo 
-    memorizza in una matrice B, all'interno del tipo strutturato Matrix.
+    memorizza in una matrice B, all'interno del tipo strutturato SisEqLin.
 
     L'albero delle chiamate: (Analisi approssimata)
     1:solveTheMatrix O(n^3)
@@ -38,7 +38,7 @@
     IP m, numero di colonne
     IOP A, matrice inizializzata
 */
-void initMatrix(int n, int m, Matrix *M){
+void initMatrix(int n, int m, SisEqLin *M){
 
     int i;
     int initNDipRow = n-1; /*al massimo le righe indipendenti saranno il # di nEq-1*/
@@ -76,10 +76,9 @@ void initMatrix(int n, int m, Matrix *M){
 
 }/*initMatrix*/
 
-void oneMatrixRAlg(Matrix *M){
+void oneMatrixRAlg(SisEqLin *M){
 
     int i,j;
-
     for(i=0;i<M->nEq;i++){
 
         for(j=0;j<M->nEq;j++){
@@ -98,7 +97,7 @@ void oneMatrixRAlg(Matrix *M){
 /*  Funzione che libera la memoria assegnata alla matrice
     IOP M, matrice da liberare
 */
-void freeMatrix(Matrix *M){
+void freeMatrix(SisEqLin *M){
 
     int i;
 
@@ -121,7 +120,7 @@ void freeMatrix(Matrix *M){
     IP M, matrice da stampare
     OV matrice stampata
 */
-void printFMatrix(const Matrix *M){
+void printFMatrix(const SisEqLin *M){
 
     int i,j;
 
@@ -146,7 +145,7 @@ void printFMatrix(const Matrix *M){
     IP M, matrice da stampare
     OV matrice stampata
 */
-void printFMatrixRAlg(const Matrix *M){
+void printFMatrixRAlg(const SisEqLin *M){
 
     int i,j;
 
@@ -156,7 +155,7 @@ void printFMatrixRAlg(const Matrix *M){
     for(i=0;i<M->nEq;i++){
 
         /*scandisco tutte le colonne*/
-        for(j = 0; j<(M->nIn);j++)
+        for(j = 0; j<M->nEq;j++)
             printf("%5.2f ",(M->MRAlg)[i][j]);
 
         printf("\n");   /*fine riga*/
@@ -174,23 +173,14 @@ void printFMatrixRAlg(const Matrix *M){
     IOP M, matrice da modificare
   
 */
-void diagNorm(int r, int c, Matrix *M){
+void diagNorm(int r, int c, SisEqLin *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
-    int i, indexRow;
+    int i;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
 
-    
-    /*metto t in tutta la colonna di B se posso*/
-    for(i=0;i<M->nEq-1;i++){
-
-        indexRow = (i+r)%(M->nEq)+1;
-
-        if(!isEqLinDip(indexRow,M))
-            (M->MRAlg)[indexRow][c-1] = t;
-        
-    }/*for*/
+    (M->MRAlg)[r][r] = 1/t;  
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -209,7 +199,7 @@ void diagNorm(int r, int c, Matrix *M){
     IP rowC, riga che sto prendendo in considerazione 
     IOP M, Matrice da modificare
 */
-void zerosRow(int r, int c, int rowC, Matrix *M){
+void zerosRow(int r, int c, int rowC, SisEqLin *M){
     
     int i;
     double el;
@@ -217,16 +207,15 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
+    (M->MRAlg)[r-1][rowC-1] = - t / ((M->MRAlg)[r-1][r-1]);
 
-    /*Scrivo la relazione tra le righe*/
-    (M->MRAlg)[r-1][c-1] = t/((M->MRAlg)[r-1][c-1]);
+    printFMatrixRAlg(M);
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
         
         el = (M->MCoef)[r][i] - t * (M->MCoef)[rowC][i];
         (M->MCoef)[r][i] = el;
-
 
         /*conto gli zeri che trovo*/
         if(isZero(el,M->error))
@@ -249,7 +238,7 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     IP r, riga della matrice ideale da modificare
     IOP M, Matrice da modificare
 */
-void zerosCol(int r, int c, Matrix * M){
+void zerosCol(int r, int c, SisEqLin * M){
     
     int i,row;  /*variabili per il ciclo, e per la riga*/
     
@@ -273,7 +262,7 @@ void zerosCol(int r, int c, Matrix * M){
     IP M, matrice
     OR se la $row, e' linearmente dipendente alle altre righe
 */
-bool isEqLinDip(int row, const Matrix * M){
+bool isEqLinDip(int row, const SisEqLin * M){
 
     int i;  /*per il for*/
 
@@ -296,7 +285,7 @@ bool isEqLinDip(int row, const Matrix * M){
     IP M, matrice con tutti i dati
     OR se il sistema rappresentato dalla matrice M, e' risolvibile
 */
-bool isZeroCoefAllEqnLinDip(const Matrix* M){
+bool isZeroCoefAllEqnLinDip(const SisEqLin* M){
 
     int i,r;
     for(i=0;i<M->nEDip;i++){
@@ -311,7 +300,7 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
 */
-void solveTheMatrix(Matrix *M){
+void solveTheMatrix(SisEqLin *M){
 
     int i=0,r=0,c=1,j=0, k=0;  /*per il while*/
     int n = M->nEq;
@@ -358,7 +347,7 @@ bool isZero(double a, double precisione){
     IP r, riga da aggiungere
     IOP M, matrice con tutto
 */
-void addR(int r, Matrix* M){
+void addR(int r, SisEqLin* M){
     
     M->aEDip[M->nEDip] = r;
     M->nEDip +=1;
@@ -385,7 +374,7 @@ int min(int a, int b){
     OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
          FALSE se il test non e' andato a buon fine (Ho sbagliato)   
 */
-bool test(Matrix* S, Matrix* T){
+bool test(SisEqLin* S, SisEqLin* T){
     int  d, j, i, iR;
     double el,sum,molt, elMoltiplicato;
 
@@ -439,10 +428,10 @@ bool test(Matrix* S, Matrix* T){
 
 
 /*  Fuznione che stampa a schermo il sistema di equazioni a schermo
-    IP Matrix M
+    IP SisEqLin M
     OV il sistema di equazioni
 */
-void printEquations(const Matrix *M){
+void printEquations(const SisEqLin *M){
 
     int i,j;
     

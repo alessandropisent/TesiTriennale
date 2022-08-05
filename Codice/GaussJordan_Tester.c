@@ -20,7 +20,7 @@
     IOF outF, file dove stampare
     IP Matrice con il sistema di equazioni
 */
-void fprintEquazioni(FILE *outF,const Matrix *M){
+void fprintEquazioni(FILE *outF,const SisEqLin *M){
 
     int i,j;
     /*Scansione delle righe*/
@@ -42,7 +42,7 @@ void fprintEquazioni(FILE *outF,const Matrix *M){
 /*  Funzione che stampa la soluzione quando il sistema ha un unica soluzione
     IOF outF, File precedentemente aperto, dove stampare il risultato
     IP Matrice Risolta*/
-void fprintSolUnic(FILE *outF, const Matrix *M){
+void fprintSolUnic(FILE *outF, const SisEqLin *M){
     int i,j;
 
     fprintf(outF,"SISTEMA CON RISULTATO UNICO\n"); 
@@ -64,8 +64,8 @@ void fprintSolUnic(FILE *outF, const Matrix *M){
 /*  Funzione che stampa su file l'insieme di soluzioni per un sistema 
     indeterminato
     IOF outF, file di input aperto in precedenza, dove stampare
-    IP Matrix M, matrice  con i coefficienti delle equazioni lineari*/
-void fprintIndet(FILE *outF, const Matrix *M){
+    IP SisEqLin M, matrice  con i coefficienti delle equazioni lineari*/
+void fprintIndet(FILE *outF, const SisEqLin *M){
     int i,j,k;
     /*frontespizio*/
     fprintf(outF,"\nSISTEMA INDETERMINATO\n");
@@ -100,7 +100,7 @@ void fprintIndet(FILE *outF, const Matrix *M){
 /*  Funzione che stampa le relazioni tra le righe linearmente dipendenti
     IOF File, precedentemente aperto, dove stampare le relazioni
     IP struttura con dentro le informazioni delle relazioni tra le Equzioni*/
-void fprintRel(FILE *outF, const Matrix *M){
+void fprintRel(FILE *outF, const SisEqLin *M){
 
     int i,j,row;
     fprintf(outF,"\nla relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
@@ -159,7 +159,7 @@ void printHelp(int code){
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileOut).
 */
-int printMatrix(const char nameFileOut[], const Matrix *M){
+int printMatrix(const char nameFileOut[], const SisEqLin *M){
 
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
@@ -205,7 +205,7 @@ int printMatrix(const char nameFileOut[], const Matrix *M){
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileIn;
 */
-int readFileMatrix(const char nameFileIn[], Matrix *M){
+int readFileMatrix(const char nameFileIn[], SisEqLin *M){
 
     double r;               /* per la lettura*/
     int n;                  /*dimensione righe*/
@@ -264,7 +264,7 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 */
 int main(int argc, char const *argv[]){
 
-    Matrix M, T;
+    SisEqLin M, T;
 
     if((argc>1) && !(strcmp(argv[1],HELPSTRING))){
         printHelp(0);
@@ -288,6 +288,7 @@ int main(int argc, char const *argv[]){
 
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
+    printf("\n\nMATRICE RISOLTA\n\n");
 
     /*Lettura della matrice Test*/
     /*readFileMatrix(argv[1],&T);
