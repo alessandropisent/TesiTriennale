@@ -300,21 +300,27 @@ void solveTheMatrix(Matrix *M){
     while(i<(n-(M->nEDip))){
         
 
-        /*se l'elemento sulla diagonale M[i][i]!=0 allora posso continuare*/
+        /*se l'elemento sulla diagonale M[$r+1][$c]!=0 allora posso continuare*/
         if(!isZero((M->MCoef)[r+1][c], M->error)){
             
+            /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
             zerosCol(r+1,c,M);
-            i++;
+            i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
         
         }/*if*/
 
+        /*indice di riga a partire da 0*/
         r=(r+1)%(M->nEq);
-        j++;
+        /*indice che conta le volte che il ciclo viene eseguito*/   
+        j++; /*parte da 0*/
 
+        /*se ho eseguito il ciclo meno volte del numero di incognite*/
         if(j<(M->nIn))
+            /*allora l'indice di colonna e' ancora regolato da j*/
             c =j+1;
         else
-            c = (M->aEDip)[k++];
+            /*altrimenti l'indice di colonna e' nel array di eqn lin dip*/
+            c = (M->aEDip)[k++]; /*in questo caso lo scandisco con k*/
         
 
     }/*while*/
