@@ -76,6 +76,9 @@ void initMatrix(int n, int m, SisEqLin *M){
 
 }/*initMatrix*/
 
+/*  Funzione che crea una matrice di 1 di dimensione $nEq x $nEq nella matrice MRAlg
+    IOP SisEqLin M, strutturato con dentro le equazioni
+*/
 void oneMatrixRAlg(SisEqLin *M){
 
     int i,j;
@@ -99,15 +102,17 @@ void oneMatrixRAlg(SisEqLin *M){
 */
 void freeMatrix(SisEqLin *M){
 
-    int i;
+    int i;  /*per il ciclo*/
 
-    /*libera le righe*/
-    for(i = 1; i < M->nIn; i++){
+    /*libera le righe dei coefficienti*/
+    for(i = 1; i < M->nIn; i++)
         free((M->MCoef)[i]);
+        
+    /*libera le righe delle relazioni*/
+    for(i=1;i<M->nEq;i++)
         free((M->MRAlg)[i]);
-    }/*for*/
 
-    /*libera le righe*/
+    /*libera l'array di righe righe*/
     free(M->MCoef);
     free(M->MRAlg);
 
@@ -207,9 +212,9 @@ void zerosRow(int r, int c, int rowC, SisEqLin *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
-    (M->MRAlg)[r-1][rowC-1] = - t / ((M->MRAlg)[r-1][r-1]);
+    /*(M->MRAlg)[r-1][rowC-1] = - t / ((M->MRAlg)[r-1][r-1]);
 
-    printFMatrixRAlg(M);
+    printFMatrixRAlg(M);*/
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
@@ -284,15 +289,26 @@ bool isEqLinDip(int row, const SisEqLin * M){
     i.e. controlla che i coefficienti noti di tutte le eqn lin dip siano zero
     IP M, matrice con tutti i dati
     OR se il sistema rappresentato dalla matrice M, e' risolvibile
+        - true  : tutti i coefficienti noti delle equazioni linearmente dipendenti
+                  sono zero
+        - false : almeno un coefficiente noto delle eqn lin dip non e' zero 
 */
 bool isZeroCoefAllEqnLinDip(const SisEqLin* M){
 
-    int i,r;
+    int i,r;    /*variabili di ciclo*/
+    
+    /*Controllo tutte le equazioni linearmente dipendenti*/
     for(i=0;i<M->nEDip;i++){
+        /*indice di riga, per migliorare leggibilita'*/
         r = M->aEDip[i];
+
+        /*controllo che il coefficiente noto non sia zero*/
         if(!isZero(M->MCoef[r][0],M->error))
-            return false;
+            return false;   /*allora ho trovato uno zero*/
+
     }/*for*/
+
+    /*no match*/
     return true;
 
 }/*isZeroCoefAllEqnLinDip*/
@@ -312,19 +328,24 @@ void solveTheMatrix(SisEqLin *M){
         /*se l'elemento sulla diagonale M[i][i]!=0 allora posso continuare*/
         if(!isZero((M->MCoef)[r+1][c], M->error)){
             
+            printf("zeroCol(%d,%d)\n",r+1,c);
             zerosCol(r+1,c,M);
             i++;
         
         }/*if*/
 
+        /*indice di riga a partire da 0*/
         r=(r+1)%(M->nEq);
-        j++;
+        /*indice che conta le volte che il ciclo viene eseguito*/   
+        j++; /*parte da 0*/
 
+        /*se ho eseguito il ciclo meno volte del numero di incognite*/
         if(j<(M->nIn))
+            /*allora l'indice di colonna e' ancora regolato da j*/
             c =j+1;
         else
-            c = (M->aEDip)[k++];
-        
+            /*altrimenti l'indice di colonna e' nel array di eqn lin dip*/
+            c = (M->aEDip)[k++]; /*in questo caso lo scandisco con k*/
 
     }/*while*/
 

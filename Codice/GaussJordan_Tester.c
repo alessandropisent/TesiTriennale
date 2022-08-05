@@ -170,6 +170,7 @@ int printMatrix(const char nameFileOut[], const SisEqLin *M){
     /*scritta per la matrice risolta*/
     fprintf(outF,"Il sistema risolto:\n\n");
     
+    
     /*stampa le equazioni su file*/
     fprintEquazioni(outF,M);
 
@@ -181,6 +182,9 @@ int printMatrix(const char nameFileOut[], const SisEqLin *M){
     dipendenti il sistema e' con una soluzione unica*/
     else if(M->nEq-M->nIn-M->nEDip == 0)
         fprintSolUnic(outF,M);
+        
+    
+        
 
     /*altrimenti, posso scrivere delle relazioni tra le colonne*/
     else
@@ -283,12 +287,10 @@ int main(int argc, char const *argv[]){
         printf("ERRORE FILE INGRESSO");
         return -1;
     }/*if*/
-
-
-
+    
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
-    printf("\n\nMATRICE RISOLTA\n\n");
+    
 
     /*Lettura della matrice Test*/
     /*readFileMatrix(argv[1],&T);
