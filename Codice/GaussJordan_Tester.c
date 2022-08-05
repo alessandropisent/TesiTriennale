@@ -102,7 +102,7 @@ void fprintIndet(FILE *outF, const Matrix *M){
     IP struttura con dentro le informazioni delle relazioni tra le Equzioni*/
 void fprintRel(FILE *outF, const Matrix *M){
 
-    int i,j,row;
+    int i,j,row,count=0;
     fprintf(outF,"\nla relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
 
     for(i=0;i<(M->nEDip);i++){
@@ -110,12 +110,23 @@ void fprintRel(FILE *outF, const Matrix *M){
         row=M->aEDip[i];
         fprintf(outF,"R%d=",row);
 
-        for(j=0;j<(M->nIn - 1);j++){
-            fprintf(outF,"%5.2f R%d + ",(M->MRAlg)[row][j],j);
+        for(j=0;j<M->nEq;j++){
 
-        }
-            
-        fprintf(outF,"%5.2f R%d",(M->MRAlg)[row][j],j);
+            /*stampo solo le relazioni con le altre colonne e diverse da 0*/
+            if((j!=row) && !isZero((M->MRAlg)[row][j],M->error)){
+                
+                if(!count){
+                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row][j],j);
+                    count++;
+                }/*if*/
+
+                else
+                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row][j],j);
+                    
+            }/*if*/
+                
+
+        }/*for*/
 
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
@@ -160,7 +171,7 @@ void printHelp(int code){
         -1: apertura fallita di $nameFileOut).
 */
 int printMatrix(const char nameFileOut[], const Matrix *M){
-
+    int i=0;
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
     /*Errore apertura file output*/
@@ -188,8 +199,23 @@ int printMatrix(const char nameFileOut[], const Matrix *M){
 
 
     /*stampo la relazioni lineari tra le righe se ci sono*/
-    if(M->nEDip > 0)
-        fprintRel(outF, M);
+    if(M->nEDip > 0){
+        /*considerazione per il singolare e plurale*/
+        if(M->nEDip==1)
+            /*frontespizio*/
+            fprintf(outF,"\nIl sistema ha una equazione linearmente dipendente: ");
+        else
+             /*frontespizio*/
+            fprintf(outF,"\nIl sistema ha %d equazioni linearmente dipendenti: ",M->nEDip);
+        fprintf(outF,"(");
+        for(i=0;i<M->nEDip;i++)
+            fprintf(outF," Eq%d", (M->aEDip)[i]);
+        fprintf(outF," )");
+        /*stampa sul file le relazioni tra le equazioni*/
+        /*fprintRel(outF, M);*/
+
+    }/*if*/
+        
 
 
     /*chiusura del file*/

@@ -13,6 +13,4 @@ x 3 =  1.62
 x 4 =  8.71
 x 5 = -13.54
 
-la relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):
-
-R6= 9.00 R0 + -3.00 R1 +  6.22 R2 +  0.00 R3 +  0.00 R4
+Il sistema ha una equazione linearmente dipendente: ( Eq6 )

@@ -68,8 +68,8 @@ void initMatrix(int n, int m, Matrix *M){
     assert(M->MRAlg != NULL);
 
     /*Creazione di un array per ogni riga*/
-    for(i = 0; i<(n+1) ; i++){
-        (M->MRAlg)[i] = (double*) calloc( m ,sizeof(double));
+    for(i = 0; i< n ; i++){
+        (M->MRAlg)[i] = (double*) malloc( n * sizeof(double));
         assert((M->MRAlg)[i] != NULL);
     }/*for*/
 
@@ -83,10 +83,14 @@ void freeMatrix(Matrix *M){
     int i;
 
     /*libera le righe*/
-    for(i = 1; i < M->nIn; i++){
+    for(i = 1; i < M->nIn; i++)
         free((M->MCoef)[i]);
+        
+
+
+    for ( i = 0; i < M->nEq; i++)
         free((M->MRAlg)[i]);
-    }/*for*/
+    
 
     /*libera le righe*/
     free(M->MCoef);
@@ -156,21 +160,10 @@ void printFMatrixRAlg(const Matrix *M){
 */
 void diagNorm(int r, int c, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
-    int i, indexRow;
+    int i;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
-
-    
-    /*metto t in tutta la colonna di B se posso*/
-    for(i=0;i<M->nEq-1;i++){
-
-        indexRow = (i+r)%(M->nEq)+1;
-
-        if(!isEqLinDip(indexRow,M))
-            (M->MRAlg)[indexRow][c-1] = t;
-        
-    }/*for*/
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -197,9 +190,6 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
-
-    /*Scrivo la relazione tra le righe*/
-    (M->MRAlg)[r-1][c-1] = t/((M->MRAlg)[r-1][c-1]);
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
