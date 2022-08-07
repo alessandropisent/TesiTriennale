@@ -9,7 +9,7 @@
     Cerca di calcolare il rapporto di proporzionalita' tra le  righe, e lo 
     memorizza in una matrice B, all'interno del tipo strutturato Matrix.
 
-    L'albero delle chiamate: (Analisi approssimata)
+    L'albero delle chiamate: (Analisi approssimata) TAG:TODO
     1:solveTheMatrix O(n^3)
         1: solveDiag         Risolvo, o almeno provo a risolvere la matrice 
                                 come se fosse una min(m,n) x min(m,n)
@@ -69,10 +69,11 @@ void initMatrix(int n, int m, Matrix *M){
 
     /*Creazione di un array per ogni riga*/
     for(i = 0; i< n ; i++){
-        (M->MRAlg)[i] = (double*) malloc( n * sizeof(double));
+        (M->MRAlg)[i] = (double*) calloc( n , sizeof(double));
         assert((M->MRAlg)[i] != NULL);
     }/*for*/
 
+    /*inizializzazzione della matrice relazioni*/
     oneMatrixRAlg(M);
 
 }/*initMatrix*/
@@ -82,19 +83,9 @@ void initMatrix(int n, int m, Matrix *M){
 */
 void oneMatrixRAlg(Matrix *M){
 
-    int i,j;
-    for(i=0;i<M->nEq;i++){
-
-        for(j=0;j<M->nEq;j++){
-
-            if(i==j)
-                (M->MRAlg)[i][j]=1;
-            else
-                (M->MRAlg)[i][j]=0;
-
-        }/*for*/
-
-    }/*for*/
+    int i;
+    for(i=0;i<M->nEq;i++)
+        (M->MRAlg)[i][i]=1;
 
 }/*oneMatrixRAlg*/
 
@@ -157,7 +148,7 @@ void printFMatrixRAlg(const Matrix *M){
     int i,j;
 
     /*frontespizio*/
-    printf("\nSTAMPO B\n");
+    printf("\nSTAMPO MRAlg:\n");
     /*scandisco tutte le righe*/
     for(i=0;i<M->nEq;i++){
 
@@ -178,6 +169,7 @@ void printFMatrixRAlg(const Matrix *M){
     IP r, riga della matrice su cui operare
     IP c, colonna della matrice su cui operare
     IOP M, matrice da modificare
+    OP
   
 */
 void diagNorm(int r, int c, Matrix *M){
@@ -188,6 +180,7 @@ void diagNorm(int r, int c, Matrix *M){
     double t = (M->MCoef)[r][c];
     /*Normalizzo l'elemento sulla sua stessa riga*/
     (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
+
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -214,8 +207,9 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
-    printf("Azzero il coefficiente: M[%d][%d]\n",r,c);
-    (M->MRAlg)[r-1][c-1] = -t/((M->MRAlg)[r-1][r-1]);
+    /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
+    /*if(rowC<=r)*/
+    factMRAlg(r,c,rowC,t,M); /*TAG:Ralg*/
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
@@ -238,6 +232,32 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
 }/*zerosRow*/
 
+/*TAG:Ralg*/
+/*  Funzione che scrive le relazioni tra equazioni nella MRAlg
+    IP r, riga in cui siamo
+    IP c, colonna in cui siamo
+    IP t, pivot
+    IOP M, struttura con tutte le informazioni necessarie
+*/
+void factMRAlg(int r,int c, int rowC, double t, Matrix *M){
+
+    int i;
+    double el;
+
+    el = t*((M->MRAlg)[rowC-1][rowC-1]);
+    (M->MRAlg)[r-1][rowC-1] = el;
+
+    for(i=0;i<M->nEq;i++){
+
+        /*non deve modificare i dati sulla diagonale*/
+        if( (i!=(r-1)) && (i!=(rowC-1)) )
+            (M->MRAlg)[r-1][i] = (M->MRAlg)[r-1][i] - el*((M->MRAlg)[rowC-1][i]);
+
+    }/*for*/
+    
+
+}/*factMRAlg*/
+
 
 /*  Funzione che normalizza l'elemento M[$r][$c] sulla diagonale e
     azzera gli altri elmenti tramite operazioni lineari
@@ -252,14 +272,18 @@ void zerosCol(int r, int c, Matrix * M){
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     diagNorm(r,c,M);
 
+
     /*Per ogni elemento*/
     for(i=0;i<((M->nEq)-1);i++){
 
         row = (i+r)%(M->nEq)+1;
+
         if(!isEqLinDip(row,M))
             zerosRow(row, c, r, M);
+        
 
     }/*for*/
+
     printFMatrix(M);
 
 }/*zerosCol*/

@@ -9,6 +9,25 @@
     Prende in lettura un file con la matrice e i coefficienti noti
     
     
+    Albero delle chiamate: 
+    "*-" = chiamata condizionata
+    "#-" = chiamata ripetuta # volte
+    "f#-" = chiamata a funzione in altro file
+        - f1 = "GaussJordan.c"
+
+    main:
+        *- printHelp
+        - readFileMatrix
+            f1- initMatrix
+            f1- printEquations
+        f1- solveTheMatrix
+        - printMatrix
+            - fprintEquazioni
+            *- fprintSolUnic
+            *- fprintIndet
+            *- fprintRel    
+        f1- freeMatrix
+
 */
 #include <stdio.h>
 #include <string.h>
@@ -133,12 +152,12 @@ void fprintRel(FILE *outF, const Matrix *M){
             if((j!=(row-1)) && !isZero((M->MRAlg)[row-1][j],M->error)){
                 
                 if(!count){
-                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row-1][j],j);
+                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row-1][j],j+1);
                     count++;
                 }/*if*/
 
                 else
-                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row-1][j],j);
+                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row-1][j],j+1);
                     
             }/*if*/
                 
@@ -187,7 +206,7 @@ void printHelp(int code){
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileOut).
 */
-int printMatrix(const char nameFileOut[], const Matrix *M){
+int printFileMatrix(const char nameFileOut[], const Matrix *M){
 
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
@@ -324,7 +343,7 @@ int main(int argc, char const *argv[]){
     */
 
     /*Stampa su file della matrice risolta*/
-    if(printMatrix(argv[2],&M) == -1){
+    if(printFileMatrix(argv[2],&M) == -1){
         printf("ERRORE FILE USCITA");
         return -1;
     }
