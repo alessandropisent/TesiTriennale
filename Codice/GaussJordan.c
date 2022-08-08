@@ -9,7 +9,7 @@
     Cerca di calcolare il rapporto di proporzionalita' tra le  righe, e lo 
     memorizza in una matrice B, all'interno del tipo strutturato Matrix.
 
-    L'albero delle chiamate: (Analisi approssimata)
+    L'albero delle chiamate: (Analisi approssimata) TAG:TODO
     1:solveTheMatrix O(n^3)
         1: solveDiag         Risolvo, o almeno provo a risolvere la matrice 
                                 come se fosse una min(m,n) x min(m,n)
@@ -69,11 +69,25 @@ void initMatrix(int n, int m, Matrix *M){
 
     /*Creazione di un array per ogni riga*/
     for(i = 0; i< n ; i++){
-        (M->MRAlg)[i] = (double*) malloc( n * sizeof(double));
+        (M->MRAlg)[i] = (double*) calloc( n , sizeof(double));
         assert((M->MRAlg)[i] != NULL);
     }/*for*/
 
+    /*inizializzazzione della matrice relazioni*/
+    oneMatrixRAlg(M);
+
 }/*initMatrix*/
+
+/*  Funzione che crea una matrice di 1 di dimensione $nEq x $nEq nella matrice MRAlg
+    IOP Matrix M, strutturato con dentro le equazioni
+*/
+void oneMatrixRAlg(Matrix *M){
+
+    int i;
+    for(i=0;i<M->nEq;i++)
+        (M->MRAlg)[i][i]=1;
+
+}/*oneMatrixRAlg*/
 
 /*  Funzione che libera la memoria assegnata alla matrice
     IOP M, matrice da liberare
@@ -82,17 +96,16 @@ void freeMatrix(Matrix *M){
 
     int i;
 
-    /*libera le righe*/
+    /*libera le righe coefficienti*/
     for(i = 1; i < M->nIn; i++)
         free((M->MCoef)[i]);
-        
-
-
+    
+    /*libera righe relazioni*/
     for ( i = 0; i < M->nEq; i++)
         free((M->MRAlg)[i]);
     
 
-    /*libera le righe*/
+    /*libera le array di righe*/
     free(M->MCoef);
     free(M->MRAlg);
 
@@ -135,12 +148,12 @@ void printFMatrixRAlg(const Matrix *M){
     int i,j;
 
     /*frontespizio*/
-    printf("\nSTAMPO B\n");
+    printf("\nSTAMPO MRAlg:\n");
     /*scandisco tutte le righe*/
     for(i=0;i<M->nEq;i++){
 
         /*scandisco tutte le colonne*/
-        for(j = 0; j<(M->nIn);j++)
+        for(j = 0; j<M->nEq;j++)
             printf("%5.2f ",(M->MRAlg)[i][j]);
 
         printf("\n");   /*fine riga*/
@@ -156,6 +169,7 @@ void printFMatrixRAlg(const Matrix *M){
     IP r, riga della matrice su cui operare
     IP c, colonna della matrice su cui operare
     IOP M, matrice da modificare
+    OP
   
 */
 void diagNorm(int r, int c, Matrix *M){
@@ -164,6 +178,9 @@ void diagNorm(int r, int c, Matrix *M){
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
+    /*Normalizzo l'elemento sulla sua stessa riga*/
+    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
+
 
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
@@ -190,6 +207,8 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
+    /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
+    factMRAlg(r,c,rowC,t,M); /*TAG:Ralg*/
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
@@ -212,6 +231,32 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
 }/*zerosRow*/
 
+/*TAG:Ralg*/
+/*  Funzione che scrive le relazioni tra equazioni nella MRAlg
+    IP r, riga in cui siamo
+    IP c, colonna in cui siamo
+    IP t, pivot
+    IOP M, struttura con tutte le informazioni necessarie
+*/
+void factMRAlg(int r,int c, int rowC, double t, Matrix *M){
+
+    int i;
+    double el;
+
+    el = t*((M->MRAlg)[rowC-1][rowC-1]);
+    (M->MRAlg)[r-1][rowC-1] = el;
+
+    for(i=0;i<M->nEq;i++){
+
+        /*non deve modificare i dati sulla diagonale*/
+        if( (i!=(r-1)) && (i!=(rowC-1)) )
+            (M->MRAlg)[r-1][i] = (M->MRAlg)[r-1][i] - el*((M->MRAlg)[rowC-1][i]);
+
+    }/*for*/
+    
+
+}/*factMRAlg*/
+
 
 /*  Funzione che normalizza l'elemento M[$r][$c] sulla diagonale e
     azzera gli altri elmenti tramite operazioni lineari
@@ -226,14 +271,19 @@ void zerosCol(int r, int c, Matrix * M){
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     diagNorm(r,c,M);
 
+
     /*Per ogni elemento*/
     for(i=0;i<((M->nEq)-1);i++){
 
         row = (i+r)%(M->nEq)+1;
+
         if(!isEqLinDip(row,M))
             zerosRow(row, c, r, M);
+        
 
     }/*for*/
+
+    /*printFMatrix(M);*/  /*TAG:DEBUG*/
 
 }/*zerosCol*/
 
@@ -296,7 +346,11 @@ void solveTheMatrix(Matrix *M){
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
             zerosCol(r+1,c,M);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-        
+            
+            /*TAG: DEBUG*/
+            /*printf("\nOperazione su Zero(%d,%d)",r+1,c); */   /*TAG: DEBUG*/
+            /*printFMatrixRAlg(M);                         */   /*TAG: DEBUG*/
+
         }/*if*/
 
         /*indice di riga a partire da 0*/
@@ -356,25 +410,38 @@ int min(int a, int b){
 /*  Funzione per testare che effettivamente la relazione trovata 
     Sia giusta
     IP S, matrice risolta
-    IP T, matrice non risolta "Originale"
+    IP T, matrice non risolta, "Originale"
     IP printTest, se vogliamo stampare a schermo le operazioni compiute dal test
     OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
-         FALSE se il test non e' andato a buon fine (Ho sbagliato)   
+         FALSE se il test non e' andato a buon fine 
+                (La relazione trovata nella matrice MRAlg non e' corretta)   
 */
 bool test(Matrix* S, Matrix* T){
+
     int  d, j, i, iR;
-    double el,sum,molt, elMoltiplicato;
-
-
+    double molt, elDip, elT, sum;
+    if(S->nIn * S->nEq > MAX_STAMPA){
+        printf("\nEQUAZIONE TROPPO GRANDE DA STAMPARE\n");
+    }
+    else{
+        /*Stampa dei calcoli fatti*/
         printf("\nORIGINAL");
         printFMatrix(T);
         printf("\nSOLVED");
         printFMatrix(S);
+        printf("\nRelazioni algebriche:");
         printFMatrixRAlg(S);
-        printf("Dobbiamo controllare R = ");
-        for(i=0;i<(S->nEDip);i++)
-            printf("%d, ",S->aEDip[i]);
-        printf("\n");
+    }
+    /*se non ci sono relazioni allora e' automaticamente passato*/
+    if(S->nEDip < 1)
+        return true;
+
+    /*Stampa di quali righe sono da controllare*/
+    printf("Dobbiamo controllare R = ");
+    for(i=0;i<(S->nEDip)-1;i++)
+        printf("%d, ",S->aEDip[i]);
+    printf("%d",S->aEDip[i]);
+    printf("\n");
 
 
     /*per ogni riga dipendente*/
@@ -382,31 +449,38 @@ bool test(Matrix* S, Matrix* T){
 
         /*indice della riga che stiamo controllando*/
         iR = (S->aEDip)[d];
-        
-        /*per ogni elemento della riga somma tutti gli elmenti 
-            delle colonne*/
-        for(i=0;i<(S->nIn);i++){
-            /*somma degli elementi*/
+        for(i=0;i<S->nIn+1;i++){
+            
+            /*la mia ipotesi e' che l'elemnto S[$iR][$i] sia la somma di 
+            $nEq-1 elementi, alcuni con il fattore moltiplicativo zero*/
             sum = 0;
 
-            /*per ogni */
-            for(j=0;j<(S->nEq);j++){
-
-                /*dichiarazioni di variabili per poi stampare*/
-                molt = ((S->MRAlg)[iR][j]);
-                elMoltiplicato = ((T->MCoef)[j+1][i+1]);
-
-                sum += molt*elMoltiplicato;
+            for(j=0;j<S->nEq;j++){
                 
-            }/*for*/
+                /*fattore moltiplicativo che trovo dul*/
+                molt = (S->MRAlg)[iR-1][j];
 
-            /*elemento della colonna dipendente*/
-            el = (T->MCoef)[iR+1][i+1];
+                /*controllo che non siamo sulle diagonali*/
+                if(iR!=(j+1) && (!isZero(molt,S->error))){
+                    
+                    elDip = (T->MCoef)[j+1][i];
+                    sum += molt*elDip;
+
+                }/*if*/
             
 
-            if(!isZero(el-sum,S->error))
+            }/*for*/
+
+            /*elemento da controllare*/
+            elT = (T->MCoef)[iR][i];
+
+            /*controllo che la differenza sia Zero*/
+            if(!isZero(elT-sum,S->error))
                 return false;
+
         }/*for*/
+        return true;
+        
     }/*for*/
 
     return true;
@@ -428,14 +502,12 @@ void printEquations(const Matrix *M){
 
         for(j=0;j<M->nIn-1;j++)
             printf("%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
-
         
         /*stampa l'ultimo elemento*/
         printf("%5.2f * x%d ",(M->MCoef)[i+1][j+1],j+1);
 
         /*stampa termine noto*/
         printf(" = %5.2f\n",(M->MCoef)[i+1][0]);
-
 
     }/*for*/
 

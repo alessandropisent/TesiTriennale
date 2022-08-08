@@ -3,6 +3,7 @@
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
 #define MAX_STRING 200
+#define MAX_STAMPA 1000
 
 typedef struct {
     double** MCoef;     /*Matrice con allocazione dinamica memoria*/
@@ -16,6 +17,8 @@ typedef struct {
 
 void initMatrix(int , int , Matrix *);
 
+void oneMatrixRAlg(Matrix *);
+
 void freeMatrix(Matrix * );
 
 void printFMatrix(const Matrix *);
@@ -25,6 +28,8 @@ void printFMatrixRAlg(const Matrix *);
 void diagNorm(int , int, Matrix *);
 
 void zerosRow(int , int, int, Matrix *);
+
+void factMRAlg(int, int, int, double, Matrix *);
 
 void zerosCol(int ,int,  Matrix * );
 
