@@ -66,16 +66,16 @@ with open("Codice/FileInput.txt","w") as f:
     f.write(precisone)
         
 #Scrittura del file per il programma LU 
-with open("Codice/LU/FileInput.txt","w") as f:
-    f.write(str(N)+" "+str(M)+"\n")
-    for i in range(N):
-        for j in range(M):
-            f.write(str(m[i][j])+" ")
-        f.write(str(c[i])+"\n")
-    f.write(precisone)
+# with open("Codice/LU/FileInput.txt","w") as f:
+#     f.write(str(N)+" "+str(M)+"\n")
+#     for i in range(N):
+#         for j in range(M):
+#             f.write(str(m[i][j])+" ")
+#         f.write(str(c[i])+"\n")
+#     f.write(precisone)
 
 # Scrittura per il matlab
-with open("Codice/PS/FileMatlab.txt","w") as f:
+with open("Codice/PS/FileMatlab.m","w") as f:
     f.write("A = [ ")
     for i in range(N):
         for j in range(M):
@@ -97,25 +97,25 @@ with open("Codice/PS/FileMatlab.txt","w") as f:
     f.write("\nx = linsolve(A,b)")
 
 # Scrittura per il file di decomposizione LU
-with open("Codice/PS/FileLU.txt","w") as f:
-    f.write("A = np.array([[ ")
-    for i in range(N):
-        for j in range(M):
-            f.write(str(m[i][j]))
-            if(j!=M-1):
-                f.write(", ")
-            else:
-                f.write("]")
-        if(i!=N-1):
-            f.write(", [")
-        else:
-            f.write("])")
+# with open("Codice/PS/FileLU.txt","w") as f:
+#     f.write("A = np.array([[ ")
+#     for i in range(N):
+#         for j in range(M):
+#             f.write(str(m[i][j]))
+#             if(j!=M-1):
+#                 f.write(", ")
+#             else:
+#                 f.write("]")
+#         if(i!=N-1):
+#             f.write(", [")
+#         else:
+#             f.write("])")
     
-    f.write("\nb = [ ")
-    for i in range(N):
-        f.write(str(c[i]))
-        if(i!=(N-1)):
-            f.write(", ")
-        else:
-            f.write(" ")
-    f.write("]")
+#     f.write("\nb = [ ")
+#     for i in range(N):
+#         f.write(str(c[i]))
+#         if(i!=(N-1)):
+#             f.write(", ")
+#         else:
+#             f.write(" ")
+#     f.write("]")
