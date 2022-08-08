@@ -207,8 +207,6 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     
     /*Prendo il valore del elemento M[$r][$c] che devo azzerare*/
     double t = (M->MCoef)[r][c];
-    /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
-    factMRAlg(r,c,rowC,t,M); /*TAG:Ralg*/
 
     /*Azzero il valore della riga $r e modifico gli altri di conseguenza*/
     for(i=0;i<(M->nIn+1);i++){
@@ -283,8 +281,6 @@ void zerosCol(int r, int c, Matrix * M){
 
     }/*for*/
 
-    /*printFMatrix(M);*/  /*TAG:DEBUG*/
-
 }/*zerosCol*/
 
 /*  Funzione che stabilisce se la riga $r e' linearmente dipendente
@@ -346,11 +342,7 @@ void solveTheMatrix(Matrix *M){
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
             zerosCol(r+1,c,M);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-            
-            /*TAG: DEBUG*/
-            /*printf("\nOperazione su Zero(%d,%d)",r+1,c); */   /*TAG: DEBUG*/
-            /*printFMatrixRAlg(M);                         */   /*TAG: DEBUG*/
-
+        
         }/*if*/
 
         /*indice di riga a partire da 0*/
