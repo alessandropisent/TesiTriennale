@@ -29,7 +29,7 @@ void diagNorm(int , int, Matrix *);
 
 void zerosRow(int , int, int, Matrix *);
 
-void factMRAlg(int, int, int, double, Matrix *);
+void factMRAlg(int, int, double, Matrix *);
 
 void zerosCol(int ,int,  Matrix * );
 

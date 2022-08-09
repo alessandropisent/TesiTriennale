@@ -1,2 +1,5 @@
-RIGA 3 sara' dipendendenti f=-7* row =4  
-RIGA 2 sara' dipendendenti f=-1* row =1  
+RIGA 2 sara' dipendendenti f=-5* row =9  
+RIGA 17 sara' dipendendenti f=-1* row =6  
+RIGA 4 sara' dipendendenti f=8* row =13  
+RIGA 11 sara' dipendendenti f=9* row =15  
+RIGA 1 sara' dipendendenti f=-4* row =16  
