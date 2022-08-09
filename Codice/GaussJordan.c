@@ -108,7 +108,6 @@ void freeMatrix(Matrix *M){
     /*libera le array di righe*/
     free(M->MCoef);
     free(M->MRAlg);
-
     /*libera la matrice con righe dipendenti*/
     free(M->aEDip);
 
@@ -164,11 +163,12 @@ void printFMatrixRAlg(const Matrix *M){
 
 
 /*  Funzione per normalizzare l'elemento sulla "diagonale" di una riga, 
-    dividendola per se stessa. 
+    dividendola per se stessa
 
     IP r, riga della matrice su cui operare
     IP c, colonna della matrice su cui operare
     IOP M, matrice da modificare
+    OP
   
 */
 void diagNorm(int r, int c, Matrix *M){
@@ -232,20 +232,17 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
     IP t, pivot
     IOP M, struttura con tutte le informazioni necessarie
 */
-void factMRAlg(int r, int rowC, double t, Matrix *M){
+void factMRAlg(int r,int c, int rowC, Matrix *M){
 
-    int i;      /*per il for*/
-    double el;  /*mi salvo l'elemento*/
+    int i;
+    double el, t = (M->MCoef)[r][c];;
 
-    /*assegnazione del elemento*/
     el = t*((M->MRAlg)[rowC-1][rowC-1]);
     (M->MRAlg)[r-1][rowC-1] = el;
 
-    /*Per ogni operazione mi porto dietro quello che ho fatto nei cicli prima*/
     for(i=0;i<M->nEq;i++){
 
-        /*non deve modificare i dati sulla diagonale e 
-            non i dati di se stesso*/
+        /*non deve modificare i dati sulla diagonale*/
         if( (i!=(r-1)) && (i!=(rowC-1)) )
             (M->MRAlg)[r-1][i] = (M->MRAlg)[r-1][i] - el*((M->MRAlg)[rowC-1][i]);
 
@@ -261,15 +258,18 @@ void factMRAlg(int r, int rowC, double t, Matrix *M){
     IP r, riga della matrice ideale da modificare
     IOP M, Matrice da modificare
 */
-void zerosCol(int r, int c, Matrix * M){
+void zerosCol(int r, int c, Matrix * M, int fRel){
     
     int i,row;  /*variabili per il ciclo, e per la riga*/
+    
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
-    
-    /*Normalizzo l'elemento sulla sua stessa riga*/
-    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
 
+    /*se devo cercare le relazioni*/
+    if(fRel)
+        /*Normalizzo l'elemento sulla sua stessa riga*/
+        (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
+    
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     diagNorm(r,c,M);
 
@@ -277,22 +277,26 @@ void zerosCol(int r, int c, Matrix * M){
     /*Per ogni elemento*/
     for(i=0;i<((M->nEq)-1);i++){
 
-        /*indice di riga, che inizia da 1*/
+        /*indice di riga a partire da 1*/
         row = (i+r)%(M->nEq)+1;
 
-        /*posso azzerare solo se l'eq non e' lin dip*/
         if(!isEqLinDip(row,M)){
-            t = (M->MCoef)[row][c];
-            /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
-            factMRAlg(row,r,t,M); /*TAG:Ralg*/
-            zerosRow(row, c, r, M);
-            
 
-        }
+            /*se devo cercare le relazioni*/
+            if(fRel){
+                /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
+                factMRAlg(row, c, r, M); /*TAG:Ralg*/
+            }/*if*/
+            
+            zerosRow(row, c, r, M);
+        
+        }/*if*/
             
         
 
     }/*for*/
+
+    /*printFMatrix(M);*/  /*TAG:DEBUG*/
 
 }/*zerosCol*/
 
@@ -328,16 +332,11 @@ bool isEqLinDip(int row, const Matrix * M){
 bool isZeroCoefAllEqnLinDip(const Matrix* M){
 
     int i,r;
-
     for(i=0;i<M->nEDip;i++){
-        /*indice di riga lin dip*/
         r = M->aEDip[i];
-        /*trovato coefficiente non zero*/
         if(!isZero(M->MCoef[r][0],M->error))
             return false;
-
     }/*for*/
-    /*non ho trovato nessun coefficiente non zero*/
     return true;
 
 }/*isZeroCoefAllEqnLinDip*/
@@ -345,14 +344,22 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
 */
-void solveTheMatrix(Matrix *M){
+void solveTheMatrix(Matrix *M, int fRel){
+
     /*per il while*/
-    int i=0,    /*contatore per le il numero di incognite normalizzate*/
-    r=0,        /*indice di riga*/
-    c=1,        /*indice di colonna*/
-    j=0,        /*contatore del numero di iterazioni del while*/
-    k=0;        /*indice per $(M->aED)ip*/
+    int i=0,    /*contatore per il numero di incognite risolte*/
+        r=0,    /*indice di riga*/
+        c=1,    /*indice di colonna*/
+        j=0,    /*contatore per il numero di iterazioni del while*/
+        k=0;    /*indice per $(M->aEDip)*/
     int n = M->nEq;
+
+    /*per abbellirre*/
+    printf("\n");
+
+
+    if(((M->nIn) * (M->nEq)) > MAX_STAMPA)
+        printf("RISOLUZIONE DEL SISTEMA:\n");
 
     /*Devo trovare $diag - diagonali - #righe dipendenti*/
     while(i<(n-(M->nEDip))){
@@ -362,9 +369,19 @@ void solveTheMatrix(Matrix *M){
         if(!isZero((M->MCoef)[r+1][c], M->error)){
             
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
-            zerosCol(r+1,c,M);
+            zerosCol(r+1,c,M,fRel);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-        
+            
+            /*TAG: DEBUG*/
+            /*printf("\nOperazione su Zero(%d,%d)",r+1,c);  */ /*TAG: DEBUG*/
+            /*printFMatrixRAlg(M);                          */  /*TAG: DEBUG*/
+            
+            /*per avere un idea del progresso*/
+            if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
+                /*la stringa al inizio serve per abbellire l'output*/
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d\n",(i*100/(n-(M->nEDip))),i);
+            
+                
         }/*if*/
 
         /*indice di riga a partire da 0*/
@@ -382,6 +399,8 @@ void solveTheMatrix(Matrix *M){
         
 
     }/*while*/
+
+    printf("\nSONO USCITO DAL WHILE\n");    /*TAG:DEBUG*/
 
     
 }/*solveTheMatrix*/
@@ -437,7 +456,6 @@ bool test(Matrix* S, Matrix* T){
     if(S->nIn * S->nEq > MAX_STAMPA){
         printf("\nEQUAZIONE TROPPO GRANDE DA STAMPARE\n");
     }
-
     else{
         /*Stampa dei calcoli fatti*/
         printf("\nORIGINAL");
@@ -447,7 +465,6 @@ bool test(Matrix* S, Matrix* T){
         printf("\nRelazioni algebriche:");
         printFMatrixRAlg(S);
     }
-
     /*se non ci sono relazioni allora e' automaticamente passato*/
     if(S->nEDip < 1)
         return true;

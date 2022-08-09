@@ -4,13 +4,13 @@ import numpy as np
 #------ 
 # Variabili di input
 
-N = 20 # righe, # di equazioni
-M = 15 # colonne, # di incognite
+N = 1050 # righe, # di equazioni
+M = 1000 # colonne, # di incognite
 
 a = 0
 b = 10
 
-D = 5 # # of righe dipendenti
+D = 50 # # of righe dipendenti
 In = N-D
 
 precisone = "0.0001"

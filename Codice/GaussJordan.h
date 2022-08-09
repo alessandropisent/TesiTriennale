@@ -29,15 +29,15 @@ void diagNorm(int , int, Matrix *);
 
 void zerosRow(int , int, int, Matrix *);
 
-void factMRAlg(int, int, double, Matrix *);
+void factMRAlg(int, int, int, Matrix *);
 
-void zerosCol(int ,int,  Matrix * );
+void zerosCol(int ,int,  Matrix * , int);
 
 bool isEqLinDip(int, const Matrix *);
 
 bool isZeroCoefAllEqnLinDip(const Matrix *);
 
-void solveTheMatrix(Matrix *);
+void solveTheMatrix(Matrix *,int);
 
 void solveDiag(Matrix * );
 

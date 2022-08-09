@@ -36,16 +36,30 @@
 
 #define HELP_STRING "-help"
 #define TEST_STRING "-test"
+#define NO_ALG_REL_STRING "-no-rel"
 
 /*  Funzione che stampa su file il sistema di equazioni
-    IOF outF, file dove stampare
+    IP 
+    OF outF, file dove stampare
     IP Matrice con il sistema di equazioni
 */
-void fprintEquazioni(FILE *outF,const Matrix *M){
-
+void fprintEquazioni(const char nameFileOut[],const Matrix *M){
+    
+    FILE *outF;     /*Variabile per il file di Output*/
     int i,j;
+
+    /*apertura del file*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL){
+        printf("ERRORE APERTURA IN PRINT_EQN\n");
+        return;
+    }/*if*/
+        
+
     /*Scansione delle righe*/
     for(i = 0; i < M->nEq; i++){
+        fprintf(outF,"%3d:",i+1);
         /*stampa delle equazioni*/
         for(j=0;j<M->nIn-1;j++)
             fprintf(outF,"%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
@@ -58,20 +72,30 @@ void fprintEquazioni(FILE *outF,const Matrix *M){
         fprintf(outF," = %5.2f\n",(M->MCoef)[i+1][0]);
     }/*for*/
 
+    /*chiusura del file*/
+    fclose(outF);
 }/*fprintEquazioni*/
 
 /*  Funzione che stampa la soluzione quando il sistema ha un unica soluzione
-    IOF outF, File precedentemente aperto, dove stampare il risultato
+    IP nome del file
+    OF outF, File precedentemente aperto, dove stampare il risultato
     IP Matrice Risolta*/
-void fprintSolUnic(FILE *outF, const Matrix *M){
+void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     int i,j;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a"); /*append*/
+    /*Errore apertura file output*/
+    if (outF == NULL){
+        printf("ERRORE APERTURA IN PRINT_SOL_UNICA\n");
+        return;
+    }/*if*/
 
     fprintf(outF,"SISTEMA CON RISULTATO UNICO\n"); 
 
     /*scrittura piu' carina carina del risultato*/
     for(i=0;i<M->nEq;i++){
         for(j=0;j<M->nIn;j++){
-            if(!isZero((M->MCoef)[i+1][j+1],M->error)){
+            if(isZero((M->MCoef)[i+1][j+1]-1,M->error)){
                 fprintf(outF,"x%2d = %5.2f\n",j+1,(M->MCoef)[i+1][0]);
                 break;
             }/*if*/
@@ -79,14 +103,17 @@ void fprintSolUnic(FILE *outF, const Matrix *M){
         }/*for*/
     
     }/*for*/
+    /*chiusura del file*/
+    fclose(outF);
 
 }/*fprintSolUnic*/
 
 /*  Funzione che stampa su file l'insieme di soluzioni per un sistema 
     indeterminato
-    IOF outF, file di input aperto in precedenza, dove stampare
+    IP nome del file da aprire
+    OF outF, file di input aperto in precedenza, dove stampare
     IP Matrix M, matrice  con i coefficienti delle equazioni lineari*/
-void fprintIndet(FILE *outF, const Matrix *M){
+void fprintIndet(const char nameFileOut[], const Matrix *M){
 
     int i=0,    /*indice di riga*/
         j=0,    /*indice di colonna*/  
@@ -94,6 +121,13 @@ void fprintIndet(FILE *outF, const Matrix *M){
         nP=0,   /*incide per contare quante righe ho stampato*/
         nToPrint = (M->nEq-M->nEDip); 
     double el ;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL){
+        printf("ERRORE APERTURA IN PRINT_INDET\n");
+        return;
+    }/*if*/
 
     /*frontespizio*/
     fprintf(outF,"\nSISTEMA INDETERMINATO\n");
@@ -116,7 +150,7 @@ void fprintIndet(FILE *outF, const Matrix *M){
                 el = (M->MCoef)[i+1][k+1];
 
                 /*se ha senso stampare il coefficiente*/
-                if(!isZero(el,M->error) && (k!=i)){
+                if(!isZero(el,M->error) && (k!=j)){
                     
                     /*stampa a seconda se il valore sia positivo o negativo*/
                     /*cambio di segno perche' e' come se avessi portato al di la' 
@@ -153,15 +187,26 @@ void fprintIndet(FILE *outF, const Matrix *M){
 
     
     }/*while*/
+    
+    /*chiusura del file*/
+    fclose(outF);
 
 }/*fprintIndet*/
 
 /*  Funzione che stampa le relazioni tra le righe linearmente dipendenti
-    IOF File, precedentemente aperto, dove stampare le relazioni
+    IP nome del file
+    OF File, precedentemente aperto, dove stampare le relazioni
     IP struttura con dentro le informazioni delle relazioni tra le Equzioni*/
-void fprintRel(FILE *outF, const Matrix *M){
+void fprintRel(const char nameFileOut[], const Matrix *M){
 
     int i,j,row,count=0;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL){
+        printf("ERRORE APERTURA IN PRINT_REL\n");
+        return;
+    }/*if*/
 
     /*considerazione per il singolare e plurale*/
     if(M->nEDip==1)
@@ -207,6 +252,8 @@ void fprintRel(FILE *outF, const Matrix *M){
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
 
+    fclose(outF);
+
 }/*fprintRel*/
 
 /*  Funzione che in base al errore stampa un tipo di aiuto
@@ -218,8 +265,9 @@ void printHelp(int code){
     /*se il codice e' zero significa che devo stampare 
     l'inizio del programma*/
     if(code==0){
-        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt %s\n\n",TEST_STRING);
+        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt <%s|%s>\n\n",TEST_STRING,NO_ALG_REL_STRING);
         printf("\"%s\" e' opzionale: serve per confermare che la relazione tra le righe sia corretta\n",TEST_STRING);
+        printf("\"%s\" e' opzionale: serve per non cercare le relazioni algebriche tra le equazioni\n",NO_ALG_REL_STRING);
         printf("il file di input va formattato come :\n");
         printf("n m\n");
         printf("b1 a11 a12 a13\n");
@@ -241,8 +289,9 @@ void printHelp(int code){
     else if(code==1){
         printf("Inserire il nome dei file di Input e Output\n");
         printf("Per aiuto \"%s\"\n",HELP_STRING);
-        printf("opzione di test: %s",TEST_STRING);
-    }   
+        printf("opzione di test: %s\n",TEST_STRING);
+        printf("opzione per non avere le relazioni tra le equazioni: \"%s\"\n",NO_ALG_REL_STRING);
+    }/*else if*/   
     
 
 }/*printHelp*/
@@ -263,34 +312,41 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
     if (outF == NULL)
         return -1;
     
-    /*scritta per la matrice risolta*/
-    fprintf(outF,"Il sistema risolto:\n\n");
-    
+    if(!isZeroCoefAllEqnLinDip(M)){
+        fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
+        /*chiusura del file*/
+        fclose(outF);
+        return -2;
+    }/*if*/
+    else
+        /*scritta per la matrice risolta*/
+        fprintf(outF,"Il sistema risolto:\n\n");
+
+    /*chiusura del file*/
+    fclose(outF);
+
     if(M->nIn * M->nEq < MAX_STAMPA)
         /*stampa le equazioni su file*/
-        fprintEquazioni(outF,M);
+        fprintEquazioni(nameFileOut,M);
 
-    /*se ha un risultato del tipo 0*x1 = 1, il sistema e' impossibile*/
-    if(!isZeroCoefAllEqnLinDip(M))
-        fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
+    /*se ha un risultato del tipo 0*x1 = a, il sistema e' impossibile*/
+
 
     /*Se # di equazioni - # di incognite == # di equazioni linarmente 
     dipendenti il sistema e' con una soluzione unica*/
-    else if(M->nEq-M->nIn-M->nEDip == 0)
-        fprintSolUnic(outF,M);
+    if(M->nEq-M->nIn-M->nEDip == 0)
+        fprintSolUnic(nameFileOut,M);
 
     /*altrimenti, posso scrivere delle relazioni tra le colonne*/
     else
-        fprintIndet(outF, M);
+        fprintIndet(nameFileOut, M);
 
 
     /*stampo la relazioni lineari tra le righe se ci sono*/
     if(M->nEDip > 0)
         /*stampa sul file le relazioni tra le equazioni*/
-        fprintRel(outF, M);
+        fprintRel(nameFileOut, M);
 
-    /*chiusura del file*/
-    fclose(outF);
     /*nessun problema*/
     return 0;
 
@@ -382,13 +438,18 @@ int main(int argc, char const *argv[]){
         printf("ERRORE FILE INGRESSO");
         return -1;
     }/*if*/
-
-    if(M.nEq *  M.nIn > MAX_STAMPA)
-        printf("FILE LETTO\n");
     
-
     /*risoluzione della matrice*/
-    solveTheMatrix(&M);
+    /*o senza relazioni algebriche*/
+    if((argc==4) && !strcmp(argv[3],NO_ALG_REL_STRING)){
+        printf("NON CERCO LE RELAZIONI TRA LE EQUAZIONI\n");
+        /*risoluzione della matrice*/
+        solveTheMatrix(&M,0);
+    }/*if*/
+    /*o con le relazioni algebriche*/
+    else {
+        solveTheMatrix(&M,1);
+    }/*else*/
     printf("\nSolved\n");
 
     /*se viene aggiunto alla fine la stringa per testare le relazioni*/
