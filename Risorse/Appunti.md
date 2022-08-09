@@ -30,3 +30,6 @@ Se # Di Colonne > # Di righe infinite soluzioni
 - 15-28 Luglio
 - 29-23 Agosto
 
+# Comandi Matlab
+matlab -nodisplay -nosplash -nodesktop -r "run('FileMatlab.m');"
+lin

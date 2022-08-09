@@ -296,7 +296,12 @@ void solveTheMatrix(Matrix *M){
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
             zerosCol(r+1,c,M);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-        
+
+            /*per avere un idea del progresso*/
+            if((n * (M->nIn)) > MAX_STAMPA)
+                /*la stringa al inizio serve per abbellire l'output*/
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d\n",(i*100/(n-(M->nEDip))),i);
+
         }/*if*/
 
         /*indice di riga a partire da 0*/

@@ -17,12 +17,21 @@
 #define HELPSTRING "-help"
 
 /*  Funzione che stampa su file il sistema di equazioni
-    IOF outF, file dove stampare
+    IP
+    OF outF, file dove stampare
     IP Matrice con il sistema di equazioni
 */
-void fprintEquazioni(FILE *outF,const Matrix *M){
+void fprintEquazioni(const char nameFileOut[],const Matrix *M){
 
     int i,j;
+
+        
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL)
+        return;
+
     /*Scansione delle righe*/
     for(i = 0; i < M->nEq; i++){
         /*stampa delle equazioni*/
@@ -37,14 +46,20 @@ void fprintEquazioni(FILE *outF,const Matrix *M){
         fprintf(outF," = %5.2f\n",(M->MCoef)[i+1][0]);
     }/*for*/
 
+    fclose(outF);
 }/*fprintEquazioni*/
 
 /*  Funzione che stampa la soluzione quando il sistema ha un unica soluzione
     IOF outF, File precedentemente aperto, dove stampare il risultato
     IP Matrice Risolta*/
-void fprintSolUnic(FILE *outF, const Matrix *M){
-    int i,j;
+void fprintSolUnic(const char nameFileOut[], const Matrix *M){
 
+    int i,j;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL)
+        return ;
     fprintf(outF,"SISTEMA CON RISULTATO UNICO\n"); 
 
     /*scrittura piu' carina carina del risultato*/
@@ -58,15 +73,20 @@ void fprintSolUnic(FILE *outF, const Matrix *M){
         }/*for*/
     
     }/*for*/
-
+    fclose(outF);
 }/*fprintSolUnic*/
 
 /*  Funzione che stampa su file l'insieme di soluzioni per un sistema 
     indeterminato
     IOF outF, file di input aperto in precedenza, dove stampare
     IP Matrix M, matrice  con i coefficienti delle equazioni lineari*/
-void fprintIndet(FILE *outF, const Matrix *M){
+void fprintIndet(const char nameFileOut[], const Matrix *M){
     int i,j,k;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL)
+        return ;
     /*frontespizio*/
     fprintf(outF,"\nSISTEMA INDETERMINATO\n");
 
@@ -94,15 +114,22 @@ void fprintIndet(FILE *outF, const Matrix *M){
     
     }/*for*/
 
+    fclose(outF);
 
 }/*fprintIndet*/
 
 /*  Funzione che stampa le relazioni tra le righe linearmente dipendenti
     IOF File, precedentemente aperto, dove stampare le relazioni
     IP struttura con dentro le informazioni delle relazioni tra le Equzioni*/
-void fprintRel(FILE *outF, const Matrix *M){
+void fprintRel(const char nameFileOut[], const Matrix *M){
 
     int i,j,row,count=0;
+    FILE *outF;     /*Variabile per il file di Output*/
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL)
+        return ;
+
     fprintf(outF,"\nla relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
 
     for(i=0;i<(M->nEDip);i++){
@@ -130,6 +157,7 @@ void fprintRel(FILE *outF, const Matrix *M){
 
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
+    fclose(outF);
 
 }/*fprintRel*/
 
@@ -171,32 +199,43 @@ void printHelp(int code){
         -1: apertura fallita di $nameFileOut).
 */
 int printMatrix(const char nameFileOut[], const Matrix *M){
-    int i=0;
+    int i=0,n=M->nEq,m=M->nIn;
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
     /*Errore apertura file output*/
     if (outF == NULL)
         return -1;
     
-    /*scritta per la matrice risolta*/
-    fprintf(outF,"Il sistema risolto:\n\n");
+    if(!isZeroCoefAllEqnLinDip(M)){
+        fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
+        return -2;
+    }
+    else    
+        /*scritta per la matrice risolta*/
+        fprintf(outF,"Il sistema risolto:\n\n");
+    fclose(outF);
     
-    /*stampa le equazioni su file*/
-    fprintEquazioni(outF,M);
+    if(m*n < MAX_STAMPA)
+        /*stampa le equazioni su file*/
+        fprintEquazioni(nameFileOut,M);
 
     /*se ha un risultato del tipo 0*x1 = 1, il sistema e' impossibile*/
-    if(!isZeroCoefAllEqnLinDip(M))
-        fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
+
 
     /*Se # di equazioni - # di incognite == # di equazioni linarmente 
     dipendenti il sistema e' con una soluzione unica*/
     else if(M->nEq-M->nIn-M->nEDip == 0)
-        fprintSolUnic(outF,M);
+        fprintSolUnic(nameFileOut,M);
 
     /*altrimenti, posso scrivere delle relazioni tra le colonne*/
     else
-        fprintIndet(outF, M);
+        fprintIndet(nameFileOut, M);
 
+
+    outF = fopen(nameFileOut, "a");
+    /*Errore apertura file output*/
+    if (outF == NULL)
+        return -1;
 
     /*stampo la relazioni lineari tra le righe se ci sono*/
     if(M->nEDip > 0){
@@ -211,8 +250,6 @@ int printMatrix(const char nameFileOut[], const Matrix *M){
         for(i=0;i<M->nEDip;i++)
             fprintf(outF," Eq%d", (M->aEDip)[i]);
         fprintf(outF," )");
-        /*stampa sul file le relazioni tra le equazioni*/
-        /*fprintRel(outF, M);*/
 
     }/*if*/
         
@@ -272,7 +309,10 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
     M->error = r;
 
     /*stampa di cioò che ho letto*/
-    printEquations(M);
+    if((m*n) < MAX_STAMPA)
+        printEquations(M);
+    else
+        printf("Sistema di equazioni di %d equazioni x %d incognite, troppo grande da stampare", n,m);
     printf("\nERRORE LETTO : %f\n", M->error);
 
     /*chiusura del file*/
@@ -290,7 +330,7 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 */
 int main(int argc, char const *argv[]){
 
-    Matrix M, T;
+    Matrix M;
 
     if((argc>1) && !(strcmp(argv[1],HELPSTRING))){
         printHelp(0);
@@ -314,12 +354,6 @@ int main(int argc, char const *argv[]){
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 
-    /*
-    if(test(&M,&T))
-        printf("\n TEST PASSATO :)\n");
-    else
-        printf("\nTEST NON PASSATO !!!!!!!\n");
-    */
 
     /*Stampa su file della matrice risolta*/
     if(printMatrix(argv[2],&M) == -1){
@@ -330,7 +364,6 @@ int main(int argc, char const *argv[]){
     
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
-    freeMatrix(&T);
     
     return 0;
 }/*main*/

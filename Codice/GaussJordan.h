@@ -3,6 +3,7 @@
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
 #define MAX_STRING 200
+#define MAX_STAMPA 1000
 
 typedef struct {
     double** MCoef;     /*Matrice con allocazione dinamica memoria*/
