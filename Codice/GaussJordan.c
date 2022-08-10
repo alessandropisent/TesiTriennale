@@ -362,7 +362,7 @@ void solveTheMatrix(Matrix *M, int fRel){
         printf("RISOLUZIONE DEL SISTEMA:\n");
 
     /*Devo trovare $diag - diagonali - #righe dipendenti*/
-    while(i<(n-(M->nEDip))){
+    while(i<(n-(M->nEDip))&&(c>0)){
         
 
         /*se l'elemento sulla diagonale M[$r+1][$c]!=0 allora posso continuare*/
@@ -379,7 +379,7 @@ void solveTheMatrix(Matrix *M, int fRel){
             /*per avere un idea del progresso*/
             if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
                 /*la stringa al inizio serve per abbellire l'output*/
-                printf("\033[A\33[2K\rProgress: %d %%, i=%d\n",(i*100/(n-(M->nEDip))),i);
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d\n",(i*100/(n-(M->nEDip))),i,c,j,r);
             
                 
         }/*if*/
@@ -400,7 +400,7 @@ void solveTheMatrix(Matrix *M, int fRel){
 
     }/*while*/
 
-    printf("\nSONO USCITO DAL WHILE\n");    /*TAG:DEBUG*/
+    /*printf("\nSONO USCITO DAL WHILE\n");*/    /*TAG:DEBUG*/
 
     
 }/*solveTheMatrix*/

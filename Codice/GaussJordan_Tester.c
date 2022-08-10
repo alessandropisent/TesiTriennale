@@ -31,12 +31,14 @@
 */
 #include <stdio.h>
 #include <string.h>
-
+#include <time.h>
 #include "GaussJordan.h"
 
 #define HELP_STRING "-help"
 #define TEST_STRING "-test"
 #define NO_ALG_REL_STRING "-no-rel"
+#define MATLAB_FILE "results.txt"
+#define WRITE_FILE_MATLAB true
 
 /*  Funzione che stampa su file il sistema di equazioni
     IP 
@@ -83,6 +85,18 @@ void fprintEquazioni(const char nameFileOut[],const Matrix *M){
 void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     int i,j;
     FILE *outF;     /*Variabile per il file di Output*/
+
+    /*Creazione e apertura per il file matlab*/
+    #ifdef WRITE_FILE_MATLAB
+        FILE *matlabF;
+        matlabF = fopen(MATLAB_FILE,"w");
+        /*Errore apertura file output*/
+        if (matlabF == NULL){
+            printf("ERRORE APERTURA IN PRINT_SOL_UNICA(MatlabFile)\n");
+            return;
+        }/*if*/
+    #endif
+
     outF = fopen(nameFileOut, "a"); /*append*/
     /*Errore apertura file output*/
     if (outF == NULL){
@@ -90,13 +104,22 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
         return;
     }/*if*/
 
+    /*scrittura frontespizio*/
     fprintf(outF,"SISTEMA CON RISULTATO UNICO\n"); 
 
     /*scrittura piu' carina carina del risultato*/
     for(i=0;i<M->nEq;i++){
         for(j=0;j<M->nIn;j++){
+            /*stampa tutti i coefficienti che sono 1*/
             if(isZero((M->MCoef)[i+1][j+1]-1,M->error)){
                 fprintf(outF,"x%2d = %5.2f\n",j+1,(M->MCoef)[i+1][0]);
+
+                /*stampo solo se richiesto dalle direttive*/
+                #ifdef WRITE_FILE_MATLAB
+                    fprintf(matlabF,"%f\n",(M->MCoef)[i+1][0]);
+                #endif
+
+                /*ho trovato match vai a riga successiva*/
                 break;
             }/*if*/
                 
@@ -105,6 +128,11 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     }/*for*/
     /*chiusura del file*/
     fclose(outF);
+
+    /*chiusura del file*/
+    #ifdef WRITE_FILE_MATLAB
+        fclose(matlabF);
+    #endif
 
 }/*fprintSolUnic*/
 
@@ -325,7 +353,7 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
     /*chiusura del file*/
     fclose(outF);
 
-    if(M->nIn * M->nEq < MAX_STAMPA)
+    /*if(M->nIn * M->nEq < MAX_STAMPA)*/
         /*stampa le equazioni su file*/
         fprintEquazioni(nameFileOut,M);
 
@@ -421,6 +449,8 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 int main(int argc, char const *argv[]){
 
     Matrix M, T;
+    clock_t start,endRead,endSolve,endWrite;
+
     if((argc>1) && !(strcmp(argv[1],HELP_STRING))){
         printHelp(0);
         return 0;
@@ -433,11 +463,16 @@ int main(int argc, char const *argv[]){
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*else if*/
 
+    start = clock();
+
     /*Lettura della matrice in input*/
     if(readFileMatrix(argv[1],&M) == -1){
-        printf("ERRORE FILE INGRESSO");
+        printf("ERRORE FILE INGRESSO\n");
         return -1;
     }/*if*/
+    endRead = clock();
+
+    printf("TEMPO DI LETTURA: %f s\n",(double)(endRead-start)/CLOCKS_PER_SEC);
     
     /*risoluzione della matrice*/
     /*o senza relazioni algebriche*/
@@ -450,7 +485,9 @@ int main(int argc, char const *argv[]){
     else {
         solveTheMatrix(&M,1);
     }/*else*/
-    printf("\nSolved\n");
+    
+    endSolve = clock();
+    printf("\nTEMPO RISOLUZIONE : %f m\n",(double)(endSolve-endRead)/(CLOCKS_PER_SEC*60));
 
     /*se viene aggiunto alla fine la stringa per testare le relazioni*/
     if((argc==4) && !strcmp(argv[3],TEST_STRING)){
@@ -461,8 +498,8 @@ int main(int argc, char const *argv[]){
             printf("\n TEST PASSATO \n");
         else
             printf("\nTEST NON PASSATO !!!!!!!\n");
-
-    }/*if*/
+    }
+    /*if*/
 
     /*Stampa su file della matrice risolta*/
     if(printFileMatrix(argv[2],&M) == -1){
@@ -470,10 +507,12 @@ int main(int argc, char const *argv[]){
         return -1;
     }/*if*/
 
-    if(M.nEq *  M.nIn > MAX_STAMPA)
+    if((M.nEq *  M.nIn) > MAX_STAMPA)
         printf("FILE SCRITTO\n");
-        
-    
+
+    endWrite=clock();
+    printf("TEMPO DI SCRITTURA: %f s\n",(double)(endWrite-endSolve)/(CLOCKS_PER_SEC));    
+    printf("TEMPO TOTALE = %f min\n",(double)(endWrite-start)/(CLOCKS_PER_SEC*60));
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
     freeMatrix(&T);
