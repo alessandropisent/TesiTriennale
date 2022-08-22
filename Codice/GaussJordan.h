@@ -31,13 +31,13 @@ void zerosRow(int , int, int, Matrix *);
 
 void factMRAlg(int, int, int, Matrix *);
 
-void zerosCol(int ,int,  Matrix * , int);
+void zerosCol(int ,int,  Matrix *);
 
 bool isEqLinDip(int, const Matrix *);
 
 bool isZeroCoefAllEqnLinDip(const Matrix *);
 
-void solveTheMatrix(Matrix *,int);
+void solveTheMatrix(Matrix *);
 
 void solveDiag(Matrix * );
 
@@ -57,4 +57,4 @@ bool isColSolved(int, const Matrix *);
 
 int whichColAreNotSolved(int* , const Matrix * );
 
-void FprintFWRNS (const Matrix *);
+void FprintFCRNS (const Matrix *);

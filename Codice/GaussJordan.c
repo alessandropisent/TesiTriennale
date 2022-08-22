@@ -278,17 +278,15 @@ void factMRAlg(int r,int c, int rowC, Matrix *M){
     IP r, riga della matrice ideale da modificare
     IOP M, Matrice da modificare
 */
-void zerosCol(int r, int c, Matrix * M, int fRel){
+void zerosCol(int r, int c, Matrix * M){
     
     int i,row;  /*variabili per il ciclo, e per la riga*/
     
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
 
-    /*se devo cercare le relazioni*/
-    if(fRel)
-        /*Normalizzo l'elemento sulla sua stessa riga*/
-        (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
+    /*Normalizzo l'elemento sulla sua stessa riga*/
+    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
     
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     diagNorm(r,c,M);
@@ -302,12 +300,9 @@ void zerosCol(int r, int c, Matrix * M, int fRel){
 
         if(!isEqLinDip(row,M)){
 
-            /*se devo cercare le relazioni*/
-            if(fRel){
-                /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
-                factMRAlg(row, c, r, M); /*TAG:Ralg*/
-            }/*if*/
-            
+            /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
+            factMRAlg(row, c, r, M); /*TAG:Ralg*/
+
             zerosRow(row, c, r, M);
         
         }/*if*/
@@ -361,7 +356,13 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
 
 }/*isZeroCoefAllEqnLinDip*/
 
-bool isColSolved(int col, const Matrix*M){
+
+/*  Funzione che controlla che la colonna $col sia composta da un solo
+        elemento diverso da zero
+    IP col, indice di colonna {1 -> $(M->nIn)}
+    IP M, Matrice con i coefficienti
+*/
+bool isColSolved(int col, const Matrix * M){
     int i, nOne = 0;
     for(i=0;i<M->nEq;i++){
         if(!isZero((M->MCoef)[i+1][col],M->error)){
@@ -372,13 +373,22 @@ bool isColSolved(int col, const Matrix*M){
         }
     }
     return true;
-}
 
+}/*isColSolved*/
+
+/*  Funzione che scrive su $aC le colonne di $M non risolte 
+        (ossia con un solo elemento != 0 , e tutti gli altri 0)
+    IOP aC, array da riempire
+    IP M, Matrice con i coefficienti delle equazioni
+*/
 int whichColAreNotSolved(int* aC, const Matrix * M){
-    int i,iA=0;
+    int i,      /*indice del for*/
+        iA=0;   /*indice array*/
 
+    /*per ogni colonna controllo che sia risolta*/
     for(i=0;i< M->nIn; i++){
 
+        /*se non e' risolta la salvo nel array delle non risolte*/
         if(!isColSolved(i+1,M))
             aC[iA++]=i+1;
 
@@ -386,37 +396,47 @@ int whichColAreNotSolved(int* aC, const Matrix * M){
 
     return iA;
     
-}/*whichRowsAreNotSolved*/
+}/*whichColAreNotSolved*/
 
-void FprintFWRNS(const Matrix * M){
+/*  Fprintf Which Coloms are Not Solved
+    Funzione che stampa su file quali colonne non sono risole
+    IP Matrice da controllare
+    OF file con le colonne non risolte
+*/
+void FprintFCRNS(const Matrix * M){
     
-    int * aC;
-    int iA, i;
-    FILE *oF; 
+    int * aC; /*array con le colonne*/
+    int iA,   /*indice per array*/ 
+        i;    /*indice per for*/
+    FILE *oF; /*puntatore a file su cui scrivere*/
     
-    aC = malloc(sizeof(int) * M->nEq);
+    /*creazione del array delle incognite non risolte*/
+    aC = malloc(sizeof(int) * M->nIn);
     assert(aC != NULL);
 
+    /*chiamata alla funzione che riempie l'array di eqn non risolte*/
     iA = whichColAreNotSolved(aC, M);
 
+    /*apertura del file*/
     oF = fopen("notSolvedRows.txt","w");
     if(oF == NULL)
         return;
     
+    /*Frontespizio*/
     fprintf(oF,"Righe sbagliate: \n");
 
-    for(i = 0; i<iA; i++){
+    /*for che cicla tutte quelle non risolte e le stampa su file*/
+    for(i = 0; i<iA; i++)
         fprintf(oF,"-%3d\n",aC[i]);
-    }
-
-    fclose(oF);
-    free(aC);
-}
+    
+    fclose(oF);     /*chiusura del file*/
+    free(aC);       /*eliminazione array*/
+}/*FprintFCRNS*/
 
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
 */
-void solveTheMatrix(Matrix *M, int fRel){
+void solveTheMatrix(Matrix *M){
 
     /*per il while*/
     int i=0,    /*contatore per il numero di incognite risolte*/
@@ -425,10 +445,9 @@ void solveTheMatrix(Matrix *M, int fRel){
         j=0,    /*contatore per il numero di iterazioni del while*/
         k=0,    /*indice per $(M->aEDip)*/
         iForFPrint,
-        iLidp =0,
+        cLidp =0,
         iSkip = 0;
     int n = M->nEq;
-    bool skipped = false;
     FILE* ixF=fopen(INDEX_FILE,"w");
 
     if(ixF==NULL)
@@ -443,18 +462,18 @@ void solveTheMatrix(Matrix *M, int fRel){
 
     /*Devo trovare $i =  #equazioni - #righe dipendenti*/
     /*i parte da 0, e deve avere al massimo $n-$nEDip, c*/
-    while(i<(n-(M->nEDip))&&(r<(n+1))){
-        skipped = false;
+    while(i<(n-(M->nEDip))){
 
-        if(M->nEDip > 0 &&  isEqLinDip(r,M))
-            fprintf(ixF,"L:%3d | ",iLidp++);
-
+        if(M->nEDip > 0 &&  isEqLinDip(r,M)){
+            fprintf(ixF,"L:%3d | ",cLidp++);
+        }
+            
         /*se l'elemento sulla diagonale M[$r][$c]!=0 allora posso continuare*/
         else if(!isZero((M->MCoef)[r][c], M->error)){
             
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
-            zerosCol(r,c,M,fRel);
-            i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
+            zerosCol(r,c,M);
+            i++; /*lo faccui su almeno tutte le equazioni - # eq lin dip*/
             
             /*TAG: DEBUG*/
             /*printf("\nOperazione su Zero(%d,%d)",r+1,c);  */ /*TAG: DEBUG*/
@@ -463,7 +482,7 @@ void solveTheMatrix(Matrix *M, int fRel){
             /*per avere un idea del progresso*/
             if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
                 /*la stringa al inizio serve per abbellire l'output*/
-                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip);
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d, k=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip,k);
            
             fprintf(ixF,"i:%3d | ",i);
 
@@ -472,40 +491,35 @@ void solveTheMatrix(Matrix *M, int fRel){
         else{
 
             fprintf(ixF,"x:%3d | ",iSkip++);
-            skipped = true;
 
         }/*else*/
             
-        
+        /*Stampa su file del'array con le le eqn lin dip*/
         fprintf(ixF,"r=%3d c=%3d, k=%3d, [",r,c,k);
         for(iForFPrint = 0; iForFPrint<M->nEDip;iForFPrint++ )
             fprintf(ixF," %3d,",(M->aEDip)[iForFPrint]);
         fprintf(ixF,"]\n");
 
-        if(!skipped){
-            /*indice di riga a partire da 1*/
-            r++;
-        }
-
 
         
         /*indice che conta le volte che il ciclo viene eseguito*/   
         j++; /*parte da 0*/
-
+        r=((r)%(M->nEq)) +1;
         
 
         /*COLONNA*/
         if(j<(M->nIn))
             c++;
+
         else{
             
             /*altrimenti l'indice di colonna e' nel array di eqn lin dip*/
             c = (M->aEDip)[(k)%(M->nEDip)]; /*in questo caso lo scandisco con k*/
             k++;
 
-            if (k>=(M->nEDip)){
-                fprintf(ixF,"Fine di k, L=%d, iSkip=%d, i=%d\n",iLidp,iSkip,i);
-            }
+            if (k>=(M->nEDip))
+                fprintf(ixF,"Fine di k, L=%d, iSkip=%d, i=%d\n",cLidp,iSkip,i);
+            
                 
         }/*else*/  
 

@@ -35,7 +35,6 @@
 
 #define HELP_STRING "-help"
 #define TEST_STRING "-test"
-#define NO_ALG_REL_STRING "-no-rel"
 #define MATLAB_FILE "results.txt"
 #define WRITE_FILE_MATLAB true
 
@@ -293,9 +292,8 @@ void printHelp(int code){
     /*se il codice e' zero significa che devo stampare 
     l'inizio del programma*/
     if(code==0){
-        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt <%s|%s>\n\n",TEST_STRING,NO_ALG_REL_STRING);
+        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt <%s>\n\n",TEST_STRING);
         printf("\"%s\" e' opzionale: serve per confermare che la relazione tra le righe sia corretta\n",TEST_STRING);
-        printf("\"%s\" e' opzionale: serve per non cercare le relazioni algebriche tra le equazioni\n",NO_ALG_REL_STRING);
         printf("il file di input va formattato come :\n");
         printf("n m\n");
         printf("b1 a11 a12 a13\n");
@@ -318,7 +316,6 @@ void printHelp(int code){
         printf("Inserire il nome dei file di Input e Output\n");
         printf("Per aiuto \"%s\"\n",HELP_STRING);
         printf("opzione di test: %s\n",TEST_STRING);
-        printf("opzione per non avere le relazioni tra le equazioni: \"%s\"\n",NO_ALG_REL_STRING);
     }/*else if*/   
     
 
@@ -462,49 +459,43 @@ int main(int argc, char const *argv[]){
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*else if*/
 
-
- 
     /*Lettura della matrice in input*/
     if(readFileMatrix(argv[1],&M) == -1){
         printf("ERRORE FILE INGRESSO\n");
         return -1;
     }/*if*/
-
-
-    /*risoluzione della matrice*/
-    /*o senza relazioni algebriche*/
-    if((argc==4) && !strcmp(argv[3],NO_ALG_REL_STRING)){
-        printf("NON CERCO LE RELAZIONI TRA LE EQUAZIONI\n");
-        /*risoluzione della matrice*/
-        solveTheMatrix(&M,0);
-    }/*if*/
-    /*o con le relazioni algebriche*/
-    else {
-        solveTheMatrix(&M,1);
-    }/*else*/
     
+    /*risoluzione della MAtrice*/
+    solveTheMatrix(&M);
+    
+    /*messaggio che e' stata risolta*/
     printf("# di incognite risolte = %d\n",M.nEq-M.nEDip);
 
-    FprintFWRNS(&M);
+    /*stampa su file delle colonne non risolte*/
+    FprintFCRNS(&M);
 
     /*se viene aggiunto alla fine la stringa per testare le relazioni*/
     if((argc==4) && !strcmp(argv[3],TEST_STRING)){
         
+        /*faccio il test se ce' qualche eqn lin dip*/
         if(M.nEDip!=0){  
+            /*rileggo il file con il sistema originale, e riempio T*/
             readFileMatrix(argv[1],&T);
 
+            /*se il test e' passato stampo*/
             if(test(&M,&T))
                 printf("\n!TEST PASSATO \n");
+            /*se il test non e' passato:*/
             else
                 printf("\nTEST NON PASSATO !!!!!!!\n");
-        }
+
+        }/*if*/
+
+        /*altrimenti non avvio nemmeno il test*/
         else
             printf("\nNessuna EQN LIN DIP\n");
-    }
-    /*if*/
 
-    /*TAG: DEBUG*/
-
+    }/*if*/
 
     /*Stampa su file della matrice risolta*/
     if(printFileMatrix(argv[2],&M) == -1){
@@ -512,6 +503,7 @@ int main(int argc, char const *argv[]){
         return -1;
     }/*if*/
 
+    /*se il sistema e' di grandi dimensioni stampo a video la conferma di scrittura*/
     if((M.nEq *  M.nIn) > MAX_STAMPA)
         printf("FILE SCRITTO\n");
 
