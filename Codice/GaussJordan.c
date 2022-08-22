@@ -33,6 +33,9 @@
 #include <string.h>         /*strcat*/
 #include "GaussJordan.h"    /*definizione delle funzioni nel file*/
 
+#define ERRORS_FILE "errors.txt"
+#define INDEX_FILE "indexDone.txt"
+
 /*inizializzazzione della matrice e allocazione della memoria
     IP n, numero di righe
     IP m, numero di colonne
@@ -174,6 +177,7 @@ void printFMatrixRAlg(const Matrix *M){
 void diagNorm(int r, int c, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
     int i;
+    FILE * erF;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
@@ -181,6 +185,22 @@ void diagNorm(int r, int c, Matrix *M){
     /*nomalizziamo i valori sulla riga*/
     for(i=0;i<(M->nIn+1);i++)
         (M->MCoef)[r][i]=((M->MCoef)[r][i])/t;
+    
+    /*se sono riuscito a normalizzare l'elemento*/
+    if(isZero((M->MCoef)[r][c]-1,M->error))
+        return;
+    
+    /*se non ho normalizzato l'elemento*/
+    /*TAG:DEBUG*/
+    erF = fopen(ERRORS_FILE,"a");
+    
+    if(erF==NULL)
+        return;
+
+    fprintf(erF,"ERRORE PER ELEMENTO M[%d][%d]=%f\n",r,c,(M->MCoef)[r][c]);
+    printf("\nErrori per normalizzazzione\n");
+
+    fclose(erF);
 
 }/*diagNorm*/
 
@@ -227,15 +247,15 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
 
 /*TAG:Ralg*/
 /*  Funzione che scrive le relazioni tra equazioni nella MRAlg
-    IP r, riga in cui siamo
-    IP c, colonna in cui siamo
-    IP t, pivot
+    IP r, riga in cui siamo 
+    IP c, colonna in cui siamo (da azzerar)
+    IP rowC, riga in cui la colonna $c e' unitaria
     IOP M, struttura con tutte le informazioni necessarie
 */
 void factMRAlg(int r,int c, int rowC, Matrix *M){
 
     int i;
-    double el, t = (M->MCoef)[r][c];;
+    double el, t = (M->MCoef)[r][c];
 
     el = t*((M->MRAlg)[rowC-1][rowC-1]);
     (M->MRAlg)[r-1][rowC-1] = el;
@@ -341,6 +361,58 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
 
 }/*isZeroCoefAllEqnLinDip*/
 
+bool isColSolved(int col, const Matrix*M){
+    int i, nOne = 0;
+    for(i=0;i<M->nEq;i++){
+        if(!isZero((M->MCoef)[i+1][col],M->error)){
+            if(nOne==0)
+                nOne++;
+            else
+                return false;
+        }
+    }
+    return true;
+}
+
+int whichColAreNotSolved(int* aC, const Matrix * M){
+    int i,iA=0;
+
+    for(i=0;i< M->nIn; i++){
+
+        if(!isColSolved(i+1,M))
+            aC[iA++]=i+1;
+
+    }/*for*/
+
+    return iA;
+    
+}/*whichRowsAreNotSolved*/
+
+void FprintFWRNS(const Matrix * M){
+    
+    int * aC;
+    int iA, i;
+    FILE *oF; 
+    
+    aC = malloc(sizeof(int) * M->nEq);
+    assert(aC != NULL);
+
+    iA = whichColAreNotSolved(aC, M);
+
+    oF = fopen("notSolvedRows.txt","w");
+    if(oF == NULL)
+        return;
+    
+    fprintf(oF,"Righe sbagliate: \n");
+
+    for(i = 0; i<iA; i++){
+        fprintf(oF,"-%3d\n",aC[i]);
+    }
+
+    fclose(oF);
+    free(aC);
+}
+
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
 */
@@ -348,11 +420,19 @@ void solveTheMatrix(Matrix *M, int fRel){
 
     /*per il while*/
     int i=0,    /*contatore per il numero di incognite risolte*/
-        r=0,    /*indice di riga*/
+        r=1,    /*indice di riga*/
         c=1,    /*indice di colonna*/
         j=0,    /*contatore per il numero di iterazioni del while*/
-        k=0;    /*indice per $(M->aEDip)*/
+        k=0,    /*indice per $(M->aEDip)*/
+        iForFPrint,
+        iLidp =0,
+        iSkip = 0;
     int n = M->nEq;
+    bool skipped = false;
+    FILE* ixF=fopen(INDEX_FILE,"w");
+
+    if(ixF==NULL)
+        return;
 
     /*per abbellirre*/
     printf("\n");
@@ -361,15 +441,19 @@ void solveTheMatrix(Matrix *M, int fRel){
     if(((M->nIn) * (M->nEq)) > MAX_STAMPA)
         printf("RISOLUZIONE DEL SISTEMA:\n");
 
-    /*Devo trovare $diag - diagonali - #righe dipendenti*/
-    while(i<(n-(M->nEDip))&&(c>0)){
-        
+    /*Devo trovare $i =  #equazioni - #righe dipendenti*/
+    /*i parte da 0, e deve avere al massimo $n-$nEDip, c*/
+    while(i<(n-(M->nEDip))&&(r<(n+1))){
+        skipped = false;
 
-        /*se l'elemento sulla diagonale M[$r+1][$c]!=0 allora posso continuare*/
-        if(!isZero((M->MCoef)[r+1][c], M->error)){
+        if(M->nEDip > 0 &&  isEqLinDip(r,M))
+            fprintf(ixF,"L:%3d | ",iLidp++);
+
+        /*se l'elemento sulla diagonale M[$r][$c]!=0 allora posso continuare*/
+        else if(!isZero((M->MCoef)[r][c], M->error)){
             
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
-            zerosCol(r+1,c,M,fRel);
+            zerosCol(r,c,M,fRel);
             i++;/*lo faccui su almeno tutte le equazioni - # eq lin dip*/
             
             /*TAG: DEBUG*/
@@ -379,30 +463,62 @@ void solveTheMatrix(Matrix *M, int fRel){
             /*per avere un idea del progresso*/
             if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
                 /*la stringa al inizio serve per abbellire l'output*/
-                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d\n",(i*100/(n-(M->nEDip))),i,c,j,r);
-            
-                
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip);
+           
+            fprintf(ixF,"i:%3d | ",i);
+
         }/*if*/
 
-        /*indice di riga a partire da 0*/
-        r=(r+1)%(M->nEq);
+        else{
+
+            fprintf(ixF,"x:%3d | ",iSkip++);
+            skipped = true;
+
+        }/*else*/
+            
+        
+        fprintf(ixF,"r=%3d c=%3d, k=%3d, [",r,c,k);
+        for(iForFPrint = 0; iForFPrint<M->nEDip;iForFPrint++ )
+            fprintf(ixF," %3d,",(M->aEDip)[iForFPrint]);
+        fprintf(ixF,"]\n");
+
+        if(!skipped){
+            /*indice di riga a partire da 1*/
+            r++;
+        }
+
+
+        
         /*indice che conta le volte che il ciclo viene eseguito*/   
         j++; /*parte da 0*/
 
-        /*se ho eseguito il ciclo meno volte del numero di incognite*/
+        
+
+        /*COLONNA*/
         if(j<(M->nIn))
-            /*allora l'indice di colonna e' ancora regolato da j*/
-            c =j+1;
-        else
+            c++;
+        else{
+            
             /*altrimenti l'indice di colonna e' nel array di eqn lin dip*/
-            c = (M->aEDip)[k++]; /*in questo caso lo scandisco con k*/
+            c = (M->aEDip)[(k)%(M->nEDip)]; /*in questo caso lo scandisco con k*/
+            k++;
+
+            if (k>=(M->nEDip)){
+                fprintf(ixF,"Fine di k, L=%d, iSkip=%d, i=%d\n",iLidp,iSkip,i);
+            }
+                
+        }/*else*/  
+
+        printf("\033[A\33[2K\rProgress: j=%d\n",j);
+
         
 
     }/*while*/
-
-    /*printf("\nSONO USCITO DAL WHILE\n");*/    /*TAG:DEBUG*/
-
     
+
+    printf("\nSONO USCITO DAL WHILE\n");    /*TAG:DEBUG*/
+    fclose(ixF);
+
 }/*solveTheMatrix*/
 
 /*  Funzione che dice se un double e' zero dato un errore

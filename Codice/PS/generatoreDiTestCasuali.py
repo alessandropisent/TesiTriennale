@@ -5,16 +5,16 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 101 # righe, # di equazioni
-M = 100 # colonne, # di incognite
+N = 10 # righe, # di equazioni
+M = 10 # colonne, # di incognite
 
-a = 0
-b = 10
+a = -100
+b = 100
 
-D = 1 # # of righe dipendenti
+D = 0 # # of righe dipendenti
 In = N-D
 
-precisone = "0.0001"
+precisone = "0.00001"
 
 #------------------------------------------------------
 # START OF PROGRAMMA
@@ -46,10 +46,13 @@ with open("Codice/Dipendenza.txt", "w") as fileD:
     if(D>0):
         for i in range(D):
             f = randint(-b,b)
-            fileD.write("RIGA %d sara' dipendendenti f=%d* row =%d  \n"%(rC[i],f,rI[i%In]))
+            g = randint(-b,b)
+            fileD.write("RIGA %d sara' dipendendenti %d* r =%d + %d * r=%d\n"%(rC[i],f,rI[(2*i)%In],g,rI[(2*i+1)%In]))
             for j in range(M):
-                m[rC[i]][j] = f*m[rI[i%In]][j]
-                c[rC[i]] = f*c[rI[i%In]]
+                m[rC[i]][j] = f*m[rI[(2*i)%In]][j]+g*m[rI[(2*i+1)%In]][j]
+                c[rC[i]] = f*c[rI[(2*i)%In]]+g*c[rI[(2*i+1)%In]]
+
+
     else:
         fileD.write("No dipendenza")
     

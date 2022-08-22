@@ -52,3 +52,9 @@ int min(int, int);
 bool test(Matrix* , Matrix* );
 
 void printEquations(const Matrix *);
+
+bool isColSolved(int, const Matrix *);
+
+int whichColAreNotSolved(int* , const Matrix * );
+
+void FprintFWRNS (const Matrix *);
