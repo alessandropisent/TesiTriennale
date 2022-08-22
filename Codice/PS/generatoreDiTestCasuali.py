@@ -5,8 +5,8 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 1000 # righe, # di equazioni
-M = 1000 # colonne, # di incognite
+N = 10 # righe, # di equazioni
+M = 10 # colonne, # di incognite
 
 a = 0
 b = 10
@@ -85,8 +85,7 @@ print("SCRITTURA DEL CODICE MATLAB")
 #     f.write("]")
 
 #     f.write("\nx = linsolve(A,b)")
-dictionary = {"A" : m, "b"=c}
-savemat("Matrix.mat", dictionary )
+savemat("Codice/PS/Matrix.mat", {"A" : m, "b":c} )
 
 print("SCRITTURA DEL FILE INPUT")
 # Scrittura per il file di Test per il programma PRincipale

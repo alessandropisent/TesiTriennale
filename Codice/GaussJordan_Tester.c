@@ -390,6 +390,7 @@ int main(int argc, char const *argv[]){
     /*risoluzione della matrice*/
     solveTheMatrix(&M);
 
+    printf("Risoluta");
 
     /*Stampa su file della matrice risolta*/
     if(printMatrix(argv[2],&M) == -1){
