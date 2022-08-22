@@ -5,8 +5,8 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 10000 # righe, # di equazioni
-M = 10000 # colonne, # di incognite
+N = 1000 # righe, # di equazioni
+M = 1000 # colonne, # di incognite
 
 a = 0
 b = 10
