@@ -36,7 +36,6 @@
 #define HELP_STRING "-help"
 #define TEST_STRING "-test"
 #define MATLAB_FILE "results.txt"
-#define WRITE_FILE_MATLAB true
 
 /*  Funzione che stampa su file il sistema di equazioni
     IP 
@@ -85,15 +84,14 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     FILE *outF;     /*Variabile per il file di Output*/
 
     /*Creazione e apertura per il file matlab*/
-    #ifdef WRITE_FILE_MATLAB
-        FILE *matlabF;
-        matlabF = fopen(MATLAB_FILE,"w");
-        /*Errore apertura file output*/
-        if (matlabF == NULL){
-            printf("ERRORE APERTURA IN PRINT_SOL_UNICA(MatlabFile)\n");
-            return;
-        }/*if*/
-    #endif
+    FILE *matlabF;
+    matlabF = fopen(MATLAB_FILE,"w");
+    /*Errore apertura file output*/
+    if (matlabF == NULL){
+        printf("ERRORE APERTURA IN PRINT_SOL_UNICA(MatlabFile)\n");
+        return;
+    }/*if*/
+    
 
     outF = fopen(nameFileOut, "a"); /*append*/
     /*Errore apertura file output*/
@@ -114,9 +112,8 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
                 fprintf(outF,"x%2d = %5.2f\n",j+1,(M->MCoef)[i+1][0]);
 
                 /*stampo solo se richiesto dalle direttive*/
-                #ifdef WRITE_FILE_MATLAB
-                    fprintf(matlabF,"%f\n",(M->MCoef)[i+1][0]);
-                #endif
+                fprintf(matlabF,"%f\n",(M->MCoef)[i+1][0]);
+                
 
                 /*ho trovato match vai a riga successiva*/
                 break;
@@ -129,9 +126,9 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     fclose(outF);
 
     /*chiusura del file*/
-    #ifdef WRITE_FILE_MATLAB
-        fclose(matlabF);
-    #endif
+    printf("Scritto file matlab");
+    fclose(matlabF);
+
 
 }/*fprintSolUnic*/
 
@@ -350,7 +347,7 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
     /*chiusura del file*/
     fclose(outF);
 
-    /*if(M->nIn * M->nEq < MAX_STAMPA)*//*TAG:TOSTAY*/
+    if(M->nIn * M->nEq < MAX_STAMPA)
         /*stampa le equazioni su file*/
         fprintEquazioni(nameFileOut,M);
 
@@ -446,6 +443,7 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 int main(int argc, char const *argv[]){
 
     Matrix M, T;
+    bool doTest=false;  /*variabile booleana che dice se ho effetuato il test*/
 
     if((argc>1) && !(strcmp(argv[1],HELP_STRING))){
         printHelp(0);
@@ -476,11 +474,14 @@ int main(int argc, char const *argv[]){
 
     /*se viene aggiunto alla fine la stringa per testare le relazioni*/
     if((argc==4) && !strcmp(argv[3],TEST_STRING)){
-        
+
         /*faccio il test se ce' qualche eqn lin dip*/
         if(M.nEDip!=0){  
             /*rileggo il file con il sistema originale, e riempio T*/
             readFileMatrix(argv[1],&T);
+
+            /*variabile che mi dice che ho riempito T*/
+            doTest = true;
 
             /*se il test e' passato stampo*/
             if(test(&M,&T))
@@ -510,7 +511,8 @@ int main(int argc, char const *argv[]){
    
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
-    freeMatrix(&T);
+    if(doTest)
+        freeMatrix(&T);
     
     return 0;
 }/*main*/

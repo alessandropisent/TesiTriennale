@@ -5,11 +5,11 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 100 # righe, # di equazioni
-M = 100 # colonne, # di incognite
+N = 3 # righe, # di equazioni
+M = 3 # colonne, # di incognite
 
-a = -100
-b = 100
+a = 0
+b = 10
 
 D = 0 # # of righe dipendenti
 In = N-D
@@ -23,7 +23,7 @@ precisone = "0.00001"
 m = np.empty((N,M),dtype=int)
 c = np.empty((N),dtype=int)
 rDip = np.empty((D),dtype=int)
-mDip = np.empty((D,M))
+mDip = np.empty((D,M)) 
 
 # DETERMINA QUALI SONO LE RIGHE DIPENDENTI 
 roC = list(range(N))
@@ -47,7 +47,7 @@ with open("Codice/Dipendenza.txt", "w") as fileD:
         for i in range(D):
             f = randint(-b,b)
             g = randint(-b,b)
-            fileD.write("RIGA %d sara' dipendendenti %d* r =%d + %d * r=%d\n"%(rC[i],f,rI[(2*i)%In],g,rI[(2*i+1)%In]))
+            fileD.write("RIGA %d sara' dipendendenti %d* r =%d + %d * r=%d\n"%(rC[i]+1,f,rI[(2*i)%In]+1,g,rI[(2*i+1)%In]+1))
             for j in range(M):
                 m[rC[i]][j] = f*m[rI[(2*i)%In]][j]+g*m[rI[(2*i+1)%In]][j]
                 c[rC[i]] = f*c[rI[(2*i)%In]]+g*c[rI[(2*i+1)%In]]

@@ -98,21 +98,36 @@ void oneMatrixRAlg(Matrix *M){
 void freeMatrix(Matrix *M){
 
     int i;
+    int n = M->nEq;
 
     /*libera le righe coefficienti*/
-    for(i = 1; i < M->nIn; i++)
-        free((M->MCoef)[i]);
+    for(i = 0; i < (n+1); i++){
+        printf("\nLibero i=%d ",(i+1)%(n+1));
+        free((M->MCoef)[(i+1)%(n+1)]);
+        printf("x");
+    }
+        
     
-    /*libera righe relazioni*/
-    for ( i = 0; i < M->nEq; i++)
-        free((M->MRAlg)[i]);
     
 
-    /*libera le array di righe*/
+    /*libera righe relazioni*/
+    for ( i = 0; i < M->nEq; i++){
+        printf("\nLibero i=%d ",i);
+        free((M->MRAlg)[i]);
+        printf("x");
+    }
+        
+
+    
+
     free(M->MCoef);
+    printf("liberato MC\n");
     free(M->MRAlg);
+    printf("liberato MRA\n"); 
     /*libera la matrice con righe dipendenti*/
     free(M->aEDip);
+    printf("Liberato aED\n");
+    
 
 }/*freeMatrix*/
 
@@ -423,7 +438,7 @@ void FprintFCRNS(const Matrix * M){
         return;
     
     /*Frontespizio*/
-    fprintf(oF,"Righe sbagliate: \n");
+    fprintf(oF,"Righe sbagliate:%d \n",iA);
 
     /*for che cicla tutte quelle non risolte e le stampa su file*/
     for(i = 0; i<iA; i++)
@@ -439,17 +454,22 @@ void FprintFCRNS(const Matrix * M){
 void solveTheMatrix(Matrix *M){
 
     /*per il while*/
-    int i=0,    /*contatore per il numero di incognite risolte*/
-        r=1,    /*indice di riga*/
-        c=1,    /*indice di colonna*/
-        j=0,    /*contatore per il numero di iterazioni del while*/
-        k=0,    /*indice per $(M->aEDip)*/
-        iForFPrint,
-        cLidp =0,
-        iSkip = 0;
-    int n = M->nEq;
+    int i=0,        /*contatore per il numero di incognite risolte*/
+        r=1,        /*indice di riga*/
+        c=1,        /*indice di colonna*/
+        j=0,        /*contatore per il numero di iterazioni del while*/
+        k=0,        /*indice per $(M->aEDip)*/
+        iForFPrint, /*indice per stampare su file for*/
+        cLidp =0,   /*contatore delle eqn lin dip*/
+        iRSkip = 0,  /*contatore delle righe saltate*/
+        iCSkip = 0,  /*contatore delle colonne saltate*/
+        cCol = 0;
+    bool skippedR = false,  
+         skippedC = false;
+    int n = M->nEq; /*per semplificare la lettura*/
+    
     FILE* ixF=fopen(INDEX_FILE,"w");
-
+    /*errore nell'aperura del file*/
     if(ixF==NULL)
         return;
 
@@ -458,16 +478,21 @@ void solveTheMatrix(Matrix *M){
 
 
     if(((M->nIn) * (M->nEq)) > MAX_STAMPA)
-        printf("RISOLUZIONE DEL SISTEMA:\n");
+        printf("RISOLUZIONE DEL SISTEMA\n");
 
     /*Devo trovare $i =  #equazioni - #righe dipendenti*/
     /*i parte da 0, e deve avere al massimo $n-$nEDip, c*/
     while(i<(n-(M->nEDip))){
 
+        skippedR = false;
+        skippedC = false;
+        
         if(M->nEDip > 0 &&  isEqLinDip(r,M)){
             fprintf(ixF,"L:%3d | ",cLidp++);
+            skippedC = true;
+            iCSkip++;
         }
-            
+           
         /*se l'elemento sulla diagonale M[$r][$c]!=0 allora posso continuare*/
         else if(!isZero((M->MCoef)[r][c], M->error)){
             
@@ -485,12 +510,14 @@ void solveTheMatrix(Matrix *M){
                 printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d, k=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip,k);
            
             fprintf(ixF,"i:%3d | ",i);
+            cCol++;
 
         }/*if*/
 
         else{
 
-            fprintf(ixF,"x:%3d | ",iSkip++);
+            fprintf(ixF,"x:%3d | ",iRSkip++);
+            skippedR = true;
 
         }/*else*/
             
@@ -504,33 +531,31 @@ void solveTheMatrix(Matrix *M){
         
         /*indice che conta le volte che il ciclo viene eseguito*/   
         j++; /*parte da 0*/
-        r=((r)%(M->nEq)) +1;
+
+        if(!skippedR)
+            /*indice per la riga, parte da 1*/
+            r=((r)%(M->nEq)) +1;
         
-
-        /*COLONNA*/
-        if(j<(M->nIn))
-            c++;
-
-        else{
+        if(!skippedC){
             
-            /*altrimenti l'indice di colonna e' nel array di eqn lin dip*/
-            c = (M->aEDip)[(k)%(M->nEDip)]; /*in questo caso lo scandisco con k*/
-            k++;
+            /*se non*/
+            if((j-iCSkip)<(M->nIn))
+                c++;
 
-            if (k>=(M->nEDip))
-                fprintf(ixF,"Fine di k, L=%d, iSkip=%d, i=%d\n",cLidp,iSkip,i);
+            else
+                c = (M->aEDip)[k++];
             
                 
-        }/*else*/  
 
-        printf("\033[A\33[2K\rProgress: j=%d\n",j);
+        }/*if*/
+        
 
         
 
     }/*while*/
     
 
-    printf("\nSONO USCITO DAL WHILE\n");    /*TAG:DEBUG*/
+    /*printf("\n\nSONO USCITO DAL WHILE\n");*/    /*TAG:DEBUG*/
     fclose(ixF);
 
 }/*solveTheMatrix*/

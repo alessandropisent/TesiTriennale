@@ -1,4 +1,2 @@
-Righe sbagliate: 
--728
--878
--971
+Righe sbagliate:1 
+-841

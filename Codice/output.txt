@@ -1,0 +1,2214 @@
+Sistema di 1200 Equazioni x 1000 incognite, troppo grande da stampare
+
+ERRORE LETTO : 0.000010
+
+RISOLUZIONE DEL SISTEMA
+[A[2KProgress: 0 %, i=1, c=1, j=0, r=1, nD=0, k=0
+[A[2KProgress: 0 %, i=2, c=2, j=1, r=2, nD=0, k=0
+[A[2KProgress: 0 %, i=3, c=3, j=2, r=3, nD=0, k=0
+[A[2KProgress: 0 %, i=4, c=4, j=3, r=4, nD=0, k=0
+[A[2KProgress: 0 %, i=5, c=5, j=4, r=5, nD=0, k=0
+[A[2KProgress: 0 %, i=6, c=6, j=5, r=6, nD=0, k=0
+[A[2KProgress: 0 %, i=7, c=7, j=6, r=7, nD=0, k=0
+[A[2KProgress: 0 %, i=8, c=8, j=7, r=8, nD=0, k=0
+[A[2KProgress: 0 %, i=9, c=9, j=8, r=9, nD=0, k=0
+[A[2KProgress: 0 %, i=10, c=10, j=9, r=10, nD=0, k=0
+[A[2KProgress: 0 %, i=11, c=11, j=10, r=11, nD=1, k=0
+[A[2KProgress: 1 %, i=12, c=12, j=11, r=12, nD=1, k=0
+[A[2KProgress: 1 %, i=13, c=13, j=12, r=13, nD=1, k=0
+[A[2KProgress: 1 %, i=14, c=14, j=13, r=14, nD=1, k=0
+[A[2KProgress: 1 %, i=15, c=15, j=14, r=15, nD=1, k=0
+[A[2KProgress: 1 %, i=16, c=16, j=15, r=16, nD=1, k=0
+[A[2KProgress: 1 %, i=17, c=17, j=16, r=17, nD=1, k=0
+[A[2KProgress: 1 %, i=18, c=18, j=17, r=18, nD=1, k=0
+[A[2KProgress: 1 %, i=19, c=19, j=18, r=19, nD=1, k=0
+[A[2KProgress: 1 %, i=20, c=20, j=19, r=20, nD=1, k=0
+[A[2KProgress: 1 %, i=21, c=21, j=20, r=21, nD=1, k=0
+[A[2KProgress: 1 %, i=22, c=22, j=21, r=22, nD=1, k=0
+[A[2KProgress: 1 %, i=23, c=23, j=22, r=23, nD=1, k=0
+[A[2KProgress: 2 %, i=24, c=24, j=23, r=24, nD=1, k=0
+[A[2KProgress: 2 %, i=25, c=25, j=24, r=25, nD=1, k=0
+[A[2KProgress: 2 %, i=26, c=26, j=25, r=26, nD=1, k=0
+[A[2KProgress: 2 %, i=27, c=27, j=26, r=27, nD=1, k=0
+[A[2KProgress: 2 %, i=28, c=28, j=27, r=28, nD=1, k=0
+[A[2KProgress: 2 %, i=29, c=29, j=28, r=29, nD=1, k=0
+[A[2KProgress: 2 %, i=30, c=30, j=29, r=30, nD=1, k=0
+[A[2KProgress: 2 %, i=31, c=31, j=30, r=31, nD=1, k=0
+[A[2KProgress: 2 %, i=32, c=32, j=31, r=32, nD=1, k=0
+[A[2KProgress: 2 %, i=33, c=33, j=32, r=33, nD=1, k=0
+[A[2KProgress: 2 %, i=34, c=34, j=33, r=34, nD=1, k=0
+[A[2KProgress: 2 %, i=35, c=35, j=34, r=35, nD=1, k=0
+[A[2KProgress: 3 %, i=36, c=36, j=35, r=36, nD=1, k=0
+[A[2KProgress: 3 %, i=37, c=37, j=36, r=37, nD=1, k=0
+[A[2KProgress: 3 %, i=38, c=38, j=37, r=38, nD=1, k=0
+[A[2KProgress: 3 %, i=39, c=39, j=38, r=39, nD=1, k=0
+[A[2KProgress: 3 %, i=40, c=40, j=39, r=40, nD=1, k=0
+[A[2KProgress: 3 %, i=41, c=41, j=40, r=41, nD=1, k=0
+[A[2KProgress: 3 %, i=42, c=42, j=41, r=42, nD=1, k=0
+[A[2KProgress: 3 %, i=43, c=43, j=42, r=43, nD=1, k=0
+[A[2KProgress: 3 %, i=44, c=44, j=43, r=44, nD=1, k=0
+[A[2KProgress: 3 %, i=45, c=45, j=44, r=45, nD=1, k=0
+[A[2KProgress: 3 %, i=46, c=46, j=45, r=46, nD=1, k=0
+[A[2KProgress: 3 %, i=47, c=47, j=46, r=47, nD=1, k=0
+[A[2KProgress: 4 %, i=48, c=48, j=47, r=48, nD=1, k=0
+[A[2KProgress: 4 %, i=49, c=49, j=48, r=49, nD=1, k=0
+[A[2KProgress: 4 %, i=50, c=50, j=49, r=50, nD=1, k=0
+[A[2KProgress: 4 %, i=51, c=51, j=50, r=51, nD=1, k=0
+[A[2KProgress: 4 %, i=52, c=52, j=51, r=52, nD=1, k=0
+[A[2KProgress: 4 %, i=53, c=53, j=52, r=53, nD=1, k=0
+[A[2KProgress: 4 %, i=54, c=54, j=53, r=54, nD=1, k=0
+[A[2KProgress: 4 %, i=55, c=55, j=54, r=55, nD=1, k=0
+[A[2KProgress: 4 %, i=56, c=56, j=55, r=56, nD=1, k=0
+[A[2KProgress: 4 %, i=57, c=57, j=56, r=57, nD=1, k=0
+[A[2KProgress: 4 %, i=58, c=58, j=57, r=58, nD=1, k=0
+[A[2KProgress: 4 %, i=59, c=59, j=58, r=59, nD=1, k=0
+[A[2KProgress: 5 %, i=60, c=60, j=59, r=60, nD=2, k=0
+[A[2KProgress: 5 %, i=61, c=61, j=60, r=61, nD=2, k=0
+[A[2KProgress: 5 %, i=62, c=62, j=61, r=62, nD=2, k=0
+[A[2KProgress: 5 %, i=63, c=63, j=62, r=63, nD=2, k=0
+[A[2KProgress: 5 %, i=64, c=64, j=63, r=64, nD=2, k=0
+[A[2KProgress: 5 %, i=65, c=65, j=64, r=65, nD=2, k=0
+[A[2KProgress: 5 %, i=66, c=66, j=65, r=66, nD=2, k=0
+[A[2KProgress: 5 %, i=67, c=67, j=66, r=67, nD=2, k=0
+[A[2KProgress: 5 %, i=68, c=68, j=67, r=68, nD=3, k=0
+[A[2KProgress: 5 %, i=69, c=69, j=68, r=69, nD=3, k=0
+[A[2KProgress: 5 %, i=70, c=70, j=69, r=70, nD=3, k=0
+[A[2KProgress: 5 %, i=71, c=71, j=70, r=71, nD=3, k=0
+[A[2KProgress: 6 %, i=72, c=72, j=71, r=72, nD=3, k=0
+[A[2KProgress: 6 %, i=73, c=73, j=72, r=73, nD=3, k=0
+[A[2KProgress: 6 %, i=74, c=74, j=73, r=74, nD=3, k=0
+[A[2KProgress: 6 %, i=75, c=75, j=74, r=75, nD=3, k=0
+[A[2KProgress: 6 %, i=76, c=76, j=75, r=76, nD=4, k=0
+[A[2KProgress: 6 %, i=77, c=77, j=76, r=77, nD=4, k=0
+[A[2KProgress: 6 %, i=78, c=78, j=77, r=78, nD=4, k=0
+[A[2KProgress: 6 %, i=79, c=79, j=78, r=79, nD=4, k=0
+[A[2KProgress: 6 %, i=80, c=80, j=79, r=80, nD=5, k=0
+[A[2KProgress: 6 %, i=81, c=81, j=80, r=81, nD=5, k=0
+[A[2KProgress: 6 %, i=82, c=82, j=81, r=82, nD=5, k=0
+[A[2KProgress: 6 %, i=83, c=83, j=82, r=83, nD=5, k=0
+[A[2KProgress: 7 %, i=84, c=84, j=83, r=84, nD=5, k=0
+[A[2KProgress: 7 %, i=85, c=85, j=84, r=85, nD=5, k=0
+[A[2KProgress: 7 %, i=86, c=86, j=85, r=86, nD=5, k=0
+[A[2KProgress: 7 %, i=87, c=87, j=86, r=87, nD=5, k=0
+[A[2KProgress: 7 %, i=88, c=88, j=87, r=88, nD=5, k=0
+[A[2KProgress: 7 %, i=89, c=89, j=88, r=89, nD=5, k=0
+[A[2KProgress: 7 %, i=90, c=90, j=89, r=90, nD=5, k=0
+[A[2KProgress: 7 %, i=91, c=91, j=90, r=91, nD=5, k=0
+[A[2KProgress: 7 %, i=92, c=92, j=91, r=92, nD=5, k=0
+[A[2KProgress: 7 %, i=93, c=93, j=92, r=93, nD=5, k=0
+[A[2KProgress: 7 %, i=94, c=94, j=93, r=94, nD=5, k=0
+[A[2KProgress: 7 %, i=95, c=95, j=94, r=95, nD=5, k=0
+[A[2KProgress: 8 %, i=96, c=96, j=95, r=96, nD=5, k=0
+[A[2KProgress: 8 %, i=97, c=97, j=96, r=97, nD=5, k=0
+[A[2KProgress: 8 %, i=98, c=98, j=97, r=98, nD=5, k=0
+[A[2KProgress: 8 %, i=99, c=99, j=98, r=99, nD=5, k=0
+[A[2KProgress: 8 %, i=100, c=100, j=99, r=100, nD=5, k=0
+[A[2KProgress: 8 %, i=101, c=101, j=100, r=101, nD=5, k=0
+[A[2KProgress: 8 %, i=102, c=102, j=101, r=102, nD=5, k=0
+[A[2KProgress: 8 %, i=103, c=103, j=102, r=103, nD=5, k=0
+[A[2KProgress: 8 %, i=104, c=104, j=103, r=104, nD=5, k=0
+[A[2KProgress: 8 %, i=105, c=105, j=104, r=105, nD=5, k=0
+[A[2KProgress: 8 %, i=106, c=106, j=105, r=106, nD=5, k=0
+[A[2KProgress: 8 %, i=107, c=107, j=106, r=107, nD=5, k=0
+[A[2KProgress: 9 %, i=108, c=108, j=107, r=108, nD=5, k=0
+[A[2KProgress: 9 %, i=109, c=109, j=108, r=109, nD=5, k=0
+[A[2KProgress: 9 %, i=110, c=110, j=109, r=110, nD=5, k=0
+[A[2KProgress: 9 %, i=111, c=111, j=110, r=111, nD=5, k=0
+[A[2KProgress: 9 %, i=112, c=112, j=111, r=112, nD=5, k=0
+[A[2KProgress: 9 %, i=113, c=113, j=112, r=113, nD=5, k=0
+[A[2KProgress: 9 %, i=114, c=114, j=113, r=114, nD=5, k=0
+[A[2KProgress: 9 %, i=115, c=115, j=114, r=115, nD=5, k=0
+[A[2KProgress: 9 %, i=116, c=116, j=115, r=116, nD=5, k=0
+[A[2KProgress: 9 %, i=117, c=117, j=116, r=117, nD=5, k=0
+[A[2KProgress: 9 %, i=118, c=118, j=117, r=118, nD=5, k=0
+[A[2KProgress: 9 %, i=119, c=119, j=118, r=119, nD=5, k=0
+[A[2KProgress: 10 %, i=120, c=120, j=119, r=120, nD=5, k=0
+[A[2KProgress: 10 %, i=121, c=121, j=120, r=121, nD=5, k=0
+[A[2KProgress: 10 %, i=122, c=122, j=121, r=122, nD=6, k=0
+[A[2KProgress: 10 %, i=123, c=123, j=122, r=123, nD=6, k=0
+[A[2KProgress: 10 %, i=124, c=124, j=123, r=124, nD=7, k=0
+[A[2KProgress: 10 %, i=125, c=125, j=124, r=125, nD=7, k=0
+[A[2KProgress: 10 %, i=126, c=126, j=125, r=126, nD=7, k=0
+[A[2KProgress: 10 %, i=127, c=127, j=126, r=127, nD=7, k=0
+[A[2KProgress: 10 %, i=128, c=128, j=127, r=128, nD=7, k=0
+[A[2KProgress: 10 %, i=129, c=129, j=128, r=129, nD=7, k=0
+[A[2KProgress: 10 %, i=130, c=130, j=129, r=130, nD=7, k=0
+[A[2KProgress: 10 %, i=131, c=131, j=130, r=131, nD=7, k=0
+[A[2KProgress: 11 %, i=132, c=132, j=131, r=132, nD=7, k=0
+[A[2KProgress: 11 %, i=133, c=133, j=132, r=133, nD=7, k=0
+[A[2KProgress: 11 %, i=134, c=134, j=133, r=134, nD=7, k=0
+[A[2KProgress: 11 %, i=135, c=135, j=134, r=135, nD=7, k=0
+[A[2KProgress: 11 %, i=136, c=136, j=135, r=136, nD=7, k=0
+[A[2KProgress: 11 %, i=137, c=137, j=136, r=137, nD=7, k=0
+[A[2KProgress: 11 %, i=138, c=138, j=137, r=138, nD=7, k=0
+[A[2KProgress: 11 %, i=139, c=139, j=138, r=139, nD=7, k=0
+[A[2KProgress: 11 %, i=140, c=140, j=139, r=140, nD=7, k=0
+[A[2KProgress: 11 %, i=141, c=141, j=140, r=141, nD=7, k=0
+[A[2KProgress: 11 %, i=142, c=142, j=141, r=142, nD=7, k=0
+[A[2KProgress: 11 %, i=143, c=143, j=142, r=143, nD=7, k=0
+[A[2KProgress: 12 %, i=144, c=144, j=143, r=144, nD=7, k=0
+[A[2KProgress: 12 %, i=145, c=145, j=144, r=145, nD=8, k=0
+[A[2KProgress: 12 %, i=146, c=146, j=145, r=146, nD=8, k=0
+[A[2KProgress: 12 %, i=147, c=147, j=146, r=147, nD=8, k=0
+[A[2KProgress: 12 %, i=148, c=148, j=147, r=148, nD=8, k=0
+[A[2KProgress: 12 %, i=149, c=149, j=148, r=149, nD=8, k=0
+[A[2KProgress: 12 %, i=150, c=150, j=149, r=150, nD=8, k=0
+[A[2KProgress: 12 %, i=151, c=151, j=150, r=151, nD=8, k=0
+[A[2KProgress: 12 %, i=152, c=152, j=151, r=152, nD=8, k=0
+[A[2KProgress: 12 %, i=153, c=153, j=152, r=153, nD=8, k=0
+[A[2KProgress: 12 %, i=154, c=154, j=153, r=154, nD=9, k=0
+[A[2KProgress: 13 %, i=155, c=155, j=154, r=155, nD=10, k=0
+[A[2KProgress: 13 %, i=156, c=156, j=155, r=156, nD=10, k=0
+[A[2KProgress: 13 %, i=157, c=157, j=156, r=157, nD=10, k=0
+[A[2KProgress: 13 %, i=158, c=158, j=157, r=158, nD=10, k=0
+[A[2KProgress: 13 %, i=159, c=159, j=158, r=159, nD=10, k=0
+[A[2KProgress: 13 %, i=160, c=160, j=159, r=160, nD=10, k=0
+[A[2KProgress: 13 %, i=161, c=161, j=160, r=161, nD=10, k=0
+[A[2KProgress: 13 %, i=162, c=162, j=161, r=162, nD=10, k=0
+[A[2KProgress: 13 %, i=163, c=163, j=162, r=163, nD=10, k=0
+[A[2KProgress: 13 %, i=164, c=164, j=163, r=164, nD=10, k=0
+[A[2KProgress: 13 %, i=165, c=165, j=164, r=165, nD=10, k=0
+[A[2KProgress: 13 %, i=166, c=166, j=165, r=166, nD=10, k=0
+[A[2KProgress: 14 %, i=167, c=167, j=166, r=167, nD=11, k=0
+[A[2KProgress: 14 %, i=168, c=168, j=167, r=168, nD=11, k=0
+[A[2KProgress: 14 %, i=169, c=169, j=168, r=169, nD=11, k=0
+[A[2KProgress: 14 %, i=170, c=170, j=169, r=170, nD=11, k=0
+[A[2KProgress: 14 %, i=171, c=171, j=170, r=171, nD=11, k=0
+[A[2KProgress: 14 %, i=172, c=172, j=171, r=172, nD=11, k=0
+[A[2KProgress: 14 %, i=173, c=173, j=172, r=173, nD=11, k=0
+[A[2KProgress: 14 %, i=174, c=174, j=173, r=174, nD=11, k=0
+[A[2KProgress: 14 %, i=175, c=175, j=174, r=175, nD=11, k=0
+[A[2KProgress: 14 %, i=176, c=176, j=175, r=176, nD=12, k=0
+[A[2KProgress: 14 %, i=177, c=177, j=176, r=177, nD=13, k=0
+[A[2KProgress: 15 %, i=178, c=178, j=177, r=178, nD=14, k=0
+[A[2KProgress: 15 %, i=179, c=179, j=178, r=179, nD=14, k=0
+[A[2KProgress: 15 %, i=180, c=180, j=179, r=180, nD=14, k=0
+[A[2KProgress: 15 %, i=181, c=181, j=180, r=181, nD=15, k=0
+[A[2KProgress: 15 %, i=182, c=182, j=181, r=182, nD=15, k=0
+[A[2KProgress: 15 %, i=183, c=183, j=182, r=183, nD=15, k=0
+[A[2KProgress: 15 %, i=184, c=184, j=183, r=184, nD=15, k=0
+[A[2KProgress: 15 %, i=185, c=185, j=184, r=185, nD=15, k=0
+[A[2KProgress: 15 %, i=186, c=186, j=185, r=186, nD=15, k=0
+[A[2KProgress: 15 %, i=187, c=187, j=186, r=187, nD=15, k=0
+[A[2KProgress: 15 %, i=188, c=188, j=187, r=188, nD=15, k=0
+[A[2KProgress: 15 %, i=189, c=189, j=188, r=189, nD=15, k=0
+[A[2KProgress: 16 %, i=190, c=190, j=189, r=190, nD=15, k=0
+[A[2KProgress: 16 %, i=191, c=191, j=190, r=191, nD=15, k=0
+[A[2KProgress: 16 %, i=192, c=192, j=191, r=192, nD=15, k=0
+[A[2KProgress: 16 %, i=193, c=193, j=192, r=193, nD=16, k=0
+[A[2KProgress: 16 %, i=194, c=194, j=193, r=194, nD=16, k=0
+[A[2KProgress: 16 %, i=195, c=195, j=194, r=195, nD=16, k=0
+[A[2KProgress: 16 %, i=196, c=196, j=195, r=196, nD=16, k=0
+[A[2KProgress: 16 %, i=197, c=197, j=196, r=197, nD=16, k=0
+[A[2KProgress: 16 %, i=198, c=198, j=197, r=198, nD=17, k=0
+[A[2KProgress: 16 %, i=199, c=199, j=198, r=199, nD=17, k=0
+[A[2KProgress: 16 %, i=200, c=200, j=199, r=200, nD=17, k=0
+[A[2KProgress: 16 %, i=201, c=201, j=201, r=202, nD=17, k=0
+[A[2KProgress: 17 %, i=202, c=202, j=202, r=203, nD=17, k=0
+[A[2KProgress: 17 %, i=203, c=203, j=203, r=204, nD=17, k=0
+[A[2KProgress: 17 %, i=204, c=204, j=204, r=205, nD=18, k=0
+[A[2KProgress: 17 %, i=205, c=205, j=205, r=206, nD=18, k=0
+[A[2KProgress: 17 %, i=206, c=206, j=206, r=207, nD=18, k=0
+[A[2KProgress: 17 %, i=207, c=207, j=207, r=208, nD=18, k=0
+[A[2KProgress: 17 %, i=208, c=208, j=208, r=209, nD=18, k=0
+[A[2KProgress: 17 %, i=209, c=209, j=209, r=210, nD=18, k=0
+[A[2KProgress: 17 %, i=210, c=210, j=210, r=211, nD=18, k=0
+[A[2KProgress: 17 %, i=211, c=211, j=211, r=212, nD=18, k=0
+[A[2KProgress: 17 %, i=212, c=212, j=212, r=213, nD=18, k=0
+[A[2KProgress: 18 %, i=213, c=213, j=213, r=214, nD=18, k=0
+[A[2KProgress: 18 %, i=214, c=214, j=214, r=215, nD=18, k=0
+[A[2KProgress: 18 %, i=215, c=215, j=215, r=216, nD=18, k=0
+[A[2KProgress: 18 %, i=216, c=216, j=216, r=217, nD=18, k=0
+[A[2KProgress: 18 %, i=217, c=217, j=217, r=218, nD=18, k=0
+[A[2KProgress: 18 %, i=218, c=218, j=218, r=219, nD=18, k=0
+[A[2KProgress: 18 %, i=219, c=219, j=219, r=220, nD=18, k=0
+[A[2KProgress: 18 %, i=220, c=220, j=220, r=221, nD=19, k=0
+[A[2KProgress: 18 %, i=221, c=221, j=221, r=222, nD=19, k=0
+[A[2KProgress: 18 %, i=222, c=222, j=222, r=223, nD=20, k=0
+[A[2KProgress: 18 %, i=223, c=223, j=223, r=224, nD=20, k=0
+[A[2KProgress: 18 %, i=224, c=224, j=224, r=225, nD=21, k=0
+[A[2KProgress: 19 %, i=225, c=225, j=225, r=226, nD=22, k=0
+[A[2KProgress: 19 %, i=226, c=226, j=226, r=227, nD=22, k=0
+[A[2KProgress: 19 %, i=227, c=227, j=227, r=228, nD=22, k=0
+[A[2KProgress: 19 %, i=228, c=228, j=228, r=229, nD=22, k=0
+[A[2KProgress: 19 %, i=229, c=229, j=229, r=230, nD=22, k=0
+[A[2KProgress: 19 %, i=230, c=230, j=230, r=231, nD=22, k=0
+[A[2KProgress: 19 %, i=231, c=231, j=231, r=232, nD=22, k=0
+[A[2KProgress: 19 %, i=232, c=232, j=232, r=233, nD=22, k=0
+[A[2KProgress: 19 %, i=233, c=233, j=233, r=234, nD=22, k=0
+[A[2KProgress: 19 %, i=234, c=234, j=234, r=235, nD=22, k=0
+[A[2KProgress: 19 %, i=235, c=235, j=235, r=236, nD=22, k=0
+[A[2KProgress: 20 %, i=236, c=236, j=236, r=237, nD=23, k=0
+[A[2KProgress: 20 %, i=237, c=237, j=237, r=238, nD=23, k=0
+[A[2KProgress: 20 %, i=238, c=238, j=238, r=239, nD=24, k=0
+[A[2KProgress: 20 %, i=239, c=239, j=239, r=240, nD=24, k=0
+[A[2KProgress: 20 %, i=240, c=240, j=240, r=241, nD=24, k=0
+[A[2KProgress: 20 %, i=241, c=241, j=241, r=242, nD=24, k=0
+[A[2KProgress: 20 %, i=242, c=242, j=242, r=243, nD=24, k=0
+[A[2KProgress: 20 %, i=243, c=243, j=243, r=244, nD=24, k=0
+[A[2KProgress: 20 %, i=244, c=244, j=244, r=245, nD=24, k=0
+[A[2KProgress: 20 %, i=245, c=245, j=245, r=246, nD=25, k=0
+[A[2KProgress: 20 %, i=246, c=246, j=246, r=247, nD=25, k=0
+[A[2KProgress: 21 %, i=247, c=247, j=247, r=248, nD=25, k=0
+[A[2KProgress: 21 %, i=248, c=248, j=248, r=249, nD=25, k=0
+[A[2KProgress: 21 %, i=249, c=249, j=249, r=250, nD=25, k=0
+[A[2KProgress: 21 %, i=250, c=250, j=250, r=251, nD=25, k=0
+[A[2KProgress: 21 %, i=251, c=251, j=251, r=252, nD=25, k=0
+[A[2KProgress: 21 %, i=252, c=252, j=252, r=253, nD=25, k=0
+[A[2KProgress: 21 %, i=253, c=253, j=253, r=254, nD=25, k=0
+[A[2KProgress: 21 %, i=254, c=254, j=254, r=255, nD=25, k=0
+[A[2KProgress: 21 %, i=255, c=255, j=255, r=256, nD=25, k=0
+[A[2KProgress: 21 %, i=256, c=256, j=256, r=257, nD=25, k=0
+[A[2KProgress: 21 %, i=257, c=257, j=257, r=258, nD=26, k=0
+[A[2KProgress: 21 %, i=258, c=258, j=258, r=259, nD=27, k=0
+[A[2KProgress: 22 %, i=259, c=259, j=259, r=260, nD=28, k=0
+[A[2KProgress: 22 %, i=260, c=260, j=260, r=261, nD=29, k=0
+[A[2KProgress: 22 %, i=261, c=261, j=261, r=262, nD=29, k=0
+[A[2KProgress: 22 %, i=262, c=262, j=262, r=263, nD=29, k=0
+[A[2KProgress: 22 %, i=263, c=263, j=263, r=264, nD=29, k=0
+[A[2KProgress: 22 %, i=264, c=264, j=264, r=265, nD=29, k=0
+[A[2KProgress: 22 %, i=265, c=265, j=265, r=266, nD=29, k=0
+[A[2KProgress: 22 %, i=266, c=266, j=266, r=267, nD=30, k=0
+[A[2KProgress: 22 %, i=267, c=267, j=267, r=268, nD=30, k=0
+[A[2KProgress: 22 %, i=268, c=268, j=268, r=269, nD=30, k=0
+[A[2KProgress: 22 %, i=269, c=269, j=269, r=270, nD=30, k=0
+[A[2KProgress: 23 %, i=270, c=270, j=270, r=271, nD=31, k=0
+[A[2KProgress: 23 %, i=271, c=271, j=271, r=272, nD=31, k=0
+[A[2KProgress: 23 %, i=272, c=272, j=272, r=273, nD=31, k=0
+[A[2KProgress: 23 %, i=273, c=273, j=273, r=274, nD=31, k=0
+[A[2KProgress: 23 %, i=274, c=274, j=274, r=275, nD=31, k=0
+[A[2KProgress: 23 %, i=275, c=275, j=275, r=276, nD=31, k=0
+[A[2KProgress: 23 %, i=276, c=276, j=276, r=277, nD=31, k=0
+[A[2KProgress: 23 %, i=277, c=277, j=277, r=278, nD=31, k=0
+[A[2KProgress: 23 %, i=278, c=278, j=278, r=279, nD=31, k=0
+[A[2KProgress: 23 %, i=279, c=279, j=279, r=280, nD=32, k=0
+[A[2KProgress: 23 %, i=280, c=280, j=280, r=281, nD=32, k=0
+[A[2KProgress: 24 %, i=281, c=281, j=281, r=282, nD=32, k=0
+[A[2KProgress: 24 %, i=282, c=282, j=282, r=283, nD=32, k=0
+[A[2KProgress: 24 %, i=283, c=283, j=283, r=284, nD=32, k=0
+[A[2KProgress: 24 %, i=284, c=284, j=284, r=285, nD=32, k=0
+[A[2KProgress: 24 %, i=285, c=285, j=285, r=286, nD=32, k=0
+[A[2KProgress: 24 %, i=286, c=286, j=286, r=287, nD=32, k=0
+[A[2KProgress: 24 %, i=287, c=287, j=287, r=288, nD=33, k=0
+[A[2KProgress: 24 %, i=288, c=288, j=288, r=289, nD=33, k=0
+[A[2KProgress: 24 %, i=289, c=289, j=289, r=290, nD=33, k=0
+[A[2KProgress: 24 %, i=290, c=290, j=290, r=291, nD=33, k=0
+[A[2KProgress: 24 %, i=291, c=291, j=291, r=292, nD=34, k=0
+[A[2KProgress: 25 %, i=292, c=292, j=292, r=293, nD=35, k=0
+[A[2KProgress: 25 %, i=293, c=293, j=293, r=294, nD=35, k=0
+[A[2KProgress: 25 %, i=294, c=294, j=294, r=295, nD=35, k=0
+[A[2KProgress: 25 %, i=295, c=295, j=295, r=296, nD=36, k=0
+[A[2KProgress: 25 %, i=296, c=296, j=296, r=297, nD=36, k=0
+[A[2KProgress: 25 %, i=297, c=297, j=297, r=298, nD=37, k=0
+[A[2KProgress: 25 %, i=298, c=298, j=298, r=299, nD=37, k=0
+[A[2KProgress: 25 %, i=299, c=299, j=299, r=300, nD=37, k=0
+[A[2KProgress: 25 %, i=300, c=300, j=300, r=301, nD=38, k=0
+[A[2KProgress: 25 %, i=301, c=301, j=301, r=302, nD=38, k=0
+[A[2KProgress: 25 %, i=302, c=302, j=302, r=303, nD=38, k=0
+[A[2KProgress: 26 %, i=303, c=303, j=303, r=304, nD=38, k=0
+[A[2KProgress: 26 %, i=304, c=304, j=304, r=305, nD=38, k=0
+[A[2KProgress: 26 %, i=305, c=305, j=305, r=306, nD=38, k=0
+[A[2KProgress: 26 %, i=306, c=306, j=307, r=308, nD=39, k=0
+[A[2KProgress: 26 %, i=307, c=307, j=308, r=309, nD=40, k=0
+[A[2KProgress: 26 %, i=308, c=308, j=309, r=310, nD=40, k=0
+[A[2KProgress: 26 %, i=309, c=309, j=310, r=311, nD=40, k=0
+[A[2KProgress: 26 %, i=310, c=310, j=311, r=312, nD=40, k=0
+[A[2KProgress: 26 %, i=311, c=311, j=312, r=313, nD=40, k=0
+[A[2KProgress: 26 %, i=312, c=312, j=313, r=314, nD=40, k=0
+[A[2KProgress: 26 %, i=313, c=313, j=314, r=315, nD=40, k=0
+[A[2KProgress: 27 %, i=314, c=314, j=315, r=316, nD=41, k=0
+[A[2KProgress: 27 %, i=315, c=315, j=316, r=317, nD=42, k=0
+[A[2KProgress: 27 %, i=316, c=316, j=317, r=318, nD=43, k=0
+[A[2KProgress: 27 %, i=317, c=317, j=318, r=319, nD=43, k=0
+[A[2KProgress: 27 %, i=318, c=318, j=319, r=320, nD=43, k=0
+[A[2KProgress: 27 %, i=319, c=319, j=320, r=321, nD=43, k=0
+[A[2KProgress: 27 %, i=320, c=320, j=321, r=322, nD=43, k=0
+[A[2KProgress: 27 %, i=321, c=321, j=322, r=323, nD=43, k=0
+[A[2KProgress: 27 %, i=322, c=322, j=323, r=324, nD=43, k=0
+[A[2KProgress: 27 %, i=323, c=323, j=324, r=325, nD=43, k=0
+[A[2KProgress: 28 %, i=324, c=324, j=325, r=326, nD=43, k=0
+[A[2KProgress: 28 %, i=325, c=325, j=326, r=327, nD=43, k=0
+[A[2KProgress: 28 %, i=326, c=326, j=327, r=328, nD=43, k=0
+[A[2KProgress: 28 %, i=327, c=327, j=328, r=329, nD=43, k=0
+[A[2KProgress: 28 %, i=328, c=328, j=329, r=330, nD=43, k=0
+[A[2KProgress: 28 %, i=329, c=329, j=330, r=331, nD=43, k=0
+[A[2KProgress: 28 %, i=330, c=330, j=331, r=332, nD=43, k=0
+[A[2KProgress: 28 %, i=331, c=331, j=332, r=333, nD=44, k=0
+[A[2KProgress: 28 %, i=332, c=332, j=333, r=334, nD=44, k=0
+[A[2KProgress: 28 %, i=333, c=333, j=334, r=335, nD=44, k=0
+[A[2KProgress: 28 %, i=334, c=334, j=335, r=336, nD=44, k=0
+[A[2KProgress: 29 %, i=335, c=335, j=336, r=337, nD=45, k=0
+[A[2KProgress: 29 %, i=336, c=336, j=337, r=338, nD=46, k=0
+[A[2KProgress: 29 %, i=337, c=337, j=338, r=339, nD=47, k=0
+[A[2KProgress: 29 %, i=338, c=338, j=339, r=340, nD=48, k=0
+[A[2KProgress: 29 %, i=339, c=339, j=341, r=342, nD=48, k=0
+[A[2KProgress: 29 %, i=340, c=340, j=342, r=343, nD=48, k=0
+[A[2KProgress: 29 %, i=341, c=341, j=343, r=344, nD=48, k=0
+[A[2KProgress: 29 %, i=342, c=342, j=344, r=345, nD=48, k=0
+[A[2KProgress: 29 %, i=343, c=343, j=345, r=346, nD=48, k=0
+[A[2KProgress: 29 %, i=344, c=344, j=348, r=349, nD=49, k=0
+[A[2KProgress: 29 %, i=345, c=345, j=349, r=350, nD=49, k=0
+[A[2KProgress: 30 %, i=346, c=346, j=350, r=351, nD=49, k=0
+[A[2KProgress: 30 %, i=347, c=347, j=351, r=352, nD=49, k=0
+[A[2KProgress: 30 %, i=348, c=348, j=352, r=353, nD=49, k=0
+[A[2KProgress: 30 %, i=349, c=349, j=353, r=354, nD=49, k=0
+[A[2KProgress: 30 %, i=350, c=350, j=355, r=356, nD=49, k=0
+[A[2KProgress: 30 %, i=351, c=351, j=356, r=357, nD=49, k=0
+[A[2KProgress: 30 %, i=352, c=352, j=358, r=359, nD=49, k=0
+[A[2KProgress: 30 %, i=353, c=353, j=359, r=360, nD=49, k=0
+[A[2KProgress: 30 %, i=354, c=354, j=360, r=361, nD=50, k=0
+[A[2KProgress: 30 %, i=355, c=355, j=361, r=362, nD=50, k=0
+[A[2KProgress: 30 %, i=356, c=356, j=362, r=363, nD=50, k=0
+[A[2KProgress: 31 %, i=357, c=357, j=363, r=364, nD=51, k=0
+[A[2KProgress: 31 %, i=358, c=358, j=364, r=365, nD=51, k=0
+[A[2KProgress: 31 %, i=359, c=359, j=365, r=366, nD=51, k=0
+[A[2KProgress: 31 %, i=360, c=360, j=366, r=367, nD=51, k=0
+[A[2KProgress: 31 %, i=361, c=361, j=367, r=368, nD=51, k=0
+[A[2KProgress: 31 %, i=362, c=362, j=368, r=369, nD=51, k=0
+[A[2KProgress: 31 %, i=363, c=363, j=369, r=370, nD=51, k=0
+[A[2KProgress: 31 %, i=364, c=364, j=371, r=372, nD=51, k=0
+[A[2KProgress: 31 %, i=365, c=365, j=372, r=373, nD=52, k=0
+[A[2KProgress: 31 %, i=366, c=366, j=373, r=374, nD=52, k=0
+[A[2KProgress: 31 %, i=367, c=367, j=374, r=375, nD=52, k=0
+[A[2KProgress: 32 %, i=368, c=368, j=375, r=376, nD=52, k=0
+[A[2KProgress: 32 %, i=369, c=369, j=376, r=377, nD=53, k=0
+[A[2KProgress: 32 %, i=370, c=370, j=378, r=379, nD=53, k=0
+[A[2KProgress: 32 %, i=371, c=371, j=379, r=380, nD=54, k=0
+[A[2KProgress: 32 %, i=372, c=372, j=380, r=381, nD=54, k=0
+[A[2KProgress: 32 %, i=373, c=373, j=381, r=382, nD=55, k=0
+[A[2KProgress: 32 %, i=374, c=374, j=382, r=383, nD=56, k=0
+[A[2KProgress: 32 %, i=375, c=375, j=383, r=384, nD=56, k=0
+[A[2KProgress: 32 %, i=376, c=376, j=384, r=385, nD=56, k=0
+[A[2KProgress: 32 %, i=377, c=377, j=385, r=386, nD=56, k=0
+[A[2KProgress: 33 %, i=378, c=378, j=386, r=387, nD=57, k=0
+[A[2KProgress: 33 %, i=379, c=379, j=387, r=388, nD=57, k=0
+[A[2KProgress: 33 %, i=380, c=380, j=388, r=389, nD=57, k=0
+[A[2KProgress: 33 %, i=381, c=381, j=389, r=390, nD=57, k=0
+[A[2KProgress: 33 %, i=382, c=382, j=390, r=391, nD=57, k=0
+[A[2KProgress: 33 %, i=383, c=383, j=391, r=392, nD=57, k=0
+[A[2KProgress: 33 %, i=384, c=384, j=392, r=393, nD=57, k=0
+[A[2KProgress: 33 %, i=385, c=385, j=393, r=394, nD=57, k=0
+[A[2KProgress: 33 %, i=386, c=386, j=394, r=395, nD=57, k=0
+[A[2KProgress: 33 %, i=387, c=387, j=395, r=396, nD=57, k=0
+[A[2KProgress: 33 %, i=388, c=388, j=396, r=397, nD=57, k=0
+[A[2KProgress: 34 %, i=389, c=389, j=397, r=398, nD=57, k=0
+[A[2KProgress: 34 %, i=390, c=390, j=399, r=400, nD=58, k=0
+[A[2KProgress: 34 %, i=391, c=391, j=400, r=401, nD=58, k=0
+[A[2KProgress: 34 %, i=392, c=392, j=402, r=403, nD=58, k=0
+[A[2KProgress: 34 %, i=393, c=393, j=403, r=404, nD=58, k=0
+[A[2KProgress: 34 %, i=394, c=394, j=404, r=405, nD=58, k=0
+[A[2KProgress: 34 %, i=395, c=395, j=405, r=406, nD=58, k=0
+[A[2KProgress: 34 %, i=396, c=396, j=406, r=407, nD=59, k=0
+[A[2KProgress: 34 %, i=397, c=397, j=407, r=408, nD=59, k=0
+[A[2KProgress: 34 %, i=398, c=398, j=408, r=409, nD=59, k=0
+[A[2KProgress: 34 %, i=399, c=399, j=410, r=411, nD=59, k=0
+[A[2KProgress: 35 %, i=400, c=400, j=411, r=412, nD=60, k=0
+[A[2KProgress: 35 %, i=401, c=401, j=412, r=413, nD=60, k=0
+[A[2KProgress: 35 %, i=402, c=402, j=414, r=415, nD=60, k=0
+[A[2KProgress: 35 %, i=403, c=403, j=415, r=416, nD=60, k=0
+[A[2KProgress: 35 %, i=404, c=404, j=416, r=417, nD=60, k=0
+[A[2KProgress: 35 %, i=405, c=405, j=417, r=418, nD=60, k=0
+[A[2KProgress: 35 %, i=406, c=406, j=418, r=419, nD=60, k=0
+[A[2KProgress: 35 %, i=407, c=407, j=419, r=420, nD=60, k=0
+[A[2KProgress: 35 %, i=408, c=408, j=420, r=421, nD=60, k=0
+[A[2KProgress: 35 %, i=409, c=409, j=421, r=422, nD=60, k=0
+[A[2KProgress: 35 %, i=410, c=410, j=423, r=424, nD=60, k=0
+[A[2KProgress: 36 %, i=411, c=411, j=425, r=426, nD=60, k=0
+[A[2KProgress: 36 %, i=412, c=412, j=426, r=427, nD=61, k=0
+[A[2KProgress: 36 %, i=413, c=413, j=427, r=428, nD=61, k=0
+[A[2KProgress: 36 %, i=414, c=414, j=428, r=429, nD=61, k=0
+[A[2KProgress: 36 %, i=415, c=415, j=429, r=430, nD=62, k=0
+[A[2KProgress: 36 %, i=416, c=416, j=430, r=431, nD=62, k=0
+[A[2KProgress: 36 %, i=417, c=417, j=431, r=432, nD=63, k=0
+[A[2KProgress: 36 %, i=418, c=418, j=432, r=433, nD=63, k=0
+[A[2KProgress: 36 %, i=419, c=419, j=433, r=434, nD=63, k=0
+[A[2KProgress: 36 %, i=420, c=420, j=434, r=435, nD=64, k=0
+[A[2KProgress: 37 %, i=421, c=421, j=435, r=436, nD=64, k=0
+[A[2KProgress: 37 %, i=422, c=422, j=436, r=437, nD=64, k=0
+[A[2KProgress: 37 %, i=423, c=423, j=438, r=439, nD=64, k=0
+[A[2KProgress: 37 %, i=424, c=424, j=439, r=440, nD=64, k=0
+[A[2KProgress: 37 %, i=425, c=425, j=440, r=441, nD=65, k=0
+[A[2KProgress: 37 %, i=426, c=426, j=441, r=442, nD=65, k=0
+[A[2KProgress: 37 %, i=427, c=427, j=442, r=443, nD=65, k=0
+[A[2KProgress: 37 %, i=428, c=428, j=443, r=444, nD=65, k=0
+[A[2KProgress: 37 %, i=429, c=429, j=444, r=445, nD=65, k=0
+[A[2KProgress: 37 %, i=430, c=430, j=445, r=446, nD=65, k=0
+[A[2KProgress: 37 %, i=431, c=431, j=446, r=447, nD=65, k=0
+[A[2KProgress: 38 %, i=432, c=432, j=447, r=448, nD=65, k=0
+[A[2KProgress: 38 %, i=433, c=433, j=448, r=449, nD=65, k=0
+[A[2KProgress: 38 %, i=434, c=434, j=449, r=450, nD=65, k=0
+[A[2KProgress: 38 %, i=435, c=435, j=450, r=451, nD=65, k=0
+[A[2KProgress: 38 %, i=436, c=436, j=452, r=453, nD=66, k=0
+[A[2KProgress: 38 %, i=437, c=437, j=454, r=455, nD=67, k=0
+[A[2KProgress: 38 %, i=438, c=438, j=455, r=456, nD=68, k=0
+[A[2KProgress: 38 %, i=439, c=439, j=456, r=457, nD=69, k=0
+[A[2KProgress: 38 %, i=440, c=440, j=457, r=458, nD=69, k=0
+[A[2KProgress: 38 %, i=441, c=441, j=458, r=459, nD=69, k=0
+[A[2KProgress: 39 %, i=442, c=442, j=459, r=460, nD=70, k=0
+[A[2KProgress: 39 %, i=443, c=443, j=460, r=461, nD=70, k=0
+[A[2KProgress: 39 %, i=444, c=444, j=461, r=462, nD=71, k=0
+[A[2KProgress: 39 %, i=445, c=445, j=462, r=463, nD=71, k=0
+[A[2KProgress: 39 %, i=446, c=446, j=463, r=464, nD=71, k=0
+[A[2KProgress: 39 %, i=447, c=447, j=464, r=465, nD=71, k=0
+[A[2KProgress: 39 %, i=448, c=448, j=465, r=466, nD=72, k=0
+[A[2KProgress: 39 %, i=449, c=449, j=467, r=468, nD=72, k=0
+[A[2KProgress: 39 %, i=450, c=450, j=468, r=469, nD=72, k=0
+[A[2KProgress: 39 %, i=451, c=451, j=469, r=470, nD=72, k=0
+[A[2KProgress: 40 %, i=452, c=452, j=470, r=471, nD=72, k=0
+[A[2KProgress: 40 %, i=453, c=453, j=471, r=472, nD=72, k=0
+[A[2KProgress: 40 %, i=454, c=454, j=472, r=473, nD=72, k=0
+[A[2KProgress: 40 %, i=455, c=455, j=473, r=474, nD=72, k=0
+[A[2KProgress: 40 %, i=456, c=456, j=474, r=475, nD=72, k=0
+[A[2KProgress: 40 %, i=457, c=457, j=475, r=476, nD=72, k=0
+[A[2KProgress: 40 %, i=458, c=458, j=476, r=477, nD=72, k=0
+[A[2KProgress: 40 %, i=459, c=459, j=477, r=478, nD=72, k=0
+[A[2KProgress: 40 %, i=460, c=460, j=478, r=479, nD=72, k=0
+[A[2KProgress: 40 %, i=461, c=461, j=479, r=480, nD=72, k=0
+[A[2KProgress: 40 %, i=462, c=462, j=480, r=481, nD=72, k=0
+[A[2KProgress: 41 %, i=463, c=463, j=481, r=482, nD=72, k=0
+[A[2KProgress: 41 %, i=464, c=464, j=482, r=483, nD=72, k=0
+[A[2KProgress: 41 %, i=465, c=465, j=483, r=484, nD=72, k=0
+[A[2KProgress: 41 %, i=466, c=466, j=484, r=485, nD=72, k=0
+[A[2KProgress: 41 %, i=467, c=467, j=485, r=486, nD=72, k=0
+[A[2KProgress: 41 %, i=468, c=468, j=486, r=487, nD=73, k=0
+[A[2KProgress: 41 %, i=469, c=469, j=487, r=488, nD=73, k=0
+[A[2KProgress: 41 %, i=470, c=470, j=488, r=489, nD=74, k=0
+[A[2KProgress: 41 %, i=471, c=471, j=489, r=490, nD=74, k=0
+[A[2KProgress: 41 %, i=472, c=472, j=490, r=491, nD=74, k=0
+[A[2KProgress: 42 %, i=473, c=473, j=491, r=492, nD=74, k=0
+[A[2KProgress: 42 %, i=474, c=474, j=492, r=493, nD=74, k=0
+[A[2KProgress: 42 %, i=475, c=475, j=493, r=494, nD=74, k=0
+[A[2KProgress: 42 %, i=476, c=476, j=494, r=495, nD=74, k=0
+[A[2KProgress: 42 %, i=477, c=477, j=495, r=496, nD=74, k=0
+[A[2KProgress: 42 %, i=478, c=478, j=496, r=497, nD=74, k=0
+[A[2KProgress: 42 %, i=479, c=479, j=497, r=498, nD=74, k=0
+[A[2KProgress: 42 %, i=480, c=480, j=498, r=499, nD=74, k=0
+[A[2KProgress: 42 %, i=481, c=481, j=499, r=500, nD=74, k=0
+[A[2KProgress: 42 %, i=482, c=482, j=500, r=501, nD=74, k=0
+[A[2KProgress: 42 %, i=483, c=483, j=501, r=502, nD=74, k=0
+[A[2KProgress: 43 %, i=484, c=484, j=502, r=503, nD=75, k=0
+[A[2KProgress: 43 %, i=485, c=485, j=503, r=504, nD=75, k=0
+[A[2KProgress: 43 %, i=486, c=486, j=504, r=505, nD=75, k=0
+[A[2KProgress: 43 %, i=487, c=487, j=505, r=506, nD=75, k=0
+[A[2KProgress: 43 %, i=488, c=488, j=506, r=507, nD=75, k=0
+[A[2KProgress: 43 %, i=489, c=489, j=507, r=508, nD=75, k=0
+[A[2KProgress: 43 %, i=490, c=490, j=508, r=509, nD=76, k=0
+[A[2KProgress: 43 %, i=491, c=491, j=509, r=510, nD=77, k=0
+[A[2KProgress: 43 %, i=492, c=492, j=510, r=511, nD=77, k=0
+[A[2KProgress: 43 %, i=493, c=493, j=511, r=512, nD=77, k=0
+[A[2KProgress: 43 %, i=494, c=494, j=512, r=513, nD=77, k=0
+[A[2KProgress: 44 %, i=495, c=495, j=513, r=514, nD=77, k=0
+[A[2KProgress: 44 %, i=496, c=496, j=514, r=515, nD=77, k=0
+[A[2KProgress: 44 %, i=497, c=497, j=515, r=516, nD=78, k=0
+[A[2KProgress: 44 %, i=498, c=498, j=516, r=517, nD=78, k=0
+[A[2KProgress: 44 %, i=499, c=499, j=517, r=518, nD=78, k=0
+[A[2KProgress: 44 %, i=500, c=500, j=518, r=519, nD=78, k=0
+[A[2KProgress: 44 %, i=501, c=501, j=519, r=520, nD=79, k=0
+[A[2KProgress: 44 %, i=502, c=502, j=520, r=521, nD=80, k=0
+[A[2KProgress: 44 %, i=503, c=503, j=521, r=522, nD=80, k=0
+[A[2KProgress: 45 %, i=504, c=504, j=522, r=523, nD=80, k=0
+[A[2KProgress: 45 %, i=505, c=505, j=523, r=524, nD=80, k=0
+[A[2KProgress: 45 %, i=506, c=506, j=524, r=525, nD=80, k=0
+[A[2KProgress: 45 %, i=507, c=507, j=525, r=526, nD=80, k=0
+[A[2KProgress: 45 %, i=508, c=508, j=526, r=527, nD=80, k=0
+[A[2KProgress: 45 %, i=509, c=509, j=527, r=528, nD=81, k=0
+[A[2KProgress: 45 %, i=510, c=510, j=528, r=529, nD=81, k=0
+[A[2KProgress: 45 %, i=511, c=511, j=529, r=530, nD=81, k=0
+[A[2KProgress: 45 %, i=512, c=512, j=530, r=531, nD=81, k=0
+[A[2KProgress: 45 %, i=513, c=513, j=531, r=532, nD=81, k=0
+[A[2KProgress: 45 %, i=514, c=514, j=532, r=533, nD=81, k=0
+[A[2KProgress: 46 %, i=515, c=515, j=533, r=534, nD=82, k=0
+[A[2KProgress: 46 %, i=516, c=516, j=534, r=535, nD=83, k=0
+[A[2KProgress: 46 %, i=517, c=517, j=535, r=536, nD=83, k=0
+[A[2KProgress: 46 %, i=518, c=518, j=536, r=537, nD=83, k=0
+[A[2KProgress: 46 %, i=519, c=519, j=537, r=538, nD=83, k=0
+[A[2KProgress: 46 %, i=520, c=520, j=538, r=539, nD=83, k=0
+[A[2KProgress: 46 %, i=521, c=521, j=539, r=540, nD=83, k=0
+[A[2KProgress: 46 %, i=522, c=522, j=540, r=541, nD=84, k=0
+[A[2KProgress: 46 %, i=523, c=523, j=541, r=542, nD=84, k=0
+[A[2KProgress: 46 %, i=524, c=524, j=542, r=543, nD=84, k=0
+[A[2KProgress: 47 %, i=525, c=525, j=543, r=544, nD=84, k=0
+[A[2KProgress: 47 %, i=526, c=526, j=544, r=545, nD=84, k=0
+[A[2KProgress: 47 %, i=527, c=527, j=545, r=546, nD=84, k=0
+[A[2KProgress: 47 %, i=528, c=528, j=546, r=547, nD=84, k=0
+[A[2KProgress: 47 %, i=529, c=529, j=547, r=548, nD=85, k=0
+[A[2KProgress: 47 %, i=530, c=530, j=548, r=549, nD=86, k=0
+[A[2KProgress: 47 %, i=531, c=531, j=549, r=550, nD=86, k=0
+[A[2KProgress: 47 %, i=532, c=532, j=550, r=551, nD=86, k=0
+[A[2KProgress: 47 %, i=533, c=533, j=551, r=552, nD=86, k=0
+[A[2KProgress: 47 %, i=534, c=534, j=553, r=554, nD=86, k=0
+[A[2KProgress: 48 %, i=535, c=535, j=554, r=555, nD=86, k=0
+[A[2KProgress: 48 %, i=536, c=536, j=555, r=556, nD=86, k=0
+[A[2KProgress: 48 %, i=537, c=537, j=556, r=557, nD=87, k=0
+[A[2KProgress: 48 %, i=538, c=538, j=557, r=558, nD=87, k=0
+[A[2KProgress: 48 %, i=539, c=539, j=558, r=559, nD=87, k=0
+[A[2KProgress: 48 %, i=540, c=540, j=559, r=560, nD=87, k=0
+[A[2KProgress: 48 %, i=541, c=541, j=560, r=561, nD=87, k=0
+[A[2KProgress: 48 %, i=542, c=542, j=561, r=562, nD=87, k=0
+[A[2KProgress: 48 %, i=543, c=543, j=562, r=563, nD=87, k=0
+[A[2KProgress: 48 %, i=544, c=544, j=563, r=564, nD=87, k=0
+[A[2KProgress: 48 %, i=545, c=545, j=565, r=566, nD=87, k=0
+[A[2KProgress: 49 %, i=546, c=546, j=566, r=567, nD=87, k=0
+[A[2KProgress: 49 %, i=547, c=547, j=567, r=568, nD=88, k=0
+[A[2KProgress: 49 %, i=548, c=548, j=568, r=569, nD=88, k=0
+[A[2KProgress: 49 %, i=549, c=549, j=569, r=570, nD=89, k=0
+[A[2KProgress: 49 %, i=550, c=550, j=570, r=571, nD=89, k=0
+[A[2KProgress: 49 %, i=551, c=551, j=571, r=572, nD=90, k=0
+[A[2KProgress: 49 %, i=552, c=552, j=572, r=573, nD=90, k=0
+[A[2KProgress: 49 %, i=553, c=553, j=573, r=574, nD=90, k=0
+[A[2KProgress: 49 %, i=554, c=554, j=574, r=575, nD=90, k=0
+[A[2KProgress: 50 %, i=555, c=555, j=575, r=576, nD=90, k=0
+[A[2KProgress: 50 %, i=556, c=556, j=576, r=577, nD=90, k=0
+[A[2KProgress: 50 %, i=557, c=557, j=577, r=578, nD=90, k=0
+[A[2KProgress: 50 %, i=558, c=558, j=578, r=579, nD=90, k=0
+[A[2KProgress: 50 %, i=559, c=559, j=579, r=580, nD=91, k=0
+[A[2KProgress: 50 %, i=560, c=560, j=580, r=581, nD=92, k=0
+[A[2KProgress: 50 %, i=561, c=561, j=581, r=582, nD=92, k=0
+[A[2KProgress: 50 %, i=562, c=562, j=582, r=583, nD=93, k=0
+[A[2KProgress: 50 %, i=563, c=563, j=584, r=585, nD=94, k=0
+[A[2KProgress: 50 %, i=564, c=564, j=585, r=586, nD=94, k=0
+[A[2KProgress: 51 %, i=565, c=565, j=586, r=587, nD=94, k=0
+[A[2KProgress: 51 %, i=566, c=566, j=587, r=588, nD=94, k=0
+[A[2KProgress: 51 %, i=567, c=567, j=588, r=589, nD=94, k=0
+[A[2KProgress: 51 %, i=568, c=568, j=589, r=590, nD=94, k=0
+[A[2KProgress: 51 %, i=569, c=569, j=590, r=591, nD=94, k=0
+[A[2KProgress: 51 %, i=570, c=570, j=591, r=592, nD=95, k=0
+[A[2KProgress: 51 %, i=571, c=571, j=592, r=593, nD=95, k=0
+[A[2KProgress: 51 %, i=572, c=572, j=593, r=594, nD=95, k=0
+[A[2KProgress: 51 %, i=573, c=573, j=594, r=595, nD=95, k=0
+[A[2KProgress: 51 %, i=574, c=574, j=598, r=599, nD=95, k=0
+[A[2KProgress: 52 %, i=575, c=575, j=599, r=600, nD=96, k=0
+[A[2KProgress: 52 %, i=576, c=576, j=601, r=602, nD=96, k=0
+[A[2KProgress: 52 %, i=577, c=577, j=602, r=603, nD=96, k=0
+[A[2KProgress: 52 %, i=578, c=578, j=603, r=604, nD=96, k=0
+[A[2KProgress: 52 %, i=579, c=579, j=604, r=605, nD=96, k=0
+[A[2KProgress: 52 %, i=580, c=580, j=606, r=607, nD=96, k=0
+[A[2KProgress: 52 %, i=581, c=581, j=607, r=608, nD=96, k=0
+[A[2KProgress: 52 %, i=582, c=582, j=608, r=609, nD=96, k=0
+[A[2KProgress: 52 %, i=583, c=583, j=609, r=610, nD=97, k=0
+[A[2KProgress: 52 %, i=584, c=584, j=610, r=611, nD=98, k=0
+[A[2KProgress: 53 %, i=585, c=585, j=613, r=614, nD=98, k=0
+[A[2KProgress: 53 %, i=586, c=586, j=614, r=615, nD=98, k=0
+[A[2KProgress: 53 %, i=587, c=587, j=615, r=616, nD=99, k=0
+[A[2KProgress: 53 %, i=588, c=588, j=616, r=617, nD=100, k=0
+[A[2KProgress: 53 %, i=589, c=589, j=617, r=618, nD=100, k=0
+[A[2KProgress: 53 %, i=590, c=590, j=618, r=619, nD=100, k=0
+[A[2KProgress: 53 %, i=591, c=591, j=620, r=621, nD=100, k=0
+[A[2KProgress: 53 %, i=592, c=592, j=621, r=622, nD=100, k=0
+[A[2KProgress: 53 %, i=593, c=593, j=622, r=623, nD=101, k=0
+[A[2KProgress: 54 %, i=594, c=594, j=623, r=624, nD=101, k=0
+[A[2KProgress: 54 %, i=595, c=595, j=625, r=626, nD=101, k=0
+[A[2KProgress: 54 %, i=596, c=596, j=626, r=627, nD=101, k=0
+[A[2KProgress: 54 %, i=597, c=597, j=627, r=628, nD=101, k=0
+[A[2KProgress: 54 %, i=598, c=598, j=628, r=629, nD=101, k=0
+[A[2KProgress: 54 %, i=599, c=599, j=629, r=630, nD=101, k=0
+[A[2KProgress: 54 %, i=600, c=600, j=630, r=631, nD=101, k=0
+[A[2KProgress: 54 %, i=601, c=601, j=631, r=632, nD=101, k=0
+[A[2KProgress: 54 %, i=602, c=602, j=632, r=633, nD=101, k=0
+[A[2KProgress: 54 %, i=603, c=603, j=634, r=635, nD=101, k=0
+[A[2KProgress: 55 %, i=604, c=604, j=636, r=637, nD=102, k=0
+[A[2KProgress: 55 %, i=605, c=605, j=637, r=638, nD=102, k=0
+[A[2KProgress: 55 %, i=606, c=606, j=638, r=639, nD=103, k=0
+[A[2KProgress: 55 %, i=607, c=607, j=639, r=640, nD=104, k=0
+[A[2KProgress: 55 %, i=608, c=608, j=640, r=641, nD=104, k=0
+[A[2KProgress: 55 %, i=609, c=609, j=642, r=643, nD=105, k=0
+[A[2KProgress: 55 %, i=610, c=610, j=643, r=644, nD=105, k=0
+[A[2KProgress: 55 %, i=611, c=611, j=644, r=645, nD=105, k=0
+[A[2KProgress: 55 %, i=612, c=612, j=645, r=646, nD=106, k=0
+[A[2KProgress: 56 %, i=613, c=613, j=646, r=647, nD=106, k=0
+[A[2KProgress: 56 %, i=614, c=614, j=647, r=648, nD=106, k=0
+[A[2KProgress: 56 %, i=615, c=615, j=648, r=649, nD=106, k=0
+[A[2KProgress: 56 %, i=616, c=616, j=650, r=651, nD=107, k=0
+[A[2KProgress: 56 %, i=617, c=617, j=652, r=653, nD=108, k=0
+[A[2KProgress: 56 %, i=618, c=618, j=653, r=654, nD=109, k=0
+[A[2KProgress: 56 %, i=619, c=619, j=654, r=655, nD=109, k=0
+[A[2KProgress: 56 %, i=620, c=620, j=655, r=656, nD=109, k=0
+[A[2KProgress: 56 %, i=621, c=621, j=657, r=658, nD=110, k=0
+[A[2KProgress: 57 %, i=622, c=622, j=658, r=659, nD=110, k=0
+[A[2KProgress: 57 %, i=623, c=623, j=659, r=660, nD=110, k=0
+[A[2KProgress: 57 %, i=624, c=624, j=661, r=662, nD=110, k=0
+[A[2KProgress: 57 %, i=625, c=625, j=662, r=663, nD=110, k=0
+[A[2KProgress: 57 %, i=626, c=626, j=663, r=664, nD=110, k=0
+[A[2KProgress: 57 %, i=627, c=627, j=664, r=665, nD=110, k=0
+[A[2KProgress: 57 %, i=628, c=628, j=665, r=666, nD=110, k=0
+[A[2KProgress: 57 %, i=629, c=629, j=666, r=667, nD=111, k=0
+[A[2KProgress: 57 %, i=630, c=630, j=667, r=668, nD=112, k=0
+[A[2KProgress: 57 %, i=631, c=631, j=668, r=669, nD=112, k=0
+[A[2KProgress: 58 %, i=632, c=632, j=670, r=671, nD=112, k=0
+[A[2KProgress: 58 %, i=633, c=633, j=671, r=672, nD=112, k=0
+[A[2KProgress: 58 %, i=634, c=634, j=672, r=673, nD=112, k=0
+[A[2KProgress: 58 %, i=635, c=635, j=673, r=674, nD=112, k=0
+[A[2KProgress: 58 %, i=636, c=636, j=674, r=675, nD=113, k=0
+[A[2KProgress: 58 %, i=637, c=637, j=676, r=677, nD=113, k=0
+[A[2KProgress: 58 %, i=638, c=638, j=678, r=679, nD=113, k=0
+[A[2KProgress: 58 %, i=639, c=639, j=679, r=680, nD=113, k=0
+[A[2KProgress: 58 %, i=640, c=640, j=681, r=682, nD=113, k=0
+[A[2KProgress: 59 %, i=641, c=641, j=682, r=683, nD=114, k=0
+[A[2KProgress: 59 %, i=642, c=642, j=683, r=684, nD=115, k=0
+[A[2KProgress: 59 %, i=643, c=643, j=684, r=685, nD=116, k=0
+[A[2KProgress: 59 %, i=644, c=644, j=685, r=686, nD=116, k=0
+[A[2KProgress: 59 %, i=645, c=645, j=686, r=687, nD=116, k=0
+[A[2KProgress: 59 %, i=646, c=646, j=688, r=689, nD=116, k=0
+[A[2KProgress: 59 %, i=647, c=647, j=689, r=690, nD=116, k=0
+[A[2KProgress: 59 %, i=648, c=648, j=690, r=691, nD=116, k=0
+[A[2KProgress: 59 %, i=649, c=649, j=693, r=694, nD=116, k=0
+[A[2KProgress: 59 %, i=650, c=650, j=694, r=695, nD=116, k=0
+[A[2KProgress: 60 %, i=651, c=651, j=695, r=696, nD=116, k=0
+[A[2KProgress: 60 %, i=652, c=652, j=696, r=697, nD=116, k=0
+[A[2KProgress: 60 %, i=653, c=653, j=697, r=698, nD=116, k=0
+[A[2KProgress: 60 %, i=654, c=654, j=698, r=699, nD=116, k=0
+[A[2KProgress: 60 %, i=655, c=655, j=700, r=701, nD=116, k=0
+[A[2KProgress: 60 %, i=656, c=656, j=701, r=702, nD=117, k=0
+[A[2KProgress: 60 %, i=657, c=657, j=702, r=703, nD=117, k=0
+[A[2KProgress: 60 %, i=658, c=658, j=706, r=707, nD=117, k=0
+[A[2KProgress: 60 %, i=659, c=659, j=707, r=708, nD=117, k=0
+[A[2KProgress: 60 %, i=660, c=660, j=709, r=710, nD=118, k=0
+[A[2KProgress: 61 %, i=661, c=661, j=710, r=711, nD=118, k=0
+[A[2KProgress: 61 %, i=662, c=662, j=711, r=712, nD=119, k=0
+[A[2KProgress: 61 %, i=663, c=663, j=712, r=713, nD=119, k=0
+[A[2KProgress: 61 %, i=664, c=664, j=714, r=715, nD=119, k=0
+[A[2KProgress: 61 %, i=665, c=665, j=715, r=716, nD=120, k=0
+[A[2KProgress: 61 %, i=666, c=666, j=716, r=717, nD=121, k=0
+[A[2KProgress: 61 %, i=667, c=667, j=717, r=718, nD=121, k=0
+[A[2KProgress: 61 %, i=668, c=668, j=718, r=719, nD=121, k=0
+[A[2KProgress: 62 %, i=669, c=669, j=719, r=720, nD=122, k=0
+[A[2KProgress: 62 %, i=670, c=670, j=721, r=722, nD=123, k=0
+[A[2KProgress: 62 %, i=671, c=671, j=722, r=723, nD=124, k=0
+[A[2KProgress: 62 %, i=672, c=672, j=724, r=725, nD=124, k=0
+[A[2KProgress: 62 %, i=673, c=673, j=725, r=726, nD=125, k=0
+[A[2KProgress: 62 %, i=674, c=674, j=726, r=727, nD=126, k=0
+[A[2KProgress: 62 %, i=675, c=675, j=727, r=728, nD=127, k=0
+[A[2KProgress: 63 %, i=676, c=676, j=728, r=729, nD=128, k=0
+[A[2KProgress: 63 %, i=677, c=677, j=729, r=730, nD=128, k=0
+[A[2KProgress: 63 %, i=678, c=678, j=730, r=731, nD=128, k=0
+[A[2KProgress: 63 %, i=679, c=679, j=731, r=732, nD=128, k=0
+[A[2KProgress: 63 %, i=680, c=680, j=732, r=733, nD=128, k=0
+[A[2KProgress: 63 %, i=681, c=681, j=733, r=734, nD=128, k=0
+[A[2KProgress: 63 %, i=682, c=682, j=734, r=735, nD=128, k=0
+[A[2KProgress: 63 %, i=683, c=683, j=735, r=736, nD=128, k=0
+[A[2KProgress: 63 %, i=684, c=684, j=736, r=737, nD=128, k=0
+[A[2KProgress: 63 %, i=685, c=685, j=738, r=739, nD=129, k=0
+[A[2KProgress: 64 %, i=686, c=686, j=739, r=740, nD=129, k=0
+[A[2KProgress: 64 %, i=687, c=687, j=740, r=741, nD=129, k=0
+[A[2KProgress: 64 %, i=688, c=688, j=741, r=742, nD=129, k=0
+[A[2KProgress: 64 %, i=689, c=689, j=742, r=743, nD=129, k=0
+[A[2KProgress: 64 %, i=690, c=690, j=743, r=744, nD=130, k=0
+[A[2KProgress: 64 %, i=691, c=691, j=744, r=745, nD=131, k=0
+[A[2KProgress: 64 %, i=692, c=692, j=745, r=746, nD=132, k=0
+[A[2KProgress: 64 %, i=693, c=693, j=746, r=747, nD=132, k=0
+[A[2KProgress: 64 %, i=694, c=694, j=747, r=748, nD=132, k=0
+[A[2KProgress: 65 %, i=695, c=695, j=749, r=750, nD=133, k=0
+[A[2KProgress: 65 %, i=696, c=696, j=750, r=751, nD=134, k=0
+[A[2KProgress: 65 %, i=697, c=697, j=751, r=752, nD=134, k=0
+[A[2KProgress: 65 %, i=698, c=698, j=752, r=753, nD=134, k=0
+[A[2KProgress: 65 %, i=699, c=699, j=753, r=754, nD=134, k=0
+[A[2KProgress: 65 %, i=700, c=700, j=754, r=755, nD=134, k=0
+[A[2KProgress: 65 %, i=701, c=701, j=755, r=756, nD=134, k=0
+[A[2KProgress: 65 %, i=702, c=702, j=756, r=757, nD=134, k=0
+[A[2KProgress: 66 %, i=703, c=703, j=758, r=759, nD=135, k=0
+[A[2KProgress: 66 %, i=704, c=704, j=759, r=760, nD=136, k=0
+[A[2KProgress: 66 %, i=705, c=705, j=761, r=762, nD=136, k=0
+[A[2KProgress: 66 %, i=706, c=706, j=762, r=763, nD=137, k=0
+[A[2KProgress: 66 %, i=707, c=707, j=763, r=764, nD=137, k=0
+[A[2KProgress: 66 %, i=708, c=708, j=764, r=765, nD=137, k=0
+[A[2KProgress: 66 %, i=709, c=709, j=765, r=766, nD=137, k=0
+[A[2KProgress: 66 %, i=710, c=710, j=767, r=768, nD=137, k=0
+[A[2KProgress: 66 %, i=711, c=711, j=768, r=769, nD=137, k=0
+[A[2KProgress: 67 %, i=712, c=712, j=769, r=770, nD=138, k=0
+[A[2KProgress: 67 %, i=713, c=713, j=770, r=771, nD=138, k=0
+[A[2KProgress: 67 %, i=714, c=714, j=771, r=772, nD=139, k=0
+[A[2KProgress: 67 %, i=715, c=715, j=772, r=773, nD=140, k=0
+[A[2KProgress: 67 %, i=716, c=716, j=773, r=774, nD=140, k=0
+[A[2KProgress: 67 %, i=717, c=717, j=775, r=776, nD=140, k=0
+[A[2KProgress: 67 %, i=718, c=718, j=776, r=777, nD=140, k=0
+[A[2KProgress: 67 %, i=719, c=719, j=777, r=778, nD=141, k=0
+[A[2KProgress: 67 %, i=720, c=720, j=779, r=780, nD=141, k=0
+[A[2KProgress: 68 %, i=721, c=721, j=780, r=781, nD=142, k=0
+[A[2KProgress: 68 %, i=722, c=722, j=781, r=782, nD=142, k=0
+[A[2KProgress: 68 %, i=723, c=723, j=782, r=783, nD=142, k=0
+[A[2KProgress: 68 %, i=724, c=724, j=783, r=784, nD=143, k=0
+[A[2KProgress: 68 %, i=725, c=725, j=784, r=785, nD=144, k=0
+[A[2KProgress: 68 %, i=726, c=726, j=786, r=787, nD=144, k=0
+[A[2KProgress: 68 %, i=727, c=727, j=787, r=788, nD=144, k=0
+[A[2KProgress: 68 %, i=728, c=728, j=789, r=790, nD=144, k=0
+[A[2KProgress: 69 %, i=729, c=729, j=790, r=791, nD=144, k=0
+[A[2KProgress: 69 %, i=730, c=730, j=792, r=793, nD=144, k=0
+[A[2KProgress: 69 %, i=731, c=731, j=793, r=794, nD=144, k=0
+[A[2KProgress: 69 %, i=732, c=732, j=794, r=795, nD=144, k=0
+[A[2KProgress: 69 %, i=733, c=733, j=795, r=796, nD=144, k=0
+[A[2KProgress: 69 %, i=734, c=734, j=796, r=797, nD=145, k=0
+[A[2KProgress: 69 %, i=735, c=735, j=797, r=798, nD=145, k=0
+[A[2KProgress: 69 %, i=736, c=736, j=798, r=799, nD=145, k=0
+[A[2KProgress: 69 %, i=737, c=737, j=799, r=800, nD=145, k=0
+[A[2KProgress: 69 %, i=738, c=738, j=800, r=801, nD=145, k=0
+[A[2KProgress: 70 %, i=739, c=739, j=801, r=802, nD=145, k=0
+[A[2KProgress: 70 %, i=740, c=740, j=803, r=804, nD=145, k=0
+[A[2KProgress: 70 %, i=741, c=741, j=804, r=805, nD=145, k=0
+[A[2KProgress: 70 %, i=742, c=742, j=805, r=806, nD=146, k=0
+[A[2KProgress: 70 %, i=743, c=743, j=807, r=808, nD=146, k=0
+[A[2KProgress: 70 %, i=744, c=744, j=808, r=809, nD=146, k=0
+[A[2KProgress: 70 %, i=745, c=745, j=809, r=810, nD=146, k=0
+[A[2KProgress: 70 %, i=746, c=746, j=810, r=811, nD=146, k=0
+[A[2KProgress: 70 %, i=747, c=747, j=811, r=812, nD=147, k=0
+[A[2KProgress: 71 %, i=748, c=748, j=812, r=813, nD=148, k=0
+[A[2KProgress: 71 %, i=749, c=749, j=813, r=814, nD=149, k=0
+[A[2KProgress: 71 %, i=750, c=750, j=816, r=817, nD=149, k=0
+[A[2KProgress: 71 %, i=751, c=751, j=817, r=818, nD=150, k=0
+[A[2KProgress: 71 %, i=752, c=752, j=818, r=819, nD=150, k=0
+[A[2KProgress: 71 %, i=753, c=753, j=819, r=820, nD=150, k=0
+[A[2KProgress: 71 %, i=754, c=754, j=822, r=823, nD=150, k=0
+[A[2KProgress: 71 %, i=755, c=755, j=823, r=824, nD=151, k=0
+[A[2KProgress: 72 %, i=756, c=756, j=826, r=827, nD=151, k=0
+[A[2KProgress: 72 %, i=757, c=757, j=827, r=828, nD=151, k=0
+[A[2KProgress: 72 %, i=758, c=758, j=828, r=829, nD=151, k=0
+[A[2KProgress: 72 %, i=759, c=759, j=829, r=830, nD=151, k=0
+[A[2KProgress: 72 %, i=760, c=760, j=830, r=831, nD=151, k=0
+[A[2KProgress: 72 %, i=761, c=761, j=831, r=832, nD=151, k=0
+[A[2KProgress: 72 %, i=762, c=762, j=832, r=833, nD=151, k=0
+[A[2KProgress: 72 %, i=763, c=763, j=833, r=834, nD=151, k=0
+[A[2KProgress: 72 %, i=764, c=764, j=834, r=835, nD=151, k=0
+[A[2KProgress: 72 %, i=765, c=765, j=836, r=837, nD=151, k=0
+[A[2KProgress: 73 %, i=766, c=766, j=837, r=838, nD=151, k=0
+[A[2KProgress: 73 %, i=767, c=767, j=838, r=839, nD=151, k=0
+[A[2KProgress: 73 %, i=768, c=768, j=839, r=840, nD=151, k=0
+[A[2KProgress: 73 %, i=769, c=769, j=840, r=841, nD=151, k=0
+[A[2KProgress: 73 %, i=770, c=770, j=841, r=842, nD=151, k=0
+[A[2KProgress: 73 %, i=771, c=771, j=843, r=844, nD=151, k=0
+[A[2KProgress: 73 %, i=772, c=772, j=844, r=845, nD=151, k=0
+[A[2KProgress: 73 %, i=773, c=773, j=846, r=847, nD=151, k=0
+[A[2KProgress: 73 %, i=774, c=774, j=847, r=848, nD=151, k=0
+[A[2KProgress: 73 %, i=775, c=775, j=848, r=849, nD=151, k=0
+[A[2KProgress: 74 %, i=776, c=776, j=850, r=851, nD=152, k=0
+[A[2KProgress: 74 %, i=777, c=777, j=851, r=852, nD=152, k=0
+[A[2KProgress: 74 %, i=778, c=778, j=852, r=853, nD=152, k=0
+[A[2KProgress: 74 %, i=779, c=779, j=854, r=855, nD=153, k=0
+[A[2KProgress: 74 %, i=780, c=780, j=856, r=857, nD=153, k=0
+[A[2KProgress: 74 %, i=781, c=781, j=858, r=859, nD=153, k=0
+[A[2KProgress: 74 %, i=782, c=782, j=859, r=860, nD=153, k=0
+[A[2KProgress: 74 %, i=783, c=783, j=860, r=861, nD=153, k=0
+[A[2KProgress: 74 %, i=784, c=784, j=861, r=862, nD=154, k=0
+[A[2KProgress: 75 %, i=785, c=785, j=862, r=863, nD=154, k=0
+[A[2KProgress: 75 %, i=786, c=786, j=864, r=865, nD=154, k=0
+[A[2KProgress: 75 %, i=787, c=787, j=865, r=866, nD=155, k=0
+[A[2KProgress: 75 %, i=788, c=788, j=866, r=867, nD=155, k=0
+[A[2KProgress: 75 %, i=789, c=789, j=867, r=868, nD=156, k=0
+[A[2KProgress: 75 %, i=790, c=790, j=868, r=869, nD=156, k=0
+[A[2KProgress: 75 %, i=791, c=791, j=869, r=870, nD=157, k=0
+[A[2KProgress: 75 %, i=792, c=792, j=871, r=872, nD=157, k=0
+[A[2KProgress: 76 %, i=793, c=793, j=874, r=875, nD=157, k=0
+[A[2KProgress: 76 %, i=794, c=794, j=875, r=876, nD=157, k=0
+[A[2KProgress: 76 %, i=795, c=795, j=876, r=877, nD=157, k=0
+[A[2KProgress: 76 %, i=796, c=796, j=877, r=878, nD=157, k=0
+[A[2KProgress: 76 %, i=797, c=797, j=878, r=879, nD=157, k=0
+[A[2KProgress: 76 %, i=798, c=798, j=880, r=881, nD=157, k=0
+[A[2KProgress: 76 %, i=799, c=799, j=881, r=882, nD=157, k=0
+[A[2KProgress: 76 %, i=800, c=800, j=883, r=884, nD=157, k=0
+[A[2KProgress: 76 %, i=801, c=801, j=884, r=885, nD=157, k=0
+[A[2KProgress: 76 %, i=802, c=802, j=885, r=886, nD=157, k=0
+[A[2KProgress: 76 %, i=803, c=803, j=886, r=887, nD=157, k=0
+[A[2KProgress: 77 %, i=804, c=804, j=888, r=889, nD=157, k=0
+[A[2KProgress: 77 %, i=805, c=805, j=889, r=890, nD=157, k=0
+[A[2KProgress: 77 %, i=806, c=806, j=890, r=891, nD=157, k=0
+[A[2KProgress: 77 %, i=807, c=807, j=892, r=893, nD=157, k=0
+[A[2KProgress: 77 %, i=808, c=808, j=893, r=894, nD=157, k=0
+[A[2KProgress: 77 %, i=809, c=809, j=894, r=895, nD=157, k=0
+[A[2KProgress: 77 %, i=810, c=810, j=895, r=896, nD=157, k=0
+[A[2KProgress: 77 %, i=811, c=811, j=896, r=897, nD=157, k=0
+[A[2KProgress: 77 %, i=812, c=812, j=897, r=898, nD=158, k=0
+[A[2KProgress: 78 %, i=813, c=813, j=898, r=899, nD=158, k=0
+[A[2KProgress: 78 %, i=814, c=814, j=899, r=900, nD=159, k=0
+[A[2KProgress: 78 %, i=815, c=815, j=900, r=901, nD=160, k=0
+[A[2KProgress: 78 %, i=816, c=816, j=902, r=903, nD=160, k=0
+[A[2KProgress: 78 %, i=817, c=817, j=903, r=904, nD=161, k=0
+[A[2KProgress: 78 %, i=818, c=818, j=904, r=905, nD=161, k=0
+[A[2KProgress: 78 %, i=819, c=819, j=906, r=907, nD=162, k=0
+[A[2KProgress: 78 %, i=820, c=820, j=908, r=909, nD=162, k=0
+[A[2KProgress: 79 %, i=821, c=821, j=909, r=910, nD=162, k=0
+[A[2KProgress: 79 %, i=822, c=822, j=911, r=912, nD=163, k=0
+[A[2KProgress: 79 %, i=823, c=823, j=914, r=915, nD=164, k=0
+[A[2KProgress: 79 %, i=824, c=824, j=916, r=917, nD=165, k=0
+[A[2KProgress: 79 %, i=825, c=825, j=917, r=918, nD=165, k=0
+[A[2KProgress: 79 %, i=826, c=826, j=919, r=920, nD=165, k=0
+[A[2KProgress: 79 %, i=827, c=827, j=921, r=922, nD=165, k=0
+[A[2KProgress: 80 %, i=828, c=828, j=924, r=925, nD=165, k=0
+[A[2KProgress: 80 %, i=829, c=829, j=926, r=927, nD=165, k=0
+[A[2KProgress: 80 %, i=830, c=830, j=927, r=928, nD=165, k=0
+[A[2KProgress: 80 %, i=831, c=831, j=929, r=930, nD=165, k=0
+[A[2KProgress: 80 %, i=832, c=832, j=930, r=931, nD=166, k=0
+[A[2KProgress: 80 %, i=833, c=833, j=931, r=932, nD=166, k=0
+[A[2KProgress: 80 %, i=834, c=834, j=932, r=933, nD=167, k=0
+[A[2KProgress: 80 %, i=835, c=835, j=933, r=934, nD=167, k=0
+[A[2KProgress: 80 %, i=836, c=836, j=934, r=935, nD=167, k=0
+[A[2KProgress: 81 %, i=837, c=837, j=935, r=936, nD=168, k=0
+[A[2KProgress: 81 %, i=838, c=838, j=936, r=937, nD=168, k=0
+[A[2KProgress: 81 %, i=839, c=839, j=937, r=938, nD=168, k=0
+[A[2KProgress: 81 %, i=840, c=840, j=938, r=939, nD=168, k=0
+[A[2KProgress: 81 %, i=841, c=841, j=940, r=941, nD=169, k=0
+[A[2KProgress: 81 %, i=842, c=842, j=941, r=942, nD=169, k=0
+[A[2KProgress: 81 %, i=843, c=843, j=942, r=943, nD=169, k=0
+[A[2KProgress: 81 %, i=844, c=844, j=944, r=945, nD=169, k=0
+[A[2KProgress: 82 %, i=845, c=845, j=948, r=949, nD=170, k=0
+[A[2KProgress: 82 %, i=846, c=846, j=949, r=950, nD=171, k=0
+[A[2KProgress: 82 %, i=847, c=847, j=950, r=951, nD=171, k=0
+[A[2KProgress: 82 %, i=848, c=848, j=951, r=952, nD=172, k=0
+[A[2KProgress: 82 %, i=849, c=849, j=952, r=953, nD=173, k=0
+[A[2KProgress: 82 %, i=850, c=850, j=954, r=955, nD=174, k=0
+[A[2KProgress: 82 %, i=851, c=851, j=955, r=956, nD=174, k=0
+[A[2KProgress: 83 %, i=852, c=852, j=956, r=957, nD=175, k=0
+[A[2KProgress: 83 %, i=853, c=853, j=957, r=958, nD=175, k=0
+[A[2KProgress: 83 %, i=854, c=854, j=958, r=959, nD=176, k=0
+[A[2KProgress: 83 %, i=855, c=855, j=960, r=961, nD=176, k=0
+[A[2KProgress: 83 %, i=856, c=856, j=961, r=962, nD=176, k=0
+[A[2KProgress: 83 %, i=857, c=857, j=962, r=963, nD=177, k=0
+[A[2KProgress: 83 %, i=858, c=858, j=964, r=965, nD=178, k=0
+[A[2KProgress: 84 %, i=859, c=859, j=965, r=966, nD=179, k=0
+[A[2KProgress: 84 %, i=860, c=860, j=969, r=970, nD=179, k=0
+[A[2KProgress: 84 %, i=861, c=861, j=970, r=971, nD=180, k=0
+[A[2KProgress: 84 %, i=862, c=862, j=971, r=972, nD=180, k=0
+[A[2KProgress: 84 %, i=863, c=863, j=972, r=973, nD=180, k=0
+[A[2KProgress: 84 %, i=864, c=864, j=973, r=974, nD=180, k=0
+[A[2KProgress: 84 %, i=865, c=865, j=974, r=975, nD=181, k=0
+[A[2KProgress: 84 %, i=866, c=866, j=975, r=976, nD=181, k=0
+[A[2KProgress: 85 %, i=867, c=867, j=976, r=977, nD=182, k=0
+[A[2KProgress: 85 %, i=868, c=868, j=977, r=978, nD=182, k=0
+[A[2KProgress: 85 %, i=869, c=869, j=979, r=980, nD=182, k=0
+[A[2KProgress: 85 %, i=870, c=870, j=980, r=981, nD=182, k=0
+[A[2KProgress: 85 %, i=871, c=871, j=982, r=983, nD=182, k=0
+[A[2KProgress: 85 %, i=872, c=872, j=983, r=984, nD=182, k=0
+[A[2KProgress: 85 %, i=873, c=873, j=985, r=986, nD=182, k=0
+[A[2KProgress: 85 %, i=874, c=874, j=986, r=987, nD=182, k=0
+[A[2KProgress: 86 %, i=875, c=875, j=988, r=989, nD=183, k=0
+[A[2KProgress: 86 %, i=876, c=876, j=989, r=990, nD=183, k=0
+[A[2KProgress: 86 %, i=877, c=877, j=992, r=993, nD=183, k=0
+[A[2KProgress: 86 %, i=878, c=878, j=994, r=995, nD=183, k=0
+[A[2KProgress: 86 %, i=879, c=879, j=996, r=997, nD=184, k=0
+[A[2KProgress: 86 %, i=880, c=880, j=997, r=998, nD=185, k=0
+[A[2KProgress: 86 %, i=881, c=881, j=999, r=1000, nD=185, k=0
+[A[2KProgress: 86 %, i=882, c=882, j=1000, r=1001, nD=185, k=0
+[A[2KProgress: 86 %, i=883, c=883, j=1001, r=1002, nD=185, k=0
+[A[2KProgress: 87 %, i=884, c=884, j=1002, r=1003, nD=185, k=0
+[A[2KProgress: 87 %, i=885, c=885, j=1003, r=1004, nD=185, k=0
+[A[2KProgress: 87 %, i=886, c=886, j=1006, r=1007, nD=185, k=0
+[A[2KProgress: 87 %, i=887, c=887, j=1008, r=1009, nD=185, k=0
+[A[2KProgress: 87 %, i=888, c=888, j=1011, r=1012, nD=185, k=0
+[A[2KProgress: 87 %, i=889, c=889, j=1012, r=1013, nD=185, k=0
+[A[2KProgress: 87 %, i=890, c=890, j=1014, r=1015, nD=185, k=0
+[A[2KProgress: 87 %, i=891, c=891, j=1015, r=1016, nD=185, k=0
+[A[2KProgress: 87 %, i=892, c=892, j=1016, r=1017, nD=185, k=0
+[A[2KProgress: 87 %, i=893, c=893, j=1017, r=1018, nD=185, k=0
+[A[2KProgress: 88 %, i=894, c=894, j=1019, r=1020, nD=185, k=0
+[A[2KProgress: 88 %, i=895, c=895, j=1020, r=1021, nD=186, k=0
+[A[2KProgress: 88 %, i=896, c=896, j=1021, r=1022, nD=186, k=0
+[A[2KProgress: 88 %, i=897, c=897, j=1022, r=1023, nD=186, k=0
+[A[2KProgress: 88 %, i=898, c=898, j=1023, r=1024, nD=186, k=0
+[A[2KProgress: 88 %, i=899, c=899, j=1024, r=1025, nD=186, k=0
+[A[2KProgress: 88 %, i=900, c=900, j=1025, r=1026, nD=186, k=0
+[A[2KProgress: 88 %, i=901, c=901, j=1026, r=1027, nD=186, k=0
+[A[2KProgress: 88 %, i=902, c=902, j=1028, r=1029, nD=186, k=0
+[A[2KProgress: 89 %, i=903, c=903, j=1029, r=1030, nD=186, k=0
+[A[2KProgress: 89 %, i=904, c=904, j=1030, r=1031, nD=186, k=0
+[A[2KProgress: 89 %, i=905, c=905, j=1031, r=1032, nD=186, k=0
+[A[2KProgress: 89 %, i=906, c=906, j=1032, r=1033, nD=186, k=0
+[A[2KProgress: 89 %, i=907, c=907, j=1033, r=1034, nD=186, k=0
+[A[2KProgress: 89 %, i=908, c=908, j=1035, r=1036, nD=187, k=0
+[A[2KProgress: 89 %, i=909, c=909, j=1036, r=1037, nD=187, k=0
+[A[2KProgress: 89 %, i=910, c=910, j=1038, r=1039, nD=187, k=0
+[A[2KProgress: 89 %, i=911, c=911, j=1039, r=1040, nD=187, k=0
+[A[2KProgress: 90 %, i=912, c=912, j=1041, r=1042, nD=187, k=0
+[A[2KProgress: 90 %, i=913, c=913, j=1043, r=1044, nD=187, k=0
+[A[2KProgress: 90 %, i=914, c=914, j=1044, r=1045, nD=187, k=0
+[A[2KProgress: 90 %, i=915, c=915, j=1045, r=1046, nD=187, k=0
+[A[2KProgress: 90 %, i=916, c=916, j=1047, r=1048, nD=188, k=0
+[A[2KProgress: 90 %, i=917, c=917, j=1048, r=1049, nD=188, k=0
+[A[2KProgress: 90 %, i=918, c=918, j=1050, r=1051, nD=188, k=0
+[A[2KProgress: 90 %, i=919, c=919, j=1051, r=1052, nD=188, k=0
+[A[2KProgress: 90 %, i=920, c=920, j=1053, r=1054, nD=189, k=0
+[A[2KProgress: 91 %, i=921, c=921, j=1054, r=1055, nD=189, k=0
+[A[2KProgress: 91 %, i=922, c=922, j=1055, r=1056, nD=190, k=0
+[A[2KProgress: 91 %, i=923, c=923, j=1058, r=1059, nD=190, k=0
+[A[2KProgress: 91 %, i=924, c=924, j=1059, r=1060, nD=190, k=0
+[A[2KProgress: 91 %, i=925, c=925, j=1063, r=1064, nD=190, k=0
+[A[2KProgress: 91 %, i=926, c=926, j=1064, r=1065, nD=191, k=0
+[A[2KProgress: 91 %, i=927, c=927, j=1068, r=1069, nD=191, k=0
+[A[2KProgress: 91 %, i=928, c=928, j=1069, r=1070, nD=191, k=0
+[A[2KProgress: 92 %, i=929, c=929, j=1070, r=1071, nD=192, k=0
+[A[2KProgress: 92 %, i=930, c=930, j=1071, r=1072, nD=192, k=0
+[A[2KProgress: 92 %, i=931, c=931, j=1072, r=1073, nD=192, k=0
+[A[2KProgress: 92 %, i=932, c=932, j=1073, r=1074, nD=192, k=0
+[A[2KProgress: 92 %, i=933, c=933, j=1074, r=1075, nD=192, k=0
+[A[2KProgress: 92 %, i=934, c=934, j=1077, r=1078, nD=192, k=0
+[A[2KProgress: 92 %, i=935, c=935, j=1078, r=1079, nD=192, k=0
+[A[2KProgress: 92 %, i=936, c=936, j=1081, r=1082, nD=193, k=0
+[A[2KProgress: 93 %, i=937, c=937, j=1084, r=1085, nD=193, k=0
+[A[2KProgress: 93 %, i=938, c=938, j=1085, r=1086, nD=193, k=0
+[A[2KProgress: 93 %, i=939, c=939, j=1086, r=1087, nD=193, k=0
+[A[2KProgress: 93 %, i=940, c=940, j=1088, r=1089, nD=193, k=0
+[A[2KProgress: 93 %, i=941, c=941, j=1091, r=1092, nD=193, k=0
+[A[2KProgress: 93 %, i=942, c=942, j=1092, r=1093, nD=193, k=0
+[A[2KProgress: 93 %, i=943, c=943, j=1094, r=1095, nD=194, k=0
+[A[2KProgress: 93 %, i=944, c=944, j=1098, r=1099, nD=194, k=0
+[A[2KProgress: 93 %, i=945, c=945, j=1099, r=1100, nD=194, k=0
+[A[2KProgress: 94 %, i=946, c=946, j=1100, r=1101, nD=194, k=0
+[A[2KProgress: 94 %, i=947, c=947, j=1101, r=1102, nD=194, k=0
+[A[2KProgress: 94 %, i=948, c=948, j=1102, r=1103, nD=194, k=0
+[A[2KProgress: 94 %, i=949, c=949, j=1103, r=1104, nD=194, k=0
+[A[2KProgress: 94 %, i=950, c=950, j=1104, r=1105, nD=194, k=0
+[A[2KProgress: 94 %, i=951, c=951, j=1105, r=1106, nD=194, k=0
+[A[2KProgress: 94 %, i=952, c=952, j=1106, r=1107, nD=194, k=0
+[A[2KProgress: 94 %, i=953, c=953, j=1107, r=1108, nD=195, k=0
+[A[2KProgress: 94 %, i=954, c=954, j=1112, r=1113, nD=195, k=0
+[A[2KProgress: 95 %, i=955, c=955, j=1113, r=1114, nD=195, k=0
+[A[2KProgress: 95 %, i=956, c=956, j=1114, r=1115, nD=195, k=0
+[A[2KProgress: 95 %, i=957, c=957, j=1115, r=1116, nD=196, k=0
+[A[2KProgress: 95 %, i=958, c=958, j=1116, r=1117, nD=196, k=0
+[A[2KProgress: 95 %, i=959, c=959, j=1118, r=1119, nD=196, k=0
+[A[2KProgress: 95 %, i=960, c=960, j=1119, r=1120, nD=196, k=0
+[A[2KProgress: 95 %, i=961, c=961, j=1121, r=1122, nD=196, k=0
+[A[2KProgress: 95 %, i=962, c=962, j=1122, r=1123, nD=196, k=0
+[A[2KProgress: 95 %, i=963, c=963, j=1123, r=1124, nD=196, k=0
+[A[2KProgress: 96 %, i=964, c=964, j=1124, r=1125, nD=196, k=0
+[A[2KProgress: 96 %, i=965, c=965, j=1126, r=1127, nD=196, k=0
+[A[2KProgress: 96 %, i=966, c=966, j=1128, r=1129, nD=196, k=0
+[A[2KProgress: 96 %, i=967, c=967, j=1133, r=1134, nD=197, k=0
+[A[2KProgress: 96 %, i=968, c=968, j=1134, r=1135, nD=197, k=0
+[A[2KProgress: 96 %, i=969, c=969, j=1135, r=1136, nD=197, k=0
+[A[2KProgress: 96 %, i=970, c=970, j=1136, r=1137, nD=198, k=0
+[A[2KProgress: 97 %, i=971, c=971, j=1137, r=1138, nD=199, k=0
+[A[2KProgress: 97 %, i=972, c=972, j=1138, r=1139, nD=199, k=0
+[A[2KProgress: 97 %, i=973, c=973, j=1139, r=1140, nD=199, k=0
+[A[2KProgress: 97 %, i=974, c=974, j=1141, r=1142, nD=199, k=0
+[A[2KProgress: 97 %, i=975, c=975, j=1146, r=1147, nD=199, k=0
+[A[2KProgress: 97 %, i=976, c=976, j=1147, r=1148, nD=199, k=0
+[A[2KProgress: 97 %, i=977, c=977, j=1148, r=1149, nD=200, k=0
+[A[2KProgress: 97 %, i=978, c=978, j=1149, r=1150, nD=200, k=0
+[A[2KProgress: 97 %, i=979, c=979, j=1150, r=1151, nD=200, k=0
+[A[2KProgress: 98 %, i=980, c=980, j=1152, r=1153, nD=200, k=0
+[A[2KProgress: 98 %, i=981, c=981, j=1153, r=1154, nD=200, k=0
+[A[2KProgress: 98 %, i=982, c=982, j=1154, r=1155, nD=200, k=0
+[A[2KProgress: 98 %, i=983, c=983, j=1156, r=1157, nD=200, k=0
+[A[2KProgress: 98 %, i=984, c=984, j=1160, r=1161, nD=200, k=0
+[A[2KProgress: 98 %, i=985, c=985, j=1164, r=1165, nD=200, k=0
+[A[2KProgress: 98 %, i=986, c=986, j=1168, r=1169, nD=200, k=0
+[A[2KProgress: 98 %, i=987, c=987, j=1169, r=1170, nD=200, k=0
+[A[2KProgress: 98 %, i=988, c=988, j=1173, r=1174, nD=200, k=0
+[A[2KProgress: 98 %, i=989, c=989, j=1175, r=1176, nD=200, k=0
+[A[2KProgress: 99 %, i=990, c=990, j=1176, r=1177, nD=200, k=0
+[A[2KProgress: 99 %, i=991, c=991, j=1177, r=1178, nD=200, k=0
+[A[2KProgress: 99 %, i=992, c=992, j=1185, r=1186, nD=200, k=0
+[A[2KProgress: 99 %, i=993, c=993, j=1186, r=1187, nD=200, k=0
+[A[2KProgress: 99 %, i=994, c=994, j=1187, r=1188, nD=200, k=0
+[A[2KProgress: 99 %, i=995, c=995, j=1188, r=1189, nD=200, k=0
+[A[2KProgress: 99 %, i=996, c=996, j=1189, r=1190, nD=200, k=0
+[A[2KProgress: 99 %, i=997, c=997, j=1191, r=1192, nD=200, k=0
+[A[2KProgress: 99 %, i=998, c=998, j=1195, r=1196, nD=200, k=0
+[A[2KProgress: 99 %, i=999, c=999, j=1198, r=1199, nD=200, k=0
+[A[2KProgress: 100 %, i=1000, c=1000, j=1199, r=1200, nD=200, k=0
+# di incognite risolte = 1000
+Sistema di 1200 Equazioni x 1000 incognite, troppo grande da stampare
+
+ERRORE LETTO : 0.000010
+
+EQUAZIONE TROPPO GRANDE DA STAMPARE
+Dobbiamo controllare R = 985, 613, 1118, 553, 612, 678, 874, 721, 584, 452, 467, 916, 676, 1171, 1041, 1088, 201, 358, 688, 355, 347, 438, 1047, 1005, 341, 1181, 371, 601, 999, 620, 767, 864, 914, 1008, 1110, 307, 378, 964, 348, 940, 625, 399, 414, 775, 423, 1006, 969, 911, 596, 410, 606, 402, 948, 650, 880, 792, 454, 1096, 425, 807, 1090, 821, 919, 1043, 946, 873, 681, 947, 913, 692, 858, 1121, 761, 706, 652, 1010, 700, 724, 597, 846, 822, 1167, 786, 636, 1014, 565, 888, 670, 705, 1057, 598, 661, 1091, 1066, 1130, 836, 923, 642, 693, 634, 960, 1163, 816, 996, 789, 657, 871, 924, 738, 1080, 929, 704, 825, 709, 1112, 1180, 749, 1019, 714, 982, 1156, 803, 779, 883, 815, 758, 902, 1168, 906, 843, 1038, 892, 1179, 908, 944, 926, 856, 1011, 854, 850, 979, 1194, 826, 921, 1126, 994, 1068, 954, 1132, 1076, 1028, 1185, 1195, 1198, 1035, 1081, 1182, 1160, 1145, 1083, 1193, 1053, 1184, 1058, 1131, 1158, 967, 1166, 992, 1050, 1109, 1173, 1077, 988, 1111, 1062, 1197, 1152, 968, 1094, 1084, 991, 1144, 1098, 1159, 1063, 1061, 1162, 1128, 1067, 1172, 1097, 1164, 1146, 1183, 1133, 1141, 1191, 1143, 1175
+
+!TEST PASSATO 
+Scritto file matlabFILE SCRITTO
+
+Libero i=1 x
+Libero i=2 x
+Libero i=3 x
+Libero i=4 x
+Libero i=5 x
+Libero i=6 x
+Libero i=7 x
+Libero i=8 x
+Libero i=9 x
+Libero i=10 x
+Libero i=11 x
+Libero i=12 x
+Libero i=13 x
+Libero i=14 x
+Libero i=15 x
+Libero i=16 x
+Libero i=17 x
+Libero i=18 x
+Libero i=19 x
+Libero i=20 x
+Libero i=21 x
+Libero i=22 x
+Libero i=23 x
+Libero i=24 x
+Libero i=25 x
+Libero i=26 x
+Libero i=27 x
+Libero i=28 x
+Libero i=29 x
+Libero i=30 x
+Libero i=31 x
+Libero i=32 x
+Libero i=33 x
+Libero i=34 x
+Libero i=35 x
+Libero i=36 x
+Libero i=37 x
+Libero i=38 x
+Libero i=39 x
+Libero i=40 x
+Libero i=41 x
+Libero i=42 x
+Libero i=43 x
+Libero i=44 x
+Libero i=45 x
+Libero i=46 x
+Libero i=47 x
+Libero i=48 x
+Libero i=49 x
+Libero i=50 x
+Libero i=51 x
+Libero i=52 x
+Libero i=53 x
+Libero i=54 x
+Libero i=55 x
+Libero i=56 x
+Libero i=57 x
+Libero i=58 x
+Libero i=59 x
+Libero i=60 x
+Libero i=61 x
+Libero i=62 x
+Libero i=63 x
+Libero i=64 x
+Libero i=65 x
+Libero i=66 x
+Libero i=67 x
+Libero i=68 x
+Libero i=69 x
+Libero i=70 x
+Libero i=71 x
+Libero i=72 x
+Libero i=73 x
+Libero i=74 x
+Libero i=75 x
+Libero i=76 x
+Libero i=77 x
+Libero i=78 x
+Libero i=79 x
+Libero i=80 x
+Libero i=81 x
+Libero i=82 x
+Libero i=83 x
+Libero i=84 x
+Libero i=85 x
+Libero i=86 x
+Libero i=87 x
+Libero i=88 x
+Libero i=89 x
+Libero i=90 x
+Libero i=91 x
+Libero i=92 x
+Libero i=93 x
+Libero i=94 x
+Libero i=95 x
+Libero i=96 x
+Libero i=97 x
+Libero i=98 x
+Libero i=99 x
+Libero i=100 x
+Libero i=101 x
+Libero i=102 x
+Libero i=103 x
+Libero i=104 x
+Libero i=105 x
+Libero i=106 x
+Libero i=107 x
+Libero i=108 x
+Libero i=109 x
+Libero i=110 x
+Libero i=111 x
+Libero i=112 x
+Libero i=113 x
+Libero i=114 x
+Libero i=115 x
+Libero i=116 x
+Libero i=117 x
+Libero i=118 x
+Libero i=119 x
+Libero i=120 x
+Libero i=121 x
+Libero i=122 x
+Libero i=123 x
+Libero i=124 x
+Libero i=125 x
+Libero i=126 x
+Libero i=127 x
+Libero i=128 x
+Libero i=129 x
+Libero i=130 x
+Libero i=131 x
+Libero i=132 x
+Libero i=133 x
+Libero i=134 x
+Libero i=135 x
+Libero i=136 x
+Libero i=137 x
+Libero i=138 x
+Libero i=139 x
+Libero i=140 x
+Libero i=141 x
+Libero i=142 x
+Libero i=143 x
+Libero i=144 x
+Libero i=145 x
+Libero i=146 x
+Libero i=147 x
+Libero i=148 x
+Libero i=149 x
+Libero i=150 x
+Libero i=151 x
+Libero i=152 x
+Libero i=153 x
+Libero i=154 x
+Libero i=155 x
+Libero i=156 x
+Libero i=157 x
+Libero i=158 x
+Libero i=159 x
+Libero i=160 x
+Libero i=161 x
+Libero i=162 x
+Libero i=163 x
+Libero i=164 x
+Libero i=165 x
+Libero i=166 x
+Libero i=167 x
+Libero i=168 x
+Libero i=169 x
+Libero i=170 x
+Libero i=171 x
+Libero i=172 x
+Libero i=173 x
+Libero i=174 x
+Libero i=175 x
+Libero i=176 x
+Libero i=177 x
+Libero i=178 x
+Libero i=179 x
+Libero i=180 x
+Libero i=181 x
+Libero i=182 x
+Libero i=183 x
+Libero i=184 x
+Libero i=185 x
+Libero i=186 x
+Libero i=187 x
+Libero i=188 x
+Libero i=189 x
+Libero i=190 x
+Libero i=191 x
+Libero i=192 x
+Libero i=193 x
+Libero i=194 x
+Libero i=195 x
+Libero i=196 x
+Libero i=197 x
+Libero i=198 x
+Libero i=199 x
+Libero i=200 x
+Libero i=201 x
+Libero i=202 x
+Libero i=203 x
+Libero i=204 x
+Libero i=205 x
+Libero i=206 x
+Libero i=207 x
+Libero i=208 x
+Libero i=209 x
+Libero i=210 x
+Libero i=211 x
+Libero i=212 x
+Libero i=213 x
+Libero i=214 x
+Libero i=215 x
+Libero i=216 x
+Libero i=217 x
+Libero i=218 x
+Libero i=219 x
+Libero i=220 x
+Libero i=221 x
+Libero i=222 x
+Libero i=223 x
+Libero i=224 x
+Libero i=225 x
+Libero i=226 x
+Libero i=227 x
+Libero i=228 x
+Libero i=229 x
+Libero i=230 x
+Libero i=231 x
+Libero i=232 x
+Libero i=233 x
+Libero i=234 x
+Libero i=235 x
+Libero i=236 x
+Libero i=237 x
+Libero i=238 x
+Libero i=239 x
+Libero i=240 x
+Libero i=241 x
+Libero i=242 x
+Libero i=243 x
+Libero i=244 x
+Libero i=245 x
+Libero i=246 x
+Libero i=247 x
+Libero i=248 x
+Libero i=249 x
+Libero i=250 x
+Libero i=251 x
+Libero i=252 x
+Libero i=253 x
+Libero i=254 x
+Libero i=255 x
+Libero i=256 x
+Libero i=257 x
+Libero i=258 x
+Libero i=259 x
+Libero i=260 x
+Libero i=261 x
+Libero i=262 x
+Libero i=263 x
+Libero i=264 x
+Libero i=265 x
+Libero i=266 x
+Libero i=267 x
+Libero i=268 x
+Libero i=269 x
+Libero i=270 x
+Libero i=271 x
+Libero i=272 x
+Libero i=273 x
+Libero i=274 x
+Libero i=275 x
+Libero i=276 x
+Libero i=277 x
+Libero i=278 x
+Libero i=279 x
+Libero i=280 x
+Libero i=281 x
+Libero i=282 x
+Libero i=283 x
+Libero i=284 x
+Libero i=285 x
+Libero i=286 x
+Libero i=287 x
+Libero i=288 x
+Libero i=289 x
+Libero i=290 x
+Libero i=291 x
+Libero i=292 x
+Libero i=293 x
+Libero i=294 x
+Libero i=295 x
+Libero i=296 x
+Libero i=297 x
+Libero i=298 x
+Libero i=299 x
+Libero i=300 x
+Libero i=301 x
+Libero i=302 x
+Libero i=303 x
+Libero i=304 x
+Libero i=305 x
+Libero i=306 x
+Libero i=307 x
+Libero i=308 x
+Libero i=309 x
+Libero i=310 x
+Libero i=311 x
+Libero i=312 x
+Libero i=313 x
+Libero i=314 x
+Libero i=315 x
+Libero i=316 x
+Libero i=317 x
+Libero i=318 x
+Libero i=319 x
+Libero i=320 x
+Libero i=321 x
+Libero i=322 x
+Libero i=323 x
+Libero i=324 x
+Libero i=325 x
+Libero i=326 x
+Libero i=327 x
+Libero i=328 x
+Libero i=329 x
+Libero i=330 x
+Libero i=331 x
+Libero i=332 x
+Libero i=333 x
+Libero i=334 x
+Libero i=335 x
+Libero i=336 x
+Libero i=337 x
+Libero i=338 x
+Libero i=339 x
+Libero i=340 x
+Libero i=341 x
+Libero i=342 x
+Libero i=343 x
+Libero i=344 x
+Libero i=345 x
+Libero i=346 x
+Libero i=347 x
+Libero i=348 x
+Libero i=349 x
+Libero i=350 x
+Libero i=351 x
+Libero i=352 x
+Libero i=353 x
+Libero i=354 x
+Libero i=355 x
+Libero i=356 x
+Libero i=357 x
+Libero i=358 x
+Libero i=359 x
+Libero i=360 x
+Libero i=361 x
+Libero i=362 x
+Libero i=363 x
+Libero i=364 x
+Libero i=365 x
+Libero i=366 x
+Libero i=367 x
+Libero i=368 x
+Libero i=369 x
+Libero i=370 x
+Libero i=371 x
+Libero i=372 x
+Libero i=373 x
+Libero i=374 x
+Libero i=375 x
+Libero i=376 x
+Libero i=377 x
+Libero i=378 x
+Libero i=379 x
+Libero i=380 x
+Libero i=381 x
+Libero i=382 x
+Libero i=383 x
+Libero i=384 x
+Libero i=385 x
+Libero i=386 x
+Libero i=387 x
+Libero i=388 x
+Libero i=389 x
+Libero i=390 x
+Libero i=391 x
+Libero i=392 x
+Libero i=393 x
+Libero i=394 x
+Libero i=395 x
+Libero i=396 x
+Libero i=397 x
+Libero i=398 x
+Libero i=399 x
+Libero i=400 x
+Libero i=401 x
+Libero i=402 x
+Libero i=403 x
+Libero i=404 x
+Libero i=405 x
+Libero i=406 x
+Libero i=407 x
+Libero i=408 x
+Libero i=409 x
+Libero i=410 x
+Libero i=411 x
+Libero i=412 x
+Libero i=413 x
+Libero i=414 x
+Libero i=415 x
+Libero i=416 x
+Libero i=417 x
+Libero i=418 x
+Libero i=419 x
+Libero i=420 x
+Libero i=421 x
+Libero i=422 x
+Libero i=423 x
+Libero i=424 x
+Libero i=425 x
+Libero i=426 x
+Libero i=427 x
+Libero i=428 x
+Libero i=429 x
+Libero i=430 x
+Libero i=431 x
+Libero i=432 x
+Libero i=433 x
+Libero i=434 x
+Libero i=435 x
+Libero i=436 x
+Libero i=437 x
+Libero i=438 x
+Libero i=439 x
+Libero i=440 x
+Libero i=441 x
+Libero i=442 x
+Libero i=443 x
+Libero i=444 x
+Libero i=445 x
+Libero i=446 x
+Libero i=447 x
+Libero i=448 x
+Libero i=449 x
+Libero i=450 x
+Libero i=451 x
+Libero i=452 x
+Libero i=453 x
+Libero i=454 x
+Libero i=455 x
+Libero i=456 x
+Libero i=457 x
+Libero i=458 x
+Libero i=459 x
+Libero i=460 x
+Libero i=461 x
+Libero i=462 x
+Libero i=463 x
+Libero i=464 x
+Libero i=465 x
+Libero i=466 x
+Libero i=467 x
+Libero i=468 x
+Libero i=469 x
+Libero i=470 x
+Libero i=471 x
+Libero i=472 x
+Libero i=473 x
+Libero i=474 x
+Libero i=475 x
+Libero i=476 x
+Libero i=477 x
+Libero i=478 x
+Libero i=479 x
+Libero i=480 x
+Libero i=481 x
+Libero i=482 x
+Libero i=483 x
+Libero i=484 x
+Libero i=485 x
+Libero i=486 x
+Libero i=487 x
+Libero i=488 x
+Libero i=489 x
+Libero i=490 x
+Libero i=491 x
+Libero i=492 x
+Libero i=493 x
+Libero i=494 x
+Libero i=495 x
+Libero i=496 x
+Libero i=497 x
+Libero i=498 x
+Libero i=499 x
+Libero i=500 x
+Libero i=501 x
+Libero i=502 x
+Libero i=503 x
+Libero i=504 x
+Libero i=505 x
+Libero i=506 x
+Libero i=507 x
+Libero i=508 x
+Libero i=509 x
+Libero i=510 x
+Libero i=511 x
+Libero i=512 x
+Libero i=513 x
+Libero i=514 x
+Libero i=515 x
+Libero i=516 x
+Libero i=517 x
+Libero i=518 x
+Libero i=519 x
+Libero i=520 x
+Libero i=521 x
+Libero i=522 x
+Libero i=523 x
+Libero i=524 x
+Libero i=525 x
+Libero i=526 x
+Libero i=527 x
+Libero i=528 x
+Libero i=529 x
+Libero i=530 x
+Libero i=531 x
+Libero i=532 x
+Libero i=533 x
+Libero i=534 x
+Libero i=535 x
+Libero i=536 x
+Libero i=537 x
+Libero i=538 x
+Libero i=539 x
+Libero i=540 x
+Libero i=541 x
+Libero i=542 x
+Libero i=543 x
+Libero i=544 x
+Libero i=545 x
+Libero i=546 x
+Libero i=547 x
+Libero i=548 x
+Libero i=549 x
+Libero i=550 x
+Libero i=551 x
+Libero i=552 x
+Libero i=553 x
+Libero i=554 x
+Libero i=555 x
+Libero i=556 x
+Libero i=557 x
+Libero i=558 x
+Libero i=559 x
+Libero i=560 x
+Libero i=561 x
+Libero i=562 x
+Libero i=563 x
+Libero i=564 x
+Libero i=565 x
+Libero i=566 x
+Libero i=567 x
+Libero i=568 x
+Libero i=569 x
+Libero i=570 x
+Libero i=571 x
+Libero i=572 x
+Libero i=573 x
+Libero i=574 x
+Libero i=575 x
+Libero i=576 x
+Libero i=577 x
+Libero i=578 x
+Libero i=579 x
+Libero i=580 x
+Libero i=581 x
+Libero i=582 x
+Libero i=583 x
+Libero i=584 x
+Libero i=585 x
+Libero i=586 x
+Libero i=587 x
+Libero i=588 x
+Libero i=589 x
+Libero i=590 x
+Libero i=591 x
+Libero i=592 x
+Libero i=593 x
+Libero i=594 x
+Libero i=595 x
+Libero i=596 x
+Libero i=597 x
+Libero i=598 x
+Libero i=599 x
+Libero i=600 x
+Libero i=601 x
+Libero i=602 x
+Libero i=603 x
+Libero i=604 x
+Libero i=605 x
+Libero i=606 x
+Libero i=607 x
+Libero i=608 x
+Libero i=609 x
+Libero i=610 x
+Libero i=611 x
+Libero i=612 x
+Libero i=613 x
+Libero i=614 x
+Libero i=615 x
+Libero i=616 x
+Libero i=617 x
+Libero i=618 x
+Libero i=619 x
+Libero i=620 x
+Libero i=621 x
+Libero i=622 x
+Libero i=623 x
+Libero i=624 x
+Libero i=625 x
+Libero i=626 x
+Libero i=627 x
+Libero i=628 x
+Libero i=629 x
+Libero i=630 x
+Libero i=631 x
+Libero i=632 x
+Libero i=633 x
+Libero i=634 x
+Libero i=635 x
+Libero i=636 x
+Libero i=637 x
+Libero i=638 x
+Libero i=639 x
+Libero i=640 x
+Libero i=641 x
+Libero i=642 x
+Libero i=643 x
+Libero i=644 x
+Libero i=645 x
+Libero i=646 x
+Libero i=647 x
+Libero i=648 x
+Libero i=649 x
+Libero i=650 x
+Libero i=651 x
+Libero i=652 x
+Libero i=653 x
+Libero i=654 x
+Libero i=655 x
+Libero i=656 x
+Libero i=657 x
+Libero i=658 x
+Libero i=659 x
+Libero i=660 x
+Libero i=661 x
+Libero i=662 x
+Libero i=663 x
+Libero i=664 x
+Libero i=665 x
+Libero i=666 x
+Libero i=667 x
+Libero i=668 x
+Libero i=669 x
+Libero i=670 x
+Libero i=671 x
+Libero i=672 x
+Libero i=673 x
+Libero i=674 x
+Libero i=675 x
+Libero i=676 x
+Libero i=677 x
+Libero i=678 x
+Libero i=679 x
+Libero i=680 x
+Libero i=681 x
+Libero i=682 x
+Libero i=683 x
+Libero i=684 x
+Libero i=685 x
+Libero i=686 x
+Libero i=687 x
+Libero i=688 x
+Libero i=689 x
+Libero i=690 x
+Libero i=691 x
+Libero i=692 x
+Libero i=693 x
+Libero i=694 x
+Libero i=695 x
+Libero i=696 x
+Libero i=697 x
+Libero i=698 x
+Libero i=699 x
+Libero i=700 x
+Libero i=701 x
+Libero i=702 x
+Libero i=703 x
+Libero i=704 x
+Libero i=705 x
+Libero i=706 x
+Libero i=707 x
+Libero i=708 x
+Libero i=709 x
+Libero i=710 x
+Libero i=711 x
+Libero i=712 x
+Libero i=713 x
+Libero i=714 x
+Libero i=715 x
+Libero i=716 x
+Libero i=717 x
+Libero i=718 x
+Libero i=719 x
+Libero i=720 x
+Libero i=721 x
+Libero i=722 x
+Libero i=723 x
+Libero i=724 x
+Libero i=725 x
+Libero i=726 x
+Libero i=727 x
+Libero i=728 x
+Libero i=729 x
+Libero i=730 x
+Libero i=731 x
+Libero i=732 x
+Libero i=733 x
+Libero i=734 x
+Libero i=735 x
+Libero i=736 x
+Libero i=737 x
+Libero i=738 x
+Libero i=739 x
+Libero i=740 x
+Libero i=741 x
+Libero i=742 x
+Libero i=743 x
+Libero i=744 x
+Libero i=745 x
+Libero i=746 x
+Libero i=747 x
+Libero i=748 x
+Libero i=749 x
+Libero i=750 x
+Libero i=751 x
+Libero i=752 x
+Libero i=753 x
+Libero i=754 x
+Libero i=755 x
+Libero i=756 x
+Libero i=757 x
+Libero i=758 x
+Libero i=759 x
+Libero i=760 x
+Libero i=761 x
+Libero i=762 x
+Libero i=763 x
+Libero i=764 x
+Libero i=765 x
+Libero i=766 x
+Libero i=767 x
+Libero i=768 x
+Libero i=769 x
+Libero i=770 x
+Libero i=771 x
+Libero i=772 x
+Libero i=773 x
+Libero i=774 x
+Libero i=775 x
+Libero i=776 x
+Libero i=777 x
+Libero i=778 x
+Libero i=779 x
+Libero i=780 x
+Libero i=781 x
+Libero i=782 x
+Libero i=783 x
+Libero i=784 x
+Libero i=785 x
+Libero i=786 x
+Libero i=787 x
+Libero i=788 x
+Libero i=789 x
+Libero i=790 x
+Libero i=791 x
+Libero i=792 x
+Libero i=793 x
+Libero i=794 x
+Libero i=795 x
+Libero i=796 x
+Libero i=797 x
+Libero i=798 x
+Libero i=799 x
+Libero i=800 x
+Libero i=801 x
+Libero i=802 x
+Libero i=803 x
+Libero i=804 x
+Libero i=805 x
+Libero i=806 x
+Libero i=807 x
+Libero i=808 x
+Libero i=809 x
+Libero i=810 x
+Libero i=811 x
+Libero i=812 x
+Libero i=813 x
+Libero i=814 x
+Libero i=815 x
+Libero i=816 x
+Libero i=817 x
+Libero i=818 x
+Libero i=819 x
+Libero i=820 x
+Libero i=821 x
+Libero i=822 x
+Libero i=823 x
+Libero i=824 x
+Libero i=825 x
+Libero i=826 x
+Libero i=827 x
+Libero i=828 x
+Libero i=829 x
+Libero i=830 x
+Libero i=831 x
+Libero i=832 x
+Libero i=833 x
+Libero i=834 x
+Libero i=835 x
+Libero i=836 x
+Libero i=837 x
+Libero i=838 x
+Libero i=839 x
+Libero i=840 x
+Libero i=841 x
+Libero i=842 x
+Libero i=843 x
+Libero i=844 x
+Libero i=845 x
+Libero i=846 x
+Libero i=847 x
+Libero i=848 x
+Libero i=849 x
+Libero i=850 x
+Libero i=851 x
+Libero i=852 x
+Libero i=853 x
+Libero i=854 x
+Libero i=855 x
+Libero i=856 x
+Libero i=857 x
+Libero i=858 x
+Libero i=859 x
+Libero i=860 x
+Libero i=861 x
+Libero i=862 x
+Libero i=863 x
+Libero i=864 x
+Libero i=865 x
+Libero i=866 x
+Libero i=867 x
+Libero i=868 x
+Libero i=869 x
+Libero i=870 x
+Libero i=871 x
+Libero i=872 x
+Libero i=873 x
+Libero i=874 x
+Libero i=875 x
+Libero i=876 x
+Libero i=877 x
+Libero i=878 x
+Libero i=879 x
+Libero i=880 x
+Libero i=881 x
+Libero i=882 x
+Libero i=883 x
+Libero i=884 x
+Libero i=885 x
+Libero i=886 x
+Libero i=887 x
+Libero i=888 x
+Libero i=889 x
+Libero i=890 x
+Libero i=891 x
+Libero i=892 x
+Libero i=893 x
+Libero i=894 x
+Libero i=895 x
+Libero i=896 x
+Libero i=897 x
+Libero i=898 x
+Libero i=899 x
+Libero i=900 x
+Libero i=901 x
+Libero i=902 x
+Libero i=903 x
+Libero i=904 x
+Libero i=905 x
+Libero i=906 x
+Libero i=907 x
+Libero i=908 x
+Libero i=909 x
+Libero i=910 x
+Libero i=911 x
+Libero i=912 x
+Libero i=913 x
+Libero i=914 x
+Libero i=915 x
+Libero i=916 x
+Libero i=917 x
+Libero i=918 x
+Libero i=919 x
+Libero i=920 x
+Libero i=921 x
+Libero i=922 x
+Libero i=923 x
+Libero i=924 x
+Libero i=925 x
+Libero i=926 x
+Libero i=927 x
+Libero i=928 x
+Libero i=929 x
+Libero i=930 x
+Libero i=931 x
+Libero i=932 x
+Libero i=933 x
+Libero i=934 x
+Libero i=935 x
+Libero i=936 x
+Libero i=937 x
+Libero i=938 x
+Libero i=939 x
+Libero i=940 x
+Libero i=941 x
+Libero i=942 x
+Libero i=943 x
+Libero i=944 x
+Libero i=945 x
+Libero i=946 x
+Libero i=947 x
+Libero i=948 x
+Libero i=949 x
+Libero i=950 x
+Libero i=951 x
+Libero i=952 x
+Libero i=953 x
+Libero i=954 x
+Libero i=955 x
+Libero i=956 x
+Libero i=957 x
+Libero i=958 x
+Libero i=959 x
+Libero i=960 x
+Libero i=961 x
+Libero i=962 x
+Libero i=963 x
+Libero i=964 x
+Libero i=965 x
+Libero i=966 x
+Libero i=967 x
+Libero i=968 x
+Libero i=969 x
+Libero i=970 x
+Libero i=971 x
+Libero i=972 x
+Libero i=973 x
+Libero i=974 x
+Libero i=975 x
+Libero i=976 x
+Libero i=977 x
+Libero i=978 x
+Libero i=979 x
+Libero i=980 x
+Libero i=981 x
+Libero i=982 x
+Libero i=983 x
+Libero i=984 x
+Libero i=985 x
+Libero i=986 x
+Libero i=987 x
+Libero i=988 x
+Libero i=989 x
+Libero i=990 x
+Libero i=991 x
+Libero i=992 x
+Libero i=993 x
+Libero i=994 x
+Libero i=995 x
+Libero i=996 x
+Libero i=997 x
+Libero i=998 x
+Libero i=999 x
+Libero i=1000 x
+Libero i=1001 x
+Libero i=1002 x
+Libero i=1003 x
+Libero i=1004 x
+Libero i=1005 x
+Libero i=1006 x
+Libero i=1007 x
+Libero i=1008 x
+Libero i=1009 x
+Libero i=1010 x
+Libero i=1011 x
+Libero i=1012 x
+Libero i=1013 x
+Libero i=1014 x
+Libero i=1015 x
+Libero i=1016 x
+Libero i=1017 x
+Libero i=1018 x
+Libero i=1019 x
+Libero i=1020 x
+Libero i=1021 x
+Libero i=1022 x
+Libero i=1023 x
+Libero i=1024 x
+Libero i=1025 x
+Libero i=1026 x
+Libero i=1027 x
+Libero i=1028 x
+Libero i=1029 x
+Libero i=1030 x
+Libero i=1031 x
+Libero i=1032 x
+Libero i=1033 x
+Libero i=1034 x
+Libero i=1035 x
+Libero i=1036 x
+Libero i=1037 x
+Libero i=1038 x
+Libero i=1039 x
+Libero i=1040 x
+Libero i=1041 x
+Libero i=1042 x
+Libero i=1043 x
+Libero i=1044 x
+Libero i=1045 x
+Libero i=1046 x
+Libero i=1047 x
+Libero i=1048 x
+Libero i=1049 x
+Libero i=1050 x
+Libero i=1051 x
+Libero i=1052 x
+Libero i=1053 x
+Libero i=1054 x
+Libero i=1055 x
+Libero i=1056 x
+Libero i=1057 x
+Libero i=1058 x
+Libero i=1059 x
+Libero i=1060 x
+Libero i=1061 x
+Libero i=1062 x
+Libero i=1063 x
+Libero i=1064 x
+Libero i=1065 x
+Libero i=1066 x
+Libero i=1067 x
+Libero i=1068 x
+Libero i=1069 x
+Libero i=1070 x
+Libero i=1071 x
+Libero i=1072 x
+Libero i=1073 x
+Libero i=1074 x
+Libero i=1075 x
+Libero i=1076 x
+Libero i=1077 x
+Libero i=1078 x
+Libero i=1079 x
+Libero i=1080 x
+Libero i=1081 x
+Libero i=1082 x
+Libero i=1083 x
+Libero i=1084 x
+Libero i=1085 x
+Libero i=1086 x
+Libero i=1087 x
+Libero i=1088 x
+Libero i=1089 x
+Libero i=1090 x
+Libero i=1091 x
+Libero i=1092 x
+Libero i=1093 x
+Libero i=1094 x
+Libero i=1095 x
+Libero i=1096 x
+Libero i=1097 x
+Libero i=1098 x
+Libero i=1099 x
+Libero i=1100 x
+Libero i=1101 x
+Libero i=1102 x
+Libero i=1103 x
+Libero i=1104 x
+Libero i=1105 x
+Libero i=1106 x
+Libero i=1107 x
+Libero i=1108 x
+Libero i=1109 x
+Libero i=1110 x
+Libero i=1111 x
+Libero i=1112 x
+Libero i=1113 x
+Libero i=1114 x
+Libero i=1115 x
+Libero i=1116 x
+Libero i=1117 x
+Libero i=1118 x
+Libero i=1119 x
+Libero i=1120 x
+Libero i=1121 x
+Libero i=1122 x
+Libero i=1123 x
+Libero i=1124 x
+Libero i=1125 x
+Libero i=1126 x
+Libero i=1127 x
+Libero i=1128 x
+Libero i=1129 x
+Libero i=1130 x
+Libero i=1131 x
+Libero i=1132 x
+Libero i=1133 x
+Libero i=1134 x
+Libero i=1135 x
+Libero i=1136 x
+Libero i=1137 x
+Libero i=1138 x
+Libero i=1139 x
+Libero i=1140 x
+Libero i=1141 x
+Libero i=1142 x
+Libero i=1143 x
+Libero i=1144 x
+Libero i=1145 x
+Libero i=1146 x
+Libero i=1147 x
+Libero i=1148 x
+Libero i=1149 x
+Libero i=1150 x
+Libero i=1151 x
+Libero i=1152 x
+Libero i=1153 x
+Libero i=1154 x
+Libero i=1155 x
+Libero i=1156 x
+Libero i=1157 x
+Libero i=1158 x
+Libero i=1159 x
+Libero i=1160 x
+Libero i=1161 x
+Libero i=1162 x
+Libero i=1163 x
+Libero i=1164 x
+Libero i=1165 x
+Libero i=1166 x
+Libero i=1167 x
+Libero i=1168 x
+Libero i=1169 x
+Libero i=1170 x
+Libero i=1171 x
+Libero i=1172 x
+Libero i=1173 x
+Libero i=1174 x
+Libero i=1175 x
+Libero i=1176 x
+Libero i=1177 x
+Libero i=1178 x
+Libero i=1179 x
+Libero i=1180 x
+Libero i=1181 x
+Libero i=1182 x
+Libero i=1183 x
+Libero i=1184 x
+Libero i=1185 x
+Libero i=1186 x
+Libero i=1187 x
+Libero i=1188 x
+Libero i=1189 x
+Libero i=1190 x
+Libero i=1191 x
+Libero i=1192 x
+Libero i=1193 x
+Libero i=1194 x
+Libero i=1195 x
+Libero i=1196 x
+Libero i=1197 x
+Lib

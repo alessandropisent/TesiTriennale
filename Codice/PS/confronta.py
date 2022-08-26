@@ -14,7 +14,9 @@ with open("Codice/results.txt","r") as f:
     for line in f:
         aC.append(float(line))
 
-for i in range(len(aC)):
+minL = min(len(aC),len(aMatlab))
+
+for i in range(minL):
     if(not math.isclose(aC[i],aMatlab[i],rel_tol=0.05)):
         print(str(i)+": "+str(aC[i])+" != "+ str(aMatlab[i]))
         eq = False
