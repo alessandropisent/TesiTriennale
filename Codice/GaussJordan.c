@@ -159,17 +159,15 @@ void printFMatrixRAlg(const Matrix *M){
 
 }/*printFMatrixRAlg*/
 
-
 /*  Funzione per normalizzare l'elemento sulla "diagonale" di una riga, 
     dividendola per se stessa
 
     IP r, riga della matrice su cui operare
     IP c, colonna della matrice su cui operare
     IOP M, matrice da modificare
-    OP
-  
-*/
-void diagNorm(int r, int c, Matrix *M){
+    OR { 0 nessun errore
+         -1 errore di normalizzazzione     }*/
+int diagNorm(int r, int c, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
     int i;
 
@@ -182,12 +180,10 @@ void diagNorm(int r, int c, Matrix *M){
     
     /*se sono riuscito a normalizzare l'elemento*/
     if(isZero((M->MCoef)[r][c]-1,M->error))
-        return;
-    
+        return 0;
     /*se non ho normalizzato l'elemento*/
-    /*TAG:DEBUG*/
-    printf("ERRORE PER ELEMENTO M[%d][%d]=%f\n",r,c,(M->MCoef)[r][c]);
-
+    else
+        return -1;
 }/*diagNorm*/
 
 
@@ -249,8 +245,7 @@ void factMRAlg(int r,int c, int rowC, Matrix *M){
     el = t*((M->MRAlg)[rowC-1][rowC-1]);
     (M->MRAlg)[r-1][rowC-1] = el;
 
-    /*prendo tutti i fattori, cioe' considero anche le operazioni che sono gia
-        state fatte sulle altre eqn*/
+    /*copia delle operazioni fatte sulla eqn $r */ /*TODO:COMMENTO*/
     for(i=0;i<M->nEq;i++){
 
         /*non deve modificare i dati sulla diagonale*/
@@ -268,8 +263,9 @@ void factMRAlg(int r,int c, int rowC, Matrix *M){
     IP c, colonna della matrice ideale da modificare
     IP r, riga della matrice ideale da modificare
     IOP M, Matrice da modificare
-*/
-void zerosCol(int r, int c, Matrix * M){
+    OR { 0: nessun errore
+        -1: errore di normalizazzione      }*/
+int zerosCol(int r, int c, Matrix * M){
     
     int i,row;  /*variabili per il ciclo, e per la riga*/
     
@@ -280,8 +276,8 @@ void zerosCol(int r, int c, Matrix * M){
     (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
     
     /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
-    diagNorm(r,c,M);
-
+    if(diagNorm(r,c,M)==-1)
+        return -1;
 
     /*Per ogni riga*/
     for(i=0;i<((M->nEq)-1);i++){
@@ -303,15 +299,16 @@ void zerosCol(int r, int c, Matrix * M){
 
     }/*for*/
 
-
+    return 0;
 }/*zerosCol*/
 
 
 
 /*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
     IOP M, matrice da risolvere
-*/
-void solveTheMatrix(Matrix *M){
+    OR { 0: sono riuscito a risolvere il sistema
+        -1: errori di normalizzazzione       }*/
+int solveTheMatrix(Matrix *M){
 
     /*per il while*/
     int i=0,        /*contatore per il numero di incognite risolte*/
@@ -347,7 +344,8 @@ void solveTheMatrix(Matrix *M){
         else if(!isZero((M->MCoef)[r][c], M->error)){
             
             /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
-            zerosCol(r,c,M);
+            if(zerosCol(r,c,M)==-1)
+                return -1;
             i++; /*lo faccio su almeno tutte le equazioni - # eq lin dip*/
             
             /*per avere un idea del progresso*/
@@ -381,6 +379,8 @@ void solveTheMatrix(Matrix *M){
         }/*if*/
         
     }/*while*/
+
+    return 0;
 
 }/*solveTheMatrix*/
 
@@ -431,17 +431,6 @@ void addR(int r, Matrix* M){
     M->nEDip +=1;
 
 }/*addR*/
-
-/*  Funzione che ritorna il minimo tra due interi
-    IP a, intero a
-    IP b, intero b
-    OR a se a<b , altrimenti b
-*/
-int min(int a, int b){
-    if (a<b)
-        return a;
-    return b;
-}/*min*/
 
 /*  Fuznione che stampa a schermo il sistema di equazioni a schermo
     IP Matrix M

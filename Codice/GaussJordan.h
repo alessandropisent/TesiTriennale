@@ -2,10 +2,10 @@
 
 #define FREE_ROWS 1
 #define COLONNA_TERMINE_NOTO 0
-#define MAX_STRING 200
+#define MAX_STRING 100000
 #define MAX_STAMPA 1000
 #define MAX_STAMPA_EQN 100
-/*#define TEST*/
+#define TEST
 
 typedef struct {
     double** MCoef;     /*Matrice con allocazione dinamica memoria*/
@@ -28,14 +28,12 @@ void printFMatrixRAlg(const Matrix *);
 void printEquations(const Matrix *);
 
 /*funzioni per la risoluzione del sistema*/
-void diagNorm(int , int, Matrix *);
+int diagNorm(int , int, Matrix *);
 void zerosRow(int , int, int, Matrix *);
 void factMRAlg(int, int, int, Matrix *);
-void zerosCol(int ,int,  Matrix *);
+int zerosCol(int ,int,  Matrix *);
 bool isEqLinDip(int, const Matrix *);
-void solveTheMatrix(Matrix *);
-void solveDiag(Matrix * );
-void solveLinDip(Matrix *);
+int solveTheMatrix(Matrix *);
 
 /*funzioni accessorie*/
 bool isZero(double , double);

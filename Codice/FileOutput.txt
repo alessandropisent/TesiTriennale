@@ -1,4 +1,0 @@
-SISTEMA CON RISULTATO UNICO
-x 1 =  0.92
-x 2 =  0.25
-x 3 = -1.17

@@ -112,7 +112,7 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
         for(i=0;i<M->nEq;i++){
             /*stampa tutti i coefficienti che sono 1*/
             if(isZero((M->MCoef)[i+1][j+1]-1,M->error)){
-                fprintf(outF,"x%2d = %5.2f\n",j+1,(M->MCoef)[i+1][0]);
+                fprintf(outF,"x%2d = %f\n",j+1,(M->MCoef)[i+1][0]);
                 #ifdef TEST
                     /*stampo solo se richiesto dalle direttive*/
                     fprintf(matlabF,"%f\n",(M->MCoef)[i+1][0]);
@@ -278,15 +278,15 @@ void printHelp(int code){
         #endif
         printf("\n\nil file di input va formattato come :\n");
         printf("n m\n");
+        printf("error\n\n");
         printf("b1 a11 a12 a13\n");
         printf("b2 a21 a22 a23\n");
         printf("b3 a31 a32 a33\n");
-        printf("error\n\n");
         printf("dove:\n- n = # di equazioni\n");
+        printf("- error= precisione che consideriamo accettabile per confrontare due numeri\n\n");
         printf("- m = # di incognite\n");
         printf("- b# = termine noto b#\n");
         printf("- a## = coefficiente della equazione\n");
-        printf("- error= precisione che consideriamo accettabile per confrontare due numeri\n\n");
         printf("Regole aggiuntive:\n");
         printf("- e' possibile non inserire tutti i coefficienti nell'equazione, verranno considerati nulli\n");
         printf("- e' necessario inserire almeno 2 numeri in una riga (cioe' del termine noto e il coefficiente di x1)\n");
@@ -363,16 +363,17 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
     OR Esito (
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileIn;
+        -2: errore di inserimento dati
 */
 int readFileMatrix(const char nameFileIn[], Matrix *M){
 
     double r;               /* per la lettura*/
     int n;                  /*dimensione righe*/
     int m;                  /*dimensione colonne*/
-    int i,j;                /*iterazione*/
+    int err;
+    int i=0,            
+        j=0;              /*icontatore elementi*/
 
-    char * line = NULL;
-    size_t len = 0;
 
     /*Apertura e dello stream dei file di input e output*/
     FILE *inF;
@@ -387,23 +388,17 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
     /*inizializzazione della matice*/
     initMatrix(n,m,M);
 
-
-    if(i<n){
-        printf("ERRORE LETTURA FILE: Non inserite abbastanza equazioni");
-        return -1;
-    }/*if*/
-        
-
+    /*salvo l'errore dentro alla matrice*/
+    fscanf(inF,"%lf",&r);
+    M->error = r;
 
     /*scansione della matrice*/
     for(i=0;i<n;i++){
 
-        
-
         for(j = 0; j< m+1 ;j++){
 
             /*lettura del dato*/
-            fscanf(inF,"%lf",&r);
+            err=fscanf(inF,"%lf",&r);
 
             /*memorizzazzione*/
             (M->MCoef)[i+1][j] = r;
@@ -412,9 +407,8 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 
     }/*for*/
 
-    /*salvo l'errore dentro alla matrice*/
-    fscanf(inF,"%lf",&r);
-    M->error = r;
+    if(err==-1)
+        return -2;
 
     /*stampa di cioò che ho letto, se il numero di elementi non e' troppo grande*/
     if((n*m)<MAX_STAMPA_EQN)
@@ -425,9 +419,6 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 
     /*chiusura del file*/
     fclose(inF);
-
-    if(line)
-        free(line);
 
     /*nessun errore*/
     return 0;
@@ -442,6 +433,7 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 int main(int argc, char const *argv[]){
 
     Matrix M;
+    int err;
     #ifdef TEST
         Matrix T;
         bool doTest=false;  /*variabile booleana che dice se ho effetuato il test*/
@@ -458,16 +450,28 @@ int main(int argc, char const *argv[]){
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*else if*/
 
+    /*codice errore*/
+    err = readFileMatrix(argv[1],&M);
+
     /*Lettura della matrice in input*/
-    if(readFileMatrix(argv[1],&M) == -1){
+    if(err == -1){
         printf("ERRORE FILE INGRESSO\n");
         return -1;
     }/*if*/
+    else if (err == -2){
+        printf("ERRORE DI INSERIMENTO DATI\n");
+        return -1;
+    }/*if*/
+
     
-    /*risoluzione della MAtrice*/
-    solveTheMatrix(&M);
-    /*stampa a schermo che il sistema e' risolto*/
-    printf("\nSistema risolto\n");
+    /*risoluzione della Ma trice*/
+    if(solveTheMatrix(&M)==-1){
+        printf("Errori di normalizzazzione\nSistema non risolto\n");
+        return -1;
+    }/*if*/
+    else
+        /*stampa a schermo che il sistema e' risolto*/
+        printf("\nSistema risolto\n");
 
     #ifdef TEST
         /*stampa su file delle colonne non risolte*/

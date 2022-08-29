@@ -5,14 +5,16 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 3 # righe, # di equazioni
-M = 3 # colonne, # di incognite
+N = 8100 # righe, # di equazioni
+M = 8000 # colonne, # di incognite
 
 a = 0
 b = 10
 
-D = 0 # # of righe dipendenti
+D = 100 # # of righe dipendenti
 In = N-D
+
+TEST_NUM = 0
 
 precisone = "0.00001"
 
@@ -42,7 +44,7 @@ for i in range(N):
 
 print("SCRITTURA DELLA DIPENDENZA")
 #Scrive le dipendenza
-with open("Codice/Dipendenza.txt", "w") as fileD:
+with open("Codice/Dipendenza%2d.txt"%(TEST_NUM), "w") as fileD:
     if(D>0):
         for i in range(D):
             f = randint(-b,b)
@@ -94,14 +96,16 @@ savemat("Codice/PS/var.mat", {"A":m.astype(float) , "b" : c.astype(float)})
 
 print("SCRITTURA DEL FILE INPUT")
 # Scrittura per il file di Test per il programma PRincipale
-with open("Codice/FileInput.txt","w") as f:
+with open("Codice/Test%2dI.txt"%(TEST_NUM),"w") as f:
     f.write(str(N)+" "+str(M)+"\n")
+    f.write(precisone)
+    f.write("\n")
     for i in range(N):
         f.write(str(c[i])+" ")
         for j in range(M):
             f.write(str(m[i][j])+" ")
         f.write("\n")
-    f.write(precisone)
+    
         
 
 # Scrittura per il file di decomposizione LU
