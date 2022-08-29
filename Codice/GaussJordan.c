@@ -33,9 +33,6 @@
 #include <string.h>         /*strcat*/
 #include "GaussJordan.h"    /*definizione delle funzioni nel file*/
 
-#define ERRORS_FILE "errors.txt"
-#define INDEX_FILE "indexDone.txt"
-
 /*inizializzazzione della matrice e allocazione della memoria
     IP n, numero di righe
     IP m, numero di colonne
@@ -45,7 +42,6 @@ void initMatrix(int n, int m, Matrix *M){
 
     int i;
     int initNDipRow = n-1; /*al massimo le righe indipendenti saranno il # di nEq-1*/
-    int dim = sizeof(double) *(m + 1);  /*per array Coefficienti*/
 
     /*Assegnazioni delle capacita' di righe e colonne*/
     M->nEq = n;   /*Equazioni / Righe*/
@@ -57,7 +53,7 @@ void initMatrix(int n, int m, Matrix *M){
 
     /*Creazione di un array per ogni riga*/
     for(i = 0; i<(n+1) ; i++){
-        (M->MCoef)[i] = (double*) malloc(dim);
+        (M->MCoef)[i] = (double*) calloc( m+1 ,sizeof(double));
         assert((M->MCoef)[i] != NULL);
     }/*for*/
 
@@ -97,37 +93,21 @@ void oneMatrixRAlg(Matrix *M){
 */
 void freeMatrix(Matrix *M){
 
-    int i;
-    int n = M->nEq;
+    int i;          /*per il for*/
+    int n = M->nEq; /*per chiarezza di lettura*/
 
     /*libera le righe coefficienti*/
-    for(i = 0; i < (n+1); i++){
-        printf("\nLibero i=%d ",(i+1)%(n+1));
+    for(i = 0; i < (n+1); i++)
         free((M->MCoef)[(i+1)%(n+1)]);
-        printf("x");
-    }
-        
-    
-    
 
     /*libera righe relazioni*/
-    for ( i = 0; i < M->nEq; i++){
-        printf("\nLibero i=%d ",i);
+    for ( i = 0; i < n; i++)
         free((M->MRAlg)[i]);
-        printf("x");
-    }
-        
-
     
-
     free(M->MCoef);
-    printf("liberato MC\n");
     free(M->MRAlg);
-    printf("liberato MRA\n"); 
     /*libera la matrice con righe dipendenti*/
     free(M->aEDip);
-    printf("Liberato aED\n");
-    
 
 }/*freeMatrix*/
 
@@ -192,7 +172,6 @@ void printFMatrixRAlg(const Matrix *M){
 void diagNorm(int r, int c, Matrix *M){
     /* Devo prendere la riga i-esima e nomalizzarla*/
     int i;
-    FILE * erF;
 
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
@@ -207,15 +186,7 @@ void diagNorm(int r, int c, Matrix *M){
     
     /*se non ho normalizzato l'elemento*/
     /*TAG:DEBUG*/
-    erF = fopen(ERRORS_FILE,"a");
-    
-    if(erF==NULL)
-        return;
-
-    fprintf(erF,"ERRORE PER ELEMENTO M[%d][%d]=%f\n",r,c,(M->MCoef)[r][c]);
-    printf("\nErrori per normalizzazzione\n");
-
-    fclose(erF);
+    printf("ERRORE PER ELEMENTO M[%d][%d]=%f\n",r,c,(M->MCoef)[r][c]);
 
 }/*diagNorm*/
 
@@ -269,12 +240,17 @@ void zerosRow(int r, int c, int rowC, Matrix *M){
 */
 void factMRAlg(int r,int c, int rowC, Matrix *M){
 
-    int i;
-    double el, t = (M->MCoef)[r][c];
+    int i;                          /*intero per il for*/
+    double el,                      /*# di volte che l'eqn $rowC viene tolta da $r*/
+            t = (M->MCoef)[r][c];   /*# di volte che l'eqn $rowC normalizzata viene tolta da $r*/
 
+    
+    /*salvo e memorizzo*/
     el = t*((M->MRAlg)[rowC-1][rowC-1]);
     (M->MRAlg)[r-1][rowC-1] = el;
 
+    /*prendo tutti i fattori, cioe' considero anche le operazioni che sono gia
+        state fatte sulle altre eqn*/
     for(i=0;i<M->nEq;i++){
 
         /*non deve modificare i dati sulla diagonale*/
@@ -307,28 +283,106 @@ void zerosCol(int r, int c, Matrix * M){
     diagNorm(r,c,M);
 
 
-    /*Per ogni elemento*/
+    /*Per ogni riga*/
     for(i=0;i<((M->nEq)-1);i++){
 
         /*indice di riga a partire da 1*/
         row = (i+r)%(M->nEq)+1;
 
+        /*se non e' un'equazione lin dip posso dividere*/
         if(!isEqLinDip(row,M)){
 
-            /*printf("Azzero il coefficiente: M[%d][%d]\n",r,c);*/ /*TAG:DEBUG*/
+            /*prima mi scrivo le operazioni che faro' sulla matrice $MRAlg*/
             factMRAlg(row, c, r, M); /*TAG:Ralg*/
 
+            /*poi azzero la riga $row, considerando che ho normalizzato 
+                l'elemento M[$r][$c]*/
             zerosRow(row, c, r, M);
         
         }/*if*/
-            
-        
 
     }/*for*/
 
-    /*printFMatrix(M);*/  /*TAG:DEBUG*/
 
 }/*zerosCol*/
+
+
+
+/*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
+    IOP M, matrice da risolvere
+*/
+void solveTheMatrix(Matrix *M){
+
+    /*per il while*/
+    int i=0,        /*contatore per il numero di incognite risolte*/
+        r=1,        /*indice di riga*/
+        c=1,        /*indice di colonna*/
+        j=0,        /*contatore per il numero di iterazioni del while*/
+        k=0,        /*indice per $(M->aEDip)*/
+        iCSkip = 0; /*contatore delle colonne saltate*/
+    bool skippedR = false, /*stato per il ciclo, se la riga e' stata saltata*/
+         skippedC = false; /*stato per il ciclo, se la colonna e' stata saltata*/ 
+    int n = M->nEq; /*per semplificare la lettura*/
+
+    /*conferma che sta iniziando la risoluzione se ci sono tanti dati*/
+    if(((M->nIn) * (M->nEq)) > MAX_STAMPA)
+        printf("\nRISOLUZIONE DEL SISTEMA\n");
+
+    /*Devo trovare $i =  #equazioni - #righe dipendenti*/
+    /*i parte da 0, e deve avere al massimo $n-$nEDip*/
+    while(i<(n-(M->nEDip))){
+
+        /*inizializzo gli stati*/
+        skippedR = false;
+        skippedC = false;
+        
+        /*se le sono su una eqn lin dip dalle altre allora posso saltare la riga $r ma
+         non devo far avanzare la colonna $c*/
+        if(M->nEDip > 0 &&  isEqLinDip(r,M)){
+            skippedC = true;
+            iCSkip++;
+        }/*if*/
+           
+        /*se l'elemento sulla diagonale M[$r][$c]!=0 allora posso continuare*/
+        else if(!isZero((M->MCoef)[r][c], M->error)){
+            
+            /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
+            zerosCol(r,c,M);
+            i++; /*lo faccio su almeno tutte le equazioni - # eq lin dip*/
+            
+            /*per avere un idea del progresso*/
+            if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
+                /*la stringa al inizio serve per abbellire l'output*/
+                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d, k=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip,k);
+
+        }/*if*/
+
+        /*altimenti, l'elemento M[$r][$c]==0, ma l'equazione $r non e' lin dip*/
+        else
+            skippedR = true; /*quindi significa che non devo aumentare $r ma provero'
+                                l'elemento M[$r][$c+1]*/
+
+        /*indice che conta le volte che il ciclo viene eseguito*/   
+        j++; /*parte da 0*/
+
+        /*aumento $r*/
+        if(!skippedR)
+            /*indice per la riga, parte da 1*/
+            r=((r)%(M->nEq)) +1;
+        
+        /*aumento $c*/
+        if(!skippedC){
+            /*se non*/
+            if((j-iCSkip)<(M->nIn))
+                c++;
+            else
+                c = (M->aEDip)[k++];
+
+        }/*if*/
+        
+    }/*while*/
+
+}/*solveTheMatrix*/
 
 /*  Funzione che stabilisce se la riga $r e' linearmente dipendente
     alle altre righe della matrice
@@ -354,6 +408,66 @@ bool isEqLinDip(int row, const Matrix * M){
 
 }/*isEqLinDip*/
 
+
+/*  Funzione che dice se un double e' zero dato un errore
+    IP a, valore da controllare se sia circa zero
+    IP precisone
+    OR $a==0
+*/
+bool isZero(double a, double precisione){
+
+    return fabs(a)<precisione;
+
+}/*isZero*/
+
+
+/*  Funzione aggiunge la riga all'array di righe indipendenti
+    IP r, riga da aggiungere
+    IOP M, matrice con tutto
+*/
+void addR(int r, Matrix* M){
+    
+    M->aEDip[M->nEDip] = r;
+    M->nEDip +=1;
+
+}/*addR*/
+
+/*  Funzione che ritorna il minimo tra due interi
+    IP a, intero a
+    IP b, intero b
+    OR a se a<b , altrimenti b
+*/
+int min(int a, int b){
+    if (a<b)
+        return a;
+    return b;
+}/*min*/
+
+/*  Fuznione che stampa a schermo il sistema di equazioni a schermo
+    IP Matrix M
+    OV il sistema di equazioni
+*/
+void printEquations(const Matrix *M){
+
+    int i,j;
+    
+    /*stampa del forntespizio*/
+    printf("\nIL SISTEMA DI EQUAZIONI e':\n");
+    for(i = 0; i < M->nEq; i++){
+
+        for(j=0;j<M->nIn-1;j++)
+            printf("%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
+        
+        /*stampa l'ultimo elemento*/
+        printf("%5.2f * x%d ",(M->MCoef)[i+1][j+1],j+1);
+
+        /*stampa termine noto*/
+        printf(" = %5.2f\n",(M->MCoef)[i+1][0]);
+
+    }/*for*/
+
+}/*printEquations*/
+
 /*  Funzione che controlla che il sistema non sia impossibile
     i.e. controlla che i coefficienti noti di tutte le eqn lin dip siano zero
     IP M, matrice con tutti i dati
@@ -372,21 +486,114 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
 }/*isZeroCoefAllEqnLinDip*/
 
 
+#ifdef TEST
+/*  Funzione per testare che effettivamente la relazione trovata 
+    Sia giusta
+    IP S, matrice risolta
+    IP T, matrice non risolta, "Originale"
+    IP printTest, se vogliamo stampare a schermo le operazioni compiute dal test
+    OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
+         FALSE se il test non e' andato a buon fine 
+                (La relazione trovata nella matrice MRAlg non e' corretta)   
+*/
+bool test(Matrix* S, Matrix* T){
+
+    int  d, j, i, iR;
+    double molt, elDip, elT, sum;
+
+    /*Se troppi elementi per stampare*/
+    if(S->nIn * S->nEq > MAX_STAMPA){
+        printf("\nEQUAZIONE TROPPO GRANDE DA STAMPARE\n");
+    }/*if*/
+
+    /*altrimenti stampa a schermo le matrici*/
+    else{
+        /*Stampa dei calcoli fatti*/
+        printf("\nORIGINAL");
+        printFMatrix(T);
+        printf("\nSOLVED");
+        printFMatrix(S);
+        printf("\nRelazioni algebriche:");
+        printFMatrixRAlg(S);
+    }/*else*/
+
+    /*se non ci sono relazioni allora e' automaticamente passato*/
+    if(S->nEDip < 1)
+        return true;
+
+    /*Stampa di quali righe sono da controllare*/
+    printf("Dobbiamo controllare R = ");
+    for(i=0;i<(S->nEDip)-1;i++)
+        printf("%d, ",S->aEDip[i]);
+    printf("%d",S->aEDip[i]);
+    printf("\n");
+
+
+    /*per ogni riga dipendente*/
+    for(d=0;d<S->nEDip;d++){
+
+        /*indice della riga che stiamo controllando*/
+        iR = (S->aEDip)[d];
+        for(i=0;i<S->nIn+1;i++){
+            
+            /*la mia ipotesi e' che l'elemnto S[$iR][$i] sia la somma di 
+            $nEq-1 elementi, alcuni con il fattore moltiplicativo zero*/
+            sum = 0;
+
+            for(j=0;j<S->nEq;j++){
+                
+                /*fattore moltiplicativo che trovo dul*/
+                molt = (S->MRAlg)[iR-1][j];
+
+                /*controllo che non siamo sulle diagonali*/
+                if(iR!=(j+1) && (!isZero(molt,S->error))){
+                    
+                    elDip = (T->MCoef)[j+1][i];
+                    sum += molt*elDip;
+
+                }/*if*/
+            
+
+            }/*for*/
+
+            /*elemento da controllare*/
+            elT = (T->MCoef)[iR][i];
+
+            /*controllo che la differenza sia Zero*/
+            if(!isZero(elT-sum,S->error))
+                return false;
+
+        }/*for*/
+        return true;
+        
+    }/*for*/
+
+    return true;
+
+}/*test*/
+
+
 /*  Funzione che controlla che la colonna $col sia composta da un solo
         elemento diverso da zero
     IP col, indice di colonna {1 -> $(M->nIn)}
     IP M, Matrice con i coefficienti
 */
 bool isColSolved(int col, const Matrix * M){
-    int i, nOne = 0;
+
+    int i,          /*per il for*/ 
+        nOne = 0;   /**/
+    /*controllo tutte le colonne*/
     for(i=0;i<M->nEq;i++){
+        /*se l'elemento sulla colonna !=0*/
         if(!isZero((M->MCoef)[i+1][col],M->error)){
+            /*se trovo solo un elemento != 0*/
             if(nOne==0)
                 nOne++;
+            /*ne ho trovati 2*/
             else
                 return false;
-        }
-    }
+        }/*if*/
+    }/*for*/
     return true;
 
 }/*isColSolved*/
@@ -448,255 +655,4 @@ void FprintFCRNS(const Matrix * M){
     free(aC);       /*eliminazione array*/
 }/*FprintFCRNS*/
 
-/*  Funzione che risolve la Matrice M tramite il metodo di Gauss-Jordan
-    IOP M, matrice da risolvere
-*/
-void solveTheMatrix(Matrix *M){
-
-    /*per il while*/
-    int i=0,        /*contatore per il numero di incognite risolte*/
-        r=1,        /*indice di riga*/
-        c=1,        /*indice di colonna*/
-        j=0,        /*contatore per il numero di iterazioni del while*/
-        k=0,        /*indice per $(M->aEDip)*/
-        iForFPrint, /*indice per stampare su file for*/
-        cLidp =0,   /*contatore delle eqn lin dip*/
-        iRSkip = 0,  /*contatore delle righe saltate*/
-        iCSkip = 0,  /*contatore delle colonne saltate*/
-        cCol = 0;
-    bool skippedR = false,  
-         skippedC = false;
-    int n = M->nEq; /*per semplificare la lettura*/
-    
-    FILE* ixF=fopen(INDEX_FILE,"w");
-    /*errore nell'aperura del file*/
-    if(ixF==NULL)
-        return;
-
-    /*per abbellirre*/
-    printf("\n");
-
-
-    if(((M->nIn) * (M->nEq)) > MAX_STAMPA)
-        printf("RISOLUZIONE DEL SISTEMA\n");
-
-    /*Devo trovare $i =  #equazioni - #righe dipendenti*/
-    /*i parte da 0, e deve avere al massimo $n-$nEDip, c*/
-    while(i<(n-(M->nEDip))){
-
-        skippedR = false;
-        skippedC = false;
-        
-        if(M->nEDip > 0 &&  isEqLinDip(r,M)){
-            fprintf(ixF,"L:%3d | ",cLidp++);
-            skippedC = true;
-            iCSkip++;
-        }
-           
-        /*se l'elemento sulla diagonale M[$r][$c]!=0 allora posso continuare*/
-        else if(!isZero((M->MCoef)[r][c], M->error)){
-            
-            /*normalizzo l'elemento [$r+1][$c] e azzero la colonna $c*/
-            zerosCol(r,c,M);
-            i++; /*lo faccui su almeno tutte le equazioni - # eq lin dip*/
-            
-            /*TAG: DEBUG*/
-            /*printf("\nOperazione su Zero(%d,%d)",r+1,c);  */ /*TAG: DEBUG*/
-            /*printFMatrixRAlg(M);                          */  /*TAG: DEBUG*/
-            
-            /*per avere un idea del progresso*/
-            if(((M->nEq) * (M->nIn)) > MAX_STAMPA)
-                /*la stringa al inizio serve per abbellire l'output*/
-                printf("\033[A\33[2K\rProgress: %d %%, i=%d, c=%d, j=%d, r=%d, nD=%d, k=%d\n",((i)*100/(n-(M->nEDip))),i,c,j,r,M->nEDip,k);
-           
-            fprintf(ixF,"i:%3d | ",i);
-            cCol++;
-
-        }/*if*/
-
-        else{
-
-            fprintf(ixF,"x:%3d | ",iRSkip++);
-            skippedR = true;
-
-        }/*else*/
-            
-        /*Stampa su file del'array con le le eqn lin dip*/
-        fprintf(ixF,"r=%3d c=%3d, k=%3d, [",r,c,k);
-        for(iForFPrint = 0; iForFPrint<M->nEDip;iForFPrint++ )
-            fprintf(ixF," %3d,",(M->aEDip)[iForFPrint]);
-        fprintf(ixF,"]\n");
-
-
-        
-        /*indice che conta le volte che il ciclo viene eseguito*/   
-        j++; /*parte da 0*/
-
-        if(!skippedR)
-            /*indice per la riga, parte da 1*/
-            r=((r)%(M->nEq)) +1;
-        
-        if(!skippedC){
-            
-            /*se non*/
-            if((j-iCSkip)<(M->nIn))
-                c++;
-
-            else
-                c = (M->aEDip)[k++];
-            
-                
-
-        }/*if*/
-        
-
-        
-
-    }/*while*/
-    
-
-    /*printf("\n\nSONO USCITO DAL WHILE\n");*/    /*TAG:DEBUG*/
-    fclose(ixF);
-
-}/*solveTheMatrix*/
-
-/*  Funzione che dice se un double e' zero dato un errore
-    IP a, valore da controllare se sia circa zero
-    IP precisone
-    OR $a==0
-*/
-bool isZero(double a, double precisione){
-
-    return fabs(a)<precisione;
-
-}/*isZero*/
-
-
-/*  Funzione aggiunge la riga all'array di righe indipendenti
-    IP r, riga da aggiungere
-    IOP M, matrice con tutto
-*/
-void addR(int r, Matrix* M){
-    
-    M->aEDip[M->nEDip] = r;
-    M->nEDip +=1;
-
-}/*addR*/
-
-/*  Funzione che ritorna il minimo tra due interi
-    IP a, intero a
-    IP b, intero b
-    OR a se a<b , altrimenti b
-*/
-int min(int a, int b){
-    if (a<b)
-        return a;
-    return b;
-}/*min*/
-
-
-/*  Funzione per testare che effettivamente la relazione trovata 
-    Sia giusta
-    IP S, matrice risolta
-    IP T, matrice non risolta, "Originale"
-    IP printTest, se vogliamo stampare a schermo le operazioni compiute dal test
-    OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
-         FALSE se il test non e' andato a buon fine 
-                (La relazione trovata nella matrice MRAlg non e' corretta)   
-*/
-bool test(Matrix* S, Matrix* T){
-
-    int  d, j, i, iR;
-    double molt, elDip, elT, sum;
-    if(S->nIn * S->nEq > MAX_STAMPA){
-        printf("\nEQUAZIONE TROPPO GRANDE DA STAMPARE\n");
-    }
-    else{
-        /*Stampa dei calcoli fatti*/
-        printf("\nORIGINAL");
-        printFMatrix(T);
-        printf("\nSOLVED");
-        printFMatrix(S);
-        printf("\nRelazioni algebriche:");
-        printFMatrixRAlg(S);
-    }
-    /*se non ci sono relazioni allora e' automaticamente passato*/
-    if(S->nEDip < 1)
-        return true;
-
-    /*Stampa di quali righe sono da controllare*/
-    printf("Dobbiamo controllare R = ");
-    for(i=0;i<(S->nEDip)-1;i++)
-        printf("%d, ",S->aEDip[i]);
-    printf("%d",S->aEDip[i]);
-    printf("\n");
-
-
-    /*per ogni riga dipendente*/
-    for(d=0;d<S->nEDip;d++){
-
-        /*indice della riga che stiamo controllando*/
-        iR = (S->aEDip)[d];
-        for(i=0;i<S->nIn+1;i++){
-            
-            /*la mia ipotesi e' che l'elemnto S[$iR][$i] sia la somma di 
-            $nEq-1 elementi, alcuni con il fattore moltiplicativo zero*/
-            sum = 0;
-
-            for(j=0;j<S->nEq;j++){
-                
-                /*fattore moltiplicativo che trovo dul*/
-                molt = (S->MRAlg)[iR-1][j];
-
-                /*controllo che non siamo sulle diagonali*/
-                if(iR!=(j+1) && (!isZero(molt,S->error))){
-                    
-                    elDip = (T->MCoef)[j+1][i];
-                    sum += molt*elDip;
-
-                }/*if*/
-            
-
-            }/*for*/
-
-            /*elemento da controllare*/
-            elT = (T->MCoef)[iR][i];
-
-            /*controllo che la differenza sia Zero*/
-            if(!isZero(elT-sum,S->error))
-                return false;
-
-        }/*for*/
-        return true;
-        
-    }/*for*/
-
-    return true;
-
-}/*test*/
-
-
-/*  Fuznione che stampa a schermo il sistema di equazioni a schermo
-    IP Matrix M
-    OV il sistema di equazioni
-*/
-void printEquations(const Matrix *M){
-
-    int i,j;
-    
-    /*stampa del forntespizio*/
-    printf("\nIL SISTEMA DI EQUAZIONI e':\n");
-    for(i = 0; i < M->nEq; i++){
-
-        for(j=0;j<M->nIn-1;j++)
-            printf("%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
-        
-        /*stampa l'ultimo elemento*/
-        printf("%5.2f * x%d ",(M->MCoef)[i+1][j+1],j+1);
-
-        /*stampa termine noto*/
-        printf(" = %5.2f\n",(M->MCoef)[i+1][0]);
-
-    }/*for*/
-
-}/*printEquations*/
+#endif 
