@@ -5,29 +5,6 @@
     In questo file di tester ci sono tutte le funzioni per la gestione dei file
     e il main per per il risolutore lineare
 
-    Appunti:
-    Prende in lettura un file con la matrice e i coefficienti noti
-    
-    
-    Albero delle chiamate: 
-    "*-" = chiamata condizionata
-    "#-" = chiamata ripetuta # volte
-    "f#-" = chiamata a funzione in altro file
-        - f1 = "GaussJordan.c"
-
-    main:
-        *- printHelp
-        - readFileMatrix
-            f1- initMatrix
-            f1- printEquations
-        f1- solveTheMatrix
-        - printMatrix
-            - fprintEquazioni
-            *- fprintSolUnic
-            *- fprintIndet
-            *- fprintRel    
-        f1- freeMatrix
-
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,15 +16,12 @@
 #define MATLAB_FILE "results.txt"
 
 /*  Funzione che stampa su file il sistema di equazioni
-    IP 
+    IP nameFileOut, stringa con il nome del file da aprire
     OF outF, file dove stampare
-    IP Matrice con il sistema di equazioni
-*/
+    IP Matrice con il sistema di equazioni*/
 void fprintEquazioni(const char nameFileOut[],const Matrix *M){
-    
     FILE *outF;     /*Variabile per il file di Output*/
     int i,j;
-
     /*apertura del file*/
     outF = fopen(nameFileOut, "a");
     /*Errore apertura file output*/
@@ -55,37 +29,30 @@ void fprintEquazioni(const char nameFileOut[],const Matrix *M){
         printf("ERRORE APERTURA IN PRINT_EQN\n");
         return;
     }/*if*/
-
-        
     /*scritta per la matrice risolta*/
     fprintf(outF,"Il sistema risolto:\n\n");    
-
     /*Scansione delle righe*/
     for(i = 0; i < M->nEq; i++){
         fprintf(outF,"%3d:",i+1);
         /*stampa delle equazioni*/
         for(j=0;j<M->nIn-1;j++)
             fprintf(outF,"%5.2f * x%d + ",(M->MCoef)[i+1][j+1],j+1);
-
         /*stampa l'ultimo elemento*/
         fprintf(outF,"%5.2f * x%d ",(M->MCoef)[i+1][j+1],j+1);
-
         /*stampa termine noto*/
         fprintf(outF," = %5.2f\n",(M->MCoef)[i+1][0]);
     }/*for*/
-
     /*chiusura del file*/
     fclose(outF);
 }/*fprintEquazioni*/
 
 /*  Funzione che stampa la soluzione quando il sistema ha un unica soluzione
     IP nome del file
-    OF outF, File precedentemente aperto, dove stampare il risultato
+    OF outF, dove stampare il risultato
     IP Matrice Risolta*/
 void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     int i,j;
     FILE *outF;     /*Variabile per il file di Output*/
-
     #ifdef TEST
         /*Creazione e apertura per il file matlab*/
         FILE *matlabF;
@@ -96,17 +63,14 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
             return;
         }/*if*/
     #endif
-
     outF = fopen(nameFileOut, "a"); /*append*/
     /*Errore apertura file output*/
     if (outF == NULL){
         printf("ERRORE APERTURA IN PRINT_SOL_UNICA\n");
         return;
     }/*if*/
-
     /*scrittura frontespizio*/
     fprintf(outF,"SISTEMA CON RISULTATO UNICO\n"); 
-
     /*scrittura piu' carina carina del risultato*/
     for(j=0;j<M->nIn;j++){
         for(i=0;i<M->nEq;i++){
@@ -124,13 +88,11 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     }/*for*/
     /*chiusura del file*/
     fclose(outF);
-
     #ifdef TEST
         /*chiusura del file*/
         printf("Scritto file matlab");
         fclose(matlabF);
     #endif
-
 }/*fprintSolUnic*/
 
 /*  Funzione che stampa su file l'insieme di soluzioni per un sistema 
@@ -139,7 +101,6 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     OF outF, file di input aperto in precedenza, dove stampare
     IP Matrix M, matrice  con i coefficienti delle equazioni lineari*/
 void fprintIndet(const char nameFileOut[], const Matrix *M){
-
     int i=0,    /*indice di riga*/
         j=0,    /*indice di colonna*/  
         k,      /*indice per scandire tutti gli elementi di una riga*/    
@@ -203,8 +164,8 @@ void fprintIndet(const char nameFileOut[], const Matrix *M){
     OF File, precedentemente aperto, dove stampare le relazioni
     IP struttura con dentro le informazioni delle relazioni tra le Equzioni*/
 void fprintRel(const char nameFileOut[], const Matrix *M){
-
     int i,j,row,count=0;
+    double el;
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "a");
     /*Errore apertura file output*/
@@ -212,7 +173,6 @@ void fprintRel(const char nameFileOut[], const Matrix *M){
         printf("ERRORE APERTURA IN PRINT_REL\n");
         return;
     }/*if*/
-
     /*considerazione per il singolare e plurale*/
     if(M->nEDip==1)
         /*frontespizio*/
@@ -220,7 +180,6 @@ void fprintRel(const char nameFileOut[], const Matrix *M){
     else
         /*frontespizio*/
         fprintf(outF,"\nIl sistema ha %d equazioni linearmente dipendenti: ",M->nEDip);
-    
     /*stampa delle eqn lin dip*/
     fprintf(outF,"(");
     for(i=0;i<M->nEDip;i++)
@@ -230,42 +189,34 @@ void fprintRel(const char nameFileOut[], const Matrix *M){
     fprintf(outF,"\n\nLe relazione tra le equazioni linearmente indipendenti (inizio a contare da 1):\n\n");
     /*stampa delle relazioni*/
     for(i=0;i<(M->nEDip);i++){
-
         /*indice di riga*/
         row=M->aEDip[i];
         fprintf(outF,"R%d=",row);
-
+        count = 0;
         for(j=0;j<M->nEq;j++){
-
+            el = (M->MRAlg)[row-1][j];
             /*stampo solo le relazioni con le altre colonne e diverse da 0*/
-            if((j!=(row-1)) && !isZero((M->MRAlg)[row-1][j],M->error)){
-                
+            if((j!=(row-1)) && !isZero(el,M->error)){
                 if(!count){
-                    fprintf(outF,"%5.2f * R%d ",(M->MRAlg)[row-1][j],j+1);
+                    fprintf(outF,"%5.2f * Eqn%d ",el,j+1);
                     count++;
                 }/*if*/
-
                 else
-                    fprintf(outF,"+ %5.2f * R%d ",(M->MRAlg)[row-1][j],j+1);
-                    
+                    if(el>0)
+                        fprintf(outF,"+ %5.2f * Eqn%d ",el,j+1); 
+                    else
+                        fprintf(outF," %5.2f * Eqn%d ",el,j+1);   
             }/*if*/
-                
-
         }/*for*/
-
         fprintf(outF,"\n");     /*fine della riga*/
     }/*for*/
-
     fclose(outF);
-
 }/*fprintRel*/
 
 /*  Funzione che in base al errore stampa un tipo di aiuto
     IP code : (0,1) = (basic,error file input)
-    OV aiuto
-*/
+    OV aiuto */
 void printHelp(int code){
-    
     /*se il codice e' zero significa che devo stampare 
     l'inizio del programma*/
     if(code==0){
@@ -292,36 +243,28 @@ void printHelp(int code){
         printf("- e' necessario inserire almeno 2 numeri in una riga (cioe' del termine noto e il coefficiente di x1)\n");
         printf("\n");
     }/*if*/
-
     /*errore base*/
     else if(code==1){
         printf("Inserire il nome dei file di Input e Output\n");
         printf("Per aiuto \"%s\"\n",HELP_STRING);
-        
         #ifdef TEST
             printf("opzione di test: %s\n",TEST_STRING);
         #endif
     }/*else if*/   
-    
-
 }/*printHelp*/
-
 /*  Funzione che stampa su un file la Matrice M (con i termini noti a sinitra)
     IP nameFileOut, stringa contente il nome del file in Output
     IP Matice M, matrice da stampare 
     OF File $nameFileOut con la matrice
     OR Esito: ()
          0: elaborazione riuscita;
-        -1: apertura fallita di $nameFileOut).
-*/
+        -1: apertura fallita di $nameFileOut).*/
 int printFileMatrix(const char nameFileOut[], const Matrix *M){
-
     FILE *outF;     /*Variabile per il file di Output*/
     outF = fopen(nameFileOut, "w");
     /*Errore apertura file output*/
     if (outF == NULL)
         return -1;
-    
     /*se ha un risultato del tipo 0*x1 = a, il sistema e' impossibile*/
     if(!isZeroCoefAllEqnLinDip(M)){
         fprintf(outF,"\nSISTEMA IMPOSSIBILE\n");
@@ -329,33 +272,25 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
         fclose(outF);
         return -2;
     }/*if*/
-
     /*chiusura del file*/
     fclose(outF);
-
     #ifdef TEST
         /*stampa le equazioni su file*/
         fprintEquazioni(nameFileOut,M);
     #endif
-
-
     /*Se # di equazioni - # di incognite == # di equazioni linarmente 
     dipendenti il sistema e' con una soluzione unica*/
     if(M->nEq - M->nIn - M->nEDip == 0)
         fprintSolUnic(nameFileOut,M);
-
     /*altrimenti, posso scrivere delle relazioni tra le colonne*/
     else
         fprintIndet(nameFileOut, M);
-
     /*stampo la relazioni lineari tra le righe se ci sono*/
     if(M->nEDip > 0)
         /*stampa sul file le relazioni tra le equazioni*/
         fprintRel(nameFileOut, M);
-
     /*nessun problema*/
     return 0;
-
 }/*printMatrix*/
 
 /*  Funzione per la lettura dei comandi nei file
@@ -366,93 +301,70 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
         -2: errore di inserimento dati
 */
 int readFileMatrix(const char nameFileIn[], Matrix *M){
-
     double r;               /* per la lettura*/
     int n;                  /*dimensione righe*/
     int m;                  /*dimensione colonne*/
     int err;
     int i=0,            
         j=0;              /*icontatore elementi*/
-
-
     /*Apertura e dello stream dei file di input e output*/
     FILE *inF;
     inF = fopen(nameFileIn, "r");
-
     /*Errore di apertura file input*/
     if (inF == NULL)
         return -1;
-
     /*scansione delle dimensioni della matrice*/
     fscanf(inF,"%d %d", &n, &m);
     /*inizializzazione della matice*/
     initMatrix(n,m,M);
-
     /*salvo l'errore dentro alla matrice*/
     fscanf(inF,"%lf",&r);
     M->error = r;
-
     /*scansione della matrice*/
     for(i=0;i<n;i++){
-
         for(j = 0; j< m+1 ;j++){
-
             /*lettura del dato*/
             err=fscanf(inF,"%lf",&r);
-
             /*memorizzazzione*/
             (M->MCoef)[i+1][j] = r;
-
         }/*for*/
-
     }/*for*/
-
     if(err==-1)
         return -2;
-
     /*stampa di cioò che ho letto, se il numero di elementi non e' troppo grande*/
     if((n*m)<MAX_STAMPA_EQN)
         printEquations(M);
     else
         printf("Sistema di %d Equazioni x %d incognite, troppo grande da stampare\n", n,m);
     printf("\nERRORE LETTO : %f\n", M->error);
-
     /*chiusura del file*/
     fclose(inF);
-
     /*nessun errore*/
     return 0;
-
 }/*readFileMatrix*/
 
 /*  Main per la lettura del file della matrice
     OR {    0  se la lettura e scrittura del file andata a buon fine
             -1 se l'utente ha dimenticato di insierire i nomi dei file  
-    }
-*/
+    }*/
 int main(int argc, char const *argv[]){
-
     Matrix M;
     int err;
     #ifdef TEST
         Matrix T;
         bool doTest=false;  /*variabile booleana che dice se ho effetuato il test*/
     #endif
-
     if((argc>1) && !(strcmp(argv[1],HELP_STRING))){
         printHelp(0);
         return 0;
-    }/*if*/
-        
+    }/*if*/   
     /*Se l'utente si e' dimenticato di scrivere i file di IO*/
     else if((argc < 3) && (argc > 4)){
         printHelp(1);
         return -1;  /*ritorno di un intero negativo per simulare un errore*/
     }/*else if*/
-
     /*codice errore*/
     err = readFileMatrix(argv[1],&M);
-
     /*Lettura della matrice in input*/
     if(err == -1){
         printf("ERRORE FILE INGRESSO\n");
@@ -462,8 +374,6 @@ int main(int argc, char const *argv[]){
         printf("ERRORE DI INSERIMENTO DATI\n");
         return -1;
     }/*if*/
-
-    
     /*risoluzione della Ma trice*/
     if(solveTheMatrix(&M)==-1){
         printf("Errori di normalizzazzione\nSistema non risolto\n");
@@ -472,7 +382,6 @@ int main(int argc, char const *argv[]){
     else
         /*stampa a schermo che il sistema e' risolto*/
         printf("\nSistema risolto\n");
-
     #ifdef TEST
         /*stampa su file delle colonne non risolte*/
         FprintFCRNS(&M);
@@ -504,25 +413,19 @@ int main(int argc, char const *argv[]){
         }/*if*/
 
     #endif
-
     /*Stampa su file della matrice risolta*/
     if(printFileMatrix(argv[2],&M) == -1){
         printf("ERRORE FILE USCITA");
         return -1;
     }/*if*/
-
     /*se il sistema e' di grandi dimensioni stampo a video la conferma di scrittura*/
     if((M.nEq *  M.nIn) > MAX_STAMPA)
         printf("FILE SCRITTO\n");
-
-   
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
-
     #ifdef TEST
         if(doTest)
             freeMatrix(&T);
     #endif
-
     return 0;
 }/*main*/

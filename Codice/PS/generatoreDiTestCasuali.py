@@ -5,16 +5,16 @@ from scipy.io import savemat
 #------ 
 # Variabili di input
 
-N = 8100 # righe, # di equazioni
-M = 8000 # colonne, # di incognite
+N = 1000 # righe, # di equazioni
+M = 1000 # colonne, # di incognite
 
 a = 0
 b = 10
 
-D = 100 # # of righe dipendenti
+D = 0 # # of righe dipendenti
 In = N-D
 
-TEST_NUM = 0
+TEST_NUM = 7
 
 precisone = "0.00001"
 
@@ -96,7 +96,7 @@ savemat("Codice/PS/var.mat", {"A":m.astype(float) , "b" : c.astype(float)})
 
 print("SCRITTURA DEL FILE INPUT")
 # Scrittura per il file di Test per il programma PRincipale
-with open("Codice/Test%2dI.txt"%(TEST_NUM),"w") as f:
+with open("Codice/Test%dI.txt"%(TEST_NUM),"w") as f:
     f.write(str(N)+" "+str(M)+"\n")
     f.write(precisone)
     f.write("\n")

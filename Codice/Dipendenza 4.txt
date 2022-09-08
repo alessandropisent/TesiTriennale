@@ -1,0 +1,2 @@
+RIGA 6 sara' dipendendenti -9* r =4 + -2 * r=2
+RIGA 1 sara' dipendendenti 9* r =5 + 6 * r=3
