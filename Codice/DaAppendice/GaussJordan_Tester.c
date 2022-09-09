@@ -12,8 +12,6 @@
 #include "GaussJordan.h"
 
 #define HELP_STRING "-help"
-#define TEST_STRING "-test"
-#define MATLAB_FILE "results.txt"
 
 /*  Funzione che stampa su file il sistema di equazioni
     IP nameFileOut, stringa con il nome del file da aprire
@@ -53,16 +51,6 @@ void fprintEquazioni(const char nameFileOut[],const Matrix *M){
 void fprintSolUnic(const char nameFileOut[], const Matrix *M){
     int i,j;
     FILE *outF;     /*Variabile per il file di Output*/
-    #ifdef TEST
-        /*Creazione e apertura per il file matlab*/
-        FILE *matlabF;
-        matlabF = fopen(MATLAB_FILE,"w");
-        /*Errore apertura file output*/
-        if (matlabF == NULL){
-            printf("ERRORE APERTURA IN PRINT_SOL_UNICA(MatlabFile)\n");
-            return;
-        }/*if*/
-    #endif
     outF = fopen(nameFileOut, "a"); /*append*/
     /*Errore apertura file output*/
     if (outF == NULL){
@@ -77,10 +65,6 @@ void fprintSolUnic(const char nameFileOut[], const Matrix *M){
             /*stampa tutti i coefficienti che sono 1*/
             if(isZero((M->MCoef)[i+1][j+1]-1,M->error)){
                 fprintf(outF,"x%2d = %f\n",j+1,(M->MCoef)[i+1][0]);
-                #ifdef TEST
-                    /*stampo solo se richiesto dalle direttive*/
-                    fprintf(matlabF,"%f\n",(M->MCoef)[i+1][0]);
-                #endif
                 /*ho trovato match vai a riga successiva*/
                 break;
             }/*if*/  
@@ -116,6 +100,7 @@ void fprintIndet(const char nameFileOut[], const Matrix *M){
     }/*if*/
     /*frontespizio*/
     fprintf(outF,"\nSISTEMA INDETERMINATO\n");
+    /*scrittura piu' carina carina del risultato*/
     /*devo stampare esattamente $nToPrint volte, la seconda condizione 
         e' per uscire nel caso di while infinito*/
     while((nP<nToPrint)&&(i<M->nEq)){
@@ -219,14 +204,8 @@ void printHelp(int code){
     /*se il codice e' zero significa che devo stampare 
     l'inizio del programma*/
     if(code==0){
-        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt ");
-        
-        /*se test viene anche spiegata l'opzione di test*/
-        #ifdef TEST
-            printf("<%s>\n\n",TEST_STRING);
-            printf("\"%s\" e' opzionale: serve per confermare che la relazione tra le righe sia corretta",TEST_STRING);
-        #endif
-        printf("\n\nil file di input va formattato come :\n");
+        printf("usage: GaussJordan_Tester.exe FileInput.txt FileOutput.txt\n");
+        printf("\nil file di input va formattato come :\n");
         printf("n m\n");
         printf("error\n\n");
         printf("b1 a11 a12 a13\n");
@@ -237,25 +216,19 @@ void printHelp(int code){
         printf("- m = # di incognite\n");
         printf("- b# = termine noto b#\n");
         printf("- a## = coefficiente della equazione\n");
-        printf("Regole aggiuntive:\n");
-        printf("- e' possibile non inserire tutti i coefficienti nell'equazione, verranno considerati nulli\n");
-        printf("- e' necessario inserire almeno 2 numeri in una riga (cioe' del termine noto e il coefficiente di x1)\n");
         printf("\n");
     }/*if*/
     /*errore base*/
     else if(code==1){
         printf("Inserire il nome dei file di Input e Output\n");
         printf("Per aiuto \"%s\"\n",HELP_STRING);
-        #ifdef TEST
-            printf("opzione di test: %s\n",TEST_STRING);
-        #endif
     }/*else if*/   
 }/*printHelp*/
 /*  Funzione che stampa su un file la Matrice M (con i termini noti a sinitra)
     IP nameFileOut, stringa contente il nome del file in Output
     IP Matice M, matrice da stampare 
     OF File $nameFileOut con la matrice
-    OR Esito: (
+    OR Esito: ()
          0: elaborazione riuscita;
         -1: apertura fallita di $nameFileOut).*/
 int printFileMatrix(const char nameFileOut[], const Matrix *M){
@@ -273,10 +246,6 @@ int printFileMatrix(const char nameFileOut[], const Matrix *M){
     }/*if*/
     /*chiusura del file*/
     fclose(outF);
-    #ifdef TEST
-        /*stampa le equazioni su file*/
-        fprintEquazioni(nameFileOut,M);
-    #endif
     /*Se # di equazioni - # di incognite == # di equazioni linarmente 
     dipendenti il sistema e' con una soluzione unica*/
     if(M->nEq - M->nIn - M->nEDip == 0)
@@ -349,10 +318,6 @@ int readFileMatrix(const char nameFileIn[], Matrix *M){
 int main(int argc, char const *argv[]){
     Matrix M;
     int err;
-    #ifdef TEST
-        Matrix T;
-        bool doTest=false;  /*variabile booleana che dice se ho effetuato il test*/
-    #endif
     if((argc>1) && !(strcmp(argv[1],HELP_STRING))){
         printHelp(0);
         return 0;
@@ -381,37 +346,6 @@ int main(int argc, char const *argv[]){
     else
         /*stampa a schermo che il sistema e' risolto*/
         printf("\nSistema risolto\n");
-    #ifdef TEST
-        /*stampa su file delle colonne non risolte*/
-        FprintFCRNS(&M);
-    
-        /*se viene aggiunto alla fine la stringa per testare le relazioni*/
-        if((argc==4) && !strcmp(argv[3],TEST_STRING)){
-
-            /*faccio il test se ce' qualche eqn lin dip*/
-            if(M.nEDip!=0){  
-                /*rileggo il file con il sistema originale, e riempio T*/
-                readFileMatrix(argv[1],&T);
-
-                /*variabile che mi dice che ho riempito T*/
-                doTest = true;
-
-                /*se il test e' passato stampo*/
-                if(test(&M,&T))
-                    printf("\n!TEST PASSATO \n");
-                /*se il test non e' passato:*/
-                else
-                    printf("\nTEST NON PASSATO !!!!!!!\n");
-
-            }/*if*/
-
-            /*altrimenti non avvio nemmeno il test*/
-            else
-                printf("\nNessuna EQN LIN DIP\n");
-
-        }/*if*/
-
-    #endif
     /*Stampa su file della matrice risolta*/
     if(printFileMatrix(argv[2],&M) == -1){
         printf("ERRORE FILE USCITA");
@@ -422,9 +356,5 @@ int main(int argc, char const *argv[]){
         printf("FILE SCRITTO\n");
     /*libero la memoria dalla matrice creata*/
     freeMatrix(&M);
-    #ifdef TEST
-        if(doTest)
-            freeMatrix(&T);
-    #endif
     return 0;
 }/*main*/

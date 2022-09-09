@@ -3,13 +3,12 @@
     File     : GaussJordan.c
     
     Descrizione file:
-
+    File che contiene i principali metodi per la risoluzione del 
 */
 #include <stdlib.h>         /*malloc, free*/
 #include <assert.h>         /*assert*/
 #include <stdio.h>          /*printf*/
 #include <math.h>           /*fabs*/
-#include <string.h>         /*strcat*/
 #include "GaussJordan.h"    /*definizione delle funzioni nel file*/
 
 /*inizializzazione della matrice e allocazione della memoria
@@ -72,7 +71,7 @@ void freeMatrix(Matrix *M){
     free(M->aEDip);
 }/*freeMatrix*/
 
-/*  Funzione che stampa la matrice a schermo
+/*  Funzione che stampa una matrice a schermo
     IP M, matrice da stampare
     OV matrice stampata */
 void printFMatrix(const Matrix *M){
@@ -88,7 +87,7 @@ void printFMatrix(const Matrix *M){
     }/*for*/
 }/*printFMatrix*/
 
-/*  Funzione che stampa la matrice Relazioni Algebriche tra le righe/Equazioni 
+/*  Funzione che stampa una matrice Relazioni Algebriche tra le righe/Equazioni 
     a schermo
     IP M, matrice da stampare
     OV matrice stampata
@@ -189,8 +188,8 @@ int zerosCol(int r, int c, Matrix * M){
     /*prendo il valore sulla diagonale*/
     double t = (M->MCoef)[r][c];
     /*Normalizzo l'elemento sulla sua stessa riga*/
-    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; 
-    /*normalizzo l'elemento M[$r][$c], inizialmente e' una diagonale*/
+    (M->MRAlg)[r-1][r-1]=(M->MRAlg)[r-1][r-1]/t; /*TAG:Ralg*/
+    /*normalizzo l'elemento M[$r][$c], in primis e' una diagonale*/
     if(diagNorm(r,c,M)==-1)
         return -1;
     /*Per ogni riga*/
@@ -200,7 +199,7 @@ int zerosCol(int r, int c, Matrix * M){
         /*se non e' un'equazione lin dip posso dividere*/
         if(!isEqLinDip(row,M)){
             /*prima mi scrivo le operazioni che faro' sulla matrice $MRAlg*/
-            factMRAlg(row, c, r, M); 
+            factMRAlg(row, c, r, M); /*TAG:Ralg*/
             /*poi azzero la riga $row, considerando che ho normalizzato 
                 l'elemento M[$r][$c]*/
             zerosRow(row, c, r, M);
@@ -331,174 +330,3 @@ bool isZeroCoefAllEqnLinDip(const Matrix* M){
     }/*for*/
     return true;
 }/*isZeroCoefAllEqnLinDip*/
-
-
-#ifdef TEST
-/*  Funzione per testare che effettivamente la relazione trovata 
-    Sia giusta
-    IP S, matrice risolta
-    IP T, matrice non risolta, "Originale"
-    IP printTest, se vogliamo stampare a schermo le operazioni compiute dal test
-    OR : TRUE se il test e' andato a buon fine (ho trovato la vera relazione)
-         FALSE se il test non e' andato a buon fine 
-                (La relazione trovata nella matrice MRAlg non e' corretta)*/
-bool test(Matrix* S, Matrix* T){
-
-    int  d, j, i, iR;
-    double molt, elDip, elT, sum;
-
-    /*Se troppi elementi per stampare*/
-    if(S->nIn * S->nEq > MAX_STAMPA){
-        printf("\nEQUAZIONE TROPPO GRANDE DA STAMPARE\n");
-    }/*if*/
-
-    /*altrimenti stampa a schermo le matrici*/
-    else{
-        /*Stampa dei calcoli fatti*/
-        printf("\nORIGINAL");
-        printFMatrix(T);
-        printf("\nSOLVED");
-        printFMatrix(S);
-        printf("\nRelazioni algebriche:");
-        printFMatrixRAlg(S);
-    }/*else*/
-
-    /*se non ci sono relazioni allora e' automaticamente passato*/
-    if(S->nEDip < 1)
-        return true;
-
-    /*Stampa di quali righe sono da controllare*/
-    printf("Dobbiamo controllare R = ");
-    for(i=0;i<(S->nEDip)-1;i++)
-        printf("%d, ",S->aEDip[i]);
-    printf("%d",S->aEDip[i]);
-    printf("\n");
-
-
-    /*per ogni riga dipendente*/
-    for(d=0;d<S->nEDip;d++){
-
-        /*indice della riga che stiamo controllando*/
-        iR = (S->aEDip)[d];
-        for(i=0;i<S->nIn+1;i++){
-            
-            /*la mia ipotesi e' che l'elemnto S[$iR][$i] sia la somma di 
-            $nEq-1 elementi, alcuni con il fattore moltiplicativo zero*/
-            sum = 0;
-
-            for(j=0;j<S->nEq;j++){
-                
-                /*fattore moltiplicativo che trovo dul*/
-                molt = (S->MRAlg)[iR-1][j];
-
-                /*controllo che non siamo sulle diagonali*/
-                if(iR!=(j+1) && (!isZero(molt,S->error))){
-                    
-                    elDip = (T->MCoef)[j+1][i];
-                    sum += molt*elDip;
-
-                }/*if*/
-            
-
-            }/*for*/
-
-            /*elemento da controllare*/
-            elT = (T->MCoef)[iR][i];
-
-            /*controllo che la differenza sia Zero*/
-            if(!isZero(elT-sum,S->error))
-                return false;
-
-        }/*for*/
-        return true;
-        
-    }/*for*/
-
-    return true;
-
-}/*test*/
-
-
-/*  Funzione che controlla che la colonna $col sia composta da un solo
-        elemento diverso da zero
-    IP col, indice di colonna {1 -> $(M->nIn)}
-    IP M, Matrice con i coefficienti
-*/
-bool isColSolved(int col, const Matrix * M){
-
-    int i,          /*per il for*/ 
-        nOne = 0;   /**/
-    /*controllo tutte le colonne*/
-    for(i=0;i<M->nEq;i++){
-        /*se l'elemento sulla colonna !=0*/
-        if(!isZero((M->MCoef)[i+1][col],M->error)){
-            /*se trovo solo un elemento != 0*/
-            if(nOne==0)
-                nOne++;
-            /*ne ho trovati 2*/
-            else
-                return false;
-        }/*if*/
-    }/*for*/
-    return true;
-
-}/*isColSolved*/
-
-/*  Funzione che scrive su $aC le colonne di $M non risolte 
-        (ossia con un solo elemento != 0 , e tutti gli altri 0)
-    IOP aC, array da riempire
-    IP M, Matrice con i coefficienti delle equazioni
-*/
-int whichColAreNotSolved(int* aC, const Matrix * M){
-    int i,      /*indice del for*/
-        iA=0;   /*indice array*/
-
-    /*per ogni colonna controllo che sia risolta*/
-    for(i=0;i< M->nIn; i++){
-
-        /*se non e' risolta la salvo nel array delle non risolte*/
-        if(!isColSolved(i+1,M))
-            aC[iA++]=i+1;
-
-    }/*for*/
-
-    return iA;
-    
-}/*whichColAreNotSolved*/
-
-/*  Fprintf Which Coloms are Not Solved
-    Funzione che stampa su file quali colonne non sono risole
-    IP Matrice da controllare
-    OF file con le colonne non risolte
-*/
-void FprintFCRNS(const Matrix * M){
-    
-    int * aC; /*array con le colonne*/
-    int iA,   /*indice per array*/ 
-        i;    /*indice per for*/
-    FILE *oF; /*puntatore a file su cui scrivere*/
-    
-    /*creazione del array delle incognite non risolte*/
-    aC = malloc(sizeof(int) * M->nIn);
-    assert(aC != NULL);
-
-    /*chiamata alla funzione che riempie l'array di eqn non risolte*/
-    iA = whichColAreNotSolved(aC, M);
-
-    /*apertura del file*/
-    oF = fopen("notSolvedRows.txt","w");
-    if(oF == NULL)
-        return;
-    
-    /*Frontespizio*/
-    fprintf(oF,"Righe sbagliate:%d \n",iA);
-
-    /*for che cicla tutte quelle non risolte e le stampa su file*/
-    for(i = 0; i<iA; i++)
-        fprintf(oF,"-%3d\n",aC[i]);
-    
-    fclose(oF);     /*chiusura del file*/
-    free(aC);       /*eliminazione array*/
-}/*FprintFCRNS*/
-
-#endif 
