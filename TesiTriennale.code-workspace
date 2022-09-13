@@ -9,7 +9,8 @@
         "files.associations": {
             "lu.h": "c",
             "stdio.h": "c",
-            "gaussjordan.h": "c"
+            "gaussjordan.h": "c",
+            "math.h": "c"
         }
     }
 }
